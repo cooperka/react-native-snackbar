@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-
 import React, {
   AppRegistry,
   Component,
@@ -10,20 +5,27 @@ import React, {
   Text,
   View
 } from 'react-native';
+import Snackbar from './react-native-snackbar';
 
 class examples extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
+        <Text style={styles.welcome} onPress={() => Snackbar.show({title: 'Coucou Remi Rohlalal',
+          duration: Snackbar.LENGTH_LONG,
+          action: {
+            title: 'Click',
+            onPress: () => Snackbar.show({title: 'Nice action'}),
+            color: '#FF0000'
+          }
+        })}>
           Welcome to React Native!
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.ios.js
+          To get started, edit index.android.js
         </Text>
         <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+          Shake or press menu button for dev menu
         </Text>
       </View>
     );
