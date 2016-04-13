@@ -36,27 +36,24 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 @implementation RNSnackBarView
 
 + (void)initialize {
-  DEFAULT_DURATIONS = @{
-                @"-2": @INT_MAX,
-                @"-1": @1500,
-                 @"0": @2750
-               };
+    DEFAULT_DURATIONS = @{
+                          @"-2": @INT_MAX,
+                          @"-1": @1500,
+                           @"0": @2750
+                         };
 }
 
 + (id)sharedSnackBar {
-  static RNSnackBarView *sharedSnackBar = nil;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    sharedSnackBar = [[self alloc] init];
-  });
-  return sharedSnackBar;
+    static RNSnackBarView *sharedSnackBar = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+      sharedSnackBar = [[self alloc] init];
+    });
+    return sharedSnackBar;
 }
 
 + (void)showWithOptions:(NSDictionary *)options andCallback:(void (^)())callback {
-  
-  
     RNSnackBarView *snackBar = [RNSnackBarView sharedSnackBar];
-  
     snackBar.pendingOptions = options;
     snackBar.pendingCallback = callback;
     [snackBar show];
@@ -77,9 +74,9 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     titleLabel = [UILabel new];
     titleLabel.text = _title;
     titleLabel.textColor = [UIColor whiteColor];
-      [titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
-      [self addSubview:titleLabel];
-      actionButton = [UIButton new];
+    [titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self addSubview:titleLabel];
+    actionButton = [UIButton new];
     [actionButton setTitle:@"" forState:UIControlStateNormal];
     [actionButton addTarget:self action:@selector(actionPressed:) forControlEvents:UIControlEventTouchUpInside];
     [actionButton setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -88,13 +85,12 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:
           @"H:|[titleLabel]-10-[actionButton(100)]|"
           options:0 metrics:nil views:@{@"titleLabel": titleLabel, @"actionButton": actionButton}]];
-  
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[titleLabel]|" options:0 metrics:nil views:@{@"titleLabel": titleLabel}]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[actionButton]|" options:0 metrics:nil views:@{@"actionButton": actionButton}]];
 }
 
 -(void)setTitle:(NSString *)title {
-  titleLabel.text = title;
+    titleLabel.text = title;
 }
 
 -(void)setActionTitle:(NSString *)actionTitle {
@@ -107,27 +103,32 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 }
 
 - (void)presentWithDuration:(NSNumber*)duration {
-   _pendingOptions = nil;
-  _pendingCallback = nil;
+    _pendingOptions = nil;
+    _pendingCallback = nil;
     UIWindow* keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
     self.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
     titleLabel.alpha = 0;
     actionButton.alpha = 0;
-  self.state = RNSnackBarViewStatePresenting;
+    self.state = RNSnackBarViewStatePresenting;
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         self.transform = CGAffineTransformIdentity;
         titleLabel.alpha = 1;
         actionButton.alpha = 1;
      } completion:^(BOOL finished) {
         self.state = RNSnackBarViewStateDisplayed;
-         NSString* durationString = [duration stringValue];
-         float durationSec = [(NSNumber*)DEFAULT_DURATIONS[durationString] floatValue] / 1000;
-         dismissTimer = [NSTimer scheduledTimerWithTimeInterval:durationSec
-                                        target:self
-                                      selector:@selector(dismiss)
-                                      userInfo:nil
-                                       repeats:FALSE];
+        NSTimeInterval interval;
+        if ([duration doubleValue] <= 0) {
+            NSString* durationString = [duration stringValue];
+            interval = [(NSNumber*)DEFAULT_DURATIONS[durationString] floatValue] / 1000;
+        } else {
+            interval = [duration doubleValue] / 1000;
+        }
+        dismissTimer = [NSTimer scheduledTimerWithTimeInterval:interval
+                                                        target:self
+                                                      selector:@selector(dismiss)
+                                                      userInfo:nil
+                                                       repeats:FALSE];
      }];
 }
 
@@ -139,32 +140,30 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     [UIView animateWithDuration:ANIMATION_DURATION animations:^{
         self.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
     } completion:^(BOOL finished) {
-      self.state = RNSnackBarViewStateDismissed;
+        self.state = RNSnackBarViewStateDismissed;
         if (_pendingOptions) {
             [self show];
         }
     }];
-  
-  
 }
   
 - (void) show {
-  
     if (self.state == RNSnackBarViewStateDisplayed || self.state == RNSnackBarViewStatePresenting) {
       [self dismiss];
       return;
     }
-  if (self.state == RNSnackBarViewStateDismissing) {
-    return;
-  }
-  if (!_pendingOptions) { return; }
+    if (self.state == RNSnackBarViewStateDismissing) {
+      return;
+    }
+    if (!_pendingOptions) { return; }
+  
     self.title = _pendingOptions[@"title"];
     self.callback = _pendingCallback;
     NSDictionary* action = _pendingOptions[@"action"];
     if (action) {
-      self.actionTitle = _pendingOptions[@"action"][@"title"];
+        self.actionTitle = _pendingOptions[@"action"][@"title"];
     } else {
-      self.actionTitle = @"";
+        self.actionTitle = @"";
     }
     NSNumber* duration = _pendingOptions[@"duration"] ? (NSNumber*)_pendingOptions[@"duration"] : @(-1);
     [self presentWithDuration:duration];

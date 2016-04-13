@@ -1,5 +1,6 @@
 package com.examples;
 
+import com.azendoo.reactnativesnackbar.SnackbarPackage;
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;

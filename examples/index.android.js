@@ -11,12 +11,13 @@ class examples extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome} onPress={() => Snackbar.show({title: 'Coucou Remi Rohlalal',
-          duration: Snackbar.LENGTH_INDEFINITE,
+        <Text style={styles.welcome} onPress={() => Snackbar.show({
+          title: 'Coucou Remi',
+          duration: 1,
           action: {
             title: 'Click',
-            onPress: () => Snackbar.show({title: 'Nice action'}),
-            color: '#FF0000'
+            onPress: () => Snackbar.show({title: 'Nice action', duration: Snackbar.LENGTH_SHORT }),
+            color: 'purple'
           }
         })}>
           Welcome to React Native!

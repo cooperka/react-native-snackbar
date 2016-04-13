@@ -1,6 +1,5 @@
-package com.examples;
+package com.azendoo.reactnativesnackbar;
 
-import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
@@ -12,6 +11,8 @@ import com.facebook.react.bridge.ReadableMap;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.annotation.Nullable;
 
 public class SnackbarModule extends ReactContextBaseJavaModule {
 
@@ -27,17 +28,20 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void show(ReadableMap options, @Nullable final Callback callback) {
+    public void show(final ReadableMap options, @Nullable final Callback callback) {
         // TODO: Check getCurrentActivity
         Snackbar snackbar = Snackbar.make(getCurrentActivity().findViewById(android.R.id.content), options.getString("title"), options.getInt("duration"));
 
         if (callback != null) { // There is an action
-            snackbar.setAction("Hello", new View.OnClickListener() {
+            ReadableMap action = options.getMap("action");
+
+            snackbar.setAction(action.getString("title"), new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     callback.invoke();
                 }
             });
+            snackbar.setActionTextColor(action.getInt("color"));
         }
         snackbar.show();
     }
