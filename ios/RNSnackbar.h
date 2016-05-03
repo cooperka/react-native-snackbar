@@ -1,6 +1,6 @@
 //
 //  RNSnackbar.h
-//  examples
+//  React-Native-Snackbar
 //
 //  Created by Remi Santos on 13/04/16.
 //  Copyright © 2016 Facebook. All rights reserved.

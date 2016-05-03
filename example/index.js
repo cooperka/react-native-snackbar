@@ -5,9 +5,9 @@ import React, {
   Text,
   View
 } from 'react-native';
-import Snackbar from './react-native-snackbar';
+import Snackbar from '../react-native-snackbar';
 
-class examples extends Component {
+class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -23,7 +23,7 @@ class examples extends Component {
           Welcome to React Native!
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.ios.js
+          To get started, edit index.js
         </Text>
         <Text style={styles.instructions}>
           Shake or Cmd+D for dev menu
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('examples', () => examples);
+AppRegistry.registerComponent('Example', () => Example);
