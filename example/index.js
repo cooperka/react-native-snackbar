@@ -5,28 +5,34 @@ import React, {
   Text,
   View
 } from 'react-native';
-import Snackbar from '../react-native-snackbar';
+import Snackbar from 'react-native-snackbar';
 
 class Example extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome} onPress={() => Snackbar.show({
-          title: 'Message sent, you can now do something else, I don\'t care',
+        <Text style={styles.title}>
+          React Native Snackbar
+        </Text>
+        <Text style={styles.button} onPress={() => Snackbar.show({title: 'Hello Wordl!'})}>
+          Simple Snackbar
+        </Text>
+        <Text style={styles.button} onPress={() => Snackbar.show({
+          title: 'Hello World! How are you doing today?! Enjoying the sun?',
+          duration: Snackbar.LENGTH_LONG,
+        })}>
+          Snackbar two lines
+        </Text>
+        <Text style={styles.button} onPress={() => Snackbar.show({
+          title: 'Please agree to this',
           duration: Snackbar.LENGTH_INDEFINITE,
           action: {
-            title: 'UNDO',
-            onPress: () => Snackbar.show({title: 'Nice action'}),
+            title: 'AGREE',
+            onPress: () => Snackbar.show({title: 'Thank you'}),
             color: 'green'
           }
         })}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or Cmd+D for dev menu
+          Snackbar with action
         </Text>
       </View>
     );
@@ -40,15 +46,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
+  title: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+    color: 'black',
   },
-  instructions: {
+  button: {
+    fontSize: 16,
     textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    margin: 10,
+    color: 'green',
   },
 });
 

@@ -22,7 +22,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		A56C9EE11CD8E64200F8772E /* libReact-Native-Snackbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A56C9EE01CD8E63400F8772E /* libReact-Native-Snackbar.a */; };
+		A5658D421CD8FA6900D2FE1A /* libRNSnackbar.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A5658D411CD8FA5F00D2FE1A /* libRNSnackbar.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,12 +103,12 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
-		A56C9EDF1CD8E63400F8772E /* PBXContainerItemProxy */ = {
+		A5658D401CD8FA5F00D2FE1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A56C9EDB1CD8E63400F8772E /* React-Native-Snackbar.xcodeproj */;
+			containerPortal = A5658D3C1CD8FA5F00D2FE1A /* RNSnackbar.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 4114DC4C1C187C3A003CD988;
-			remoteInfo = "React-Native-Snackbar";
+			remoteInfo = RNSnackbar;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -134,7 +134,7 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		A56C9EDB1CD8E63400F8772E /* React-Native-Snackbar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "React-Native-Snackbar.xcodeproj"; path = "../../ios/React-Native-Snackbar.xcodeproj"; sourceTree = "<group>"; };
+		A5658D3C1CD8FA5F00D2FE1A /* RNSnackbar.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSnackbar.xcodeproj; path = ../../ios/RNSnackbar.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,7 +149,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A56C9EE11CD8E64200F8772E /* libReact-Native-Snackbar.a in Frameworks */,
+				A5658D421CD8FA6900D2FE1A /* libRNSnackbar.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -272,7 +272,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				A56C9EDB1CD8E63400F8772E /* React-Native-Snackbar.xcodeproj */,
+				A5658D3C1CD8FA5F00D2FE1A /* RNSnackbar.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
 				00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */,
@@ -316,10 +316,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		A56C9EDC1CD8E63400F8772E /* Products */ = {
+		A5658D3D1CD8FA5F00D2FE1A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				A56C9EE01CD8E63400F8772E /* libReact-Native-Snackbar.a */,
+				A5658D411CD8FA5F00D2FE1A /* libRNSnackbar.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -427,12 +427,12 @@
 					ProjectRef = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
 				},
 				{
-					ProductGroup = A56C9EDC1CD8E63400F8772E /* Products */;
-					ProjectRef = A56C9EDB1CD8E63400F8772E /* React-Native-Snackbar.xcodeproj */;
-				},
-				{
 					ProductGroup = 146834001AC3E56700842450 /* Products */;
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+				},
+				{
+					ProductGroup = A5658D3D1CD8FA5F00D2FE1A /* Products */;
+					ProjectRef = A5658D3C1CD8FA5F00D2FE1A /* RNSnackbar.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -514,11 +514,11 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		A56C9EE01CD8E63400F8772E /* libReact-Native-Snackbar.a */ = {
+		A5658D411CD8FA5F00D2FE1A /* libRNSnackbar.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = "libReact-Native-Snackbar.a";
-			remoteRef = A56C9EDF1CD8E63400F8772E /* PBXContainerItemProxy */;
+			path = libRNSnackbar.a;
+			remoteRef = A5658D401CD8FA5F00D2FE1A /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
