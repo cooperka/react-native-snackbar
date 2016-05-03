@@ -1,10 +1,10 @@
 {
   "name": "react-native-snackbar",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "React Native Snackbar",
   "main": "react-native-snackbar",
   "directories": {
-    "example": "example",
+    "example": "example"
   },
   "repository": {
     "type": "git",
@@ -15,7 +15,7 @@
     "react-component",
     "ios",
     "android",
-    "material design"
+    "material design",
     "snackbar"
   ],
   "author": "Azendoo",

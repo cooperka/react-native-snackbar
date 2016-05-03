@@ -1,6 +1,4 @@
-import { NativeModules } from 'react-native';
-
-import processColor from 'processColor';
+import { NativeModules, processColor } from 'react-native';
 
 export default {
   ...NativeModules.RNSnackbar,
