@@ -24,7 +24,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		4114DC4C1C187C3A003CD988 /* libReact-Native-Snackbar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libReact-Native-Snackbar.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4114DC4C1C187C3A003CD988 /* libRNSnackbar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNSnackbar.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A56C9ECB1CD8E57C00F8772E /* RNSnackbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNSnackbar.h; sourceTree = SOURCE_ROOT; };
 		A56C9ECC1CD8E57C00F8772E /* RNSnackbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNSnackbar.m; sourceTree = SOURCE_ROOT; };
 		A56C9ECD1CD8E57C00F8772E /* RNSnackBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNSnackBarView.h; sourceTree = SOURCE_ROOT; };
@@ -45,7 +45,7 @@
 		4114DC431C187C3A003CD988 = {
 			isa = PBXGroup;
 			children = (
-				4114DC4E1C187C3A003CD988 /* React-Native-Snackbar */,
+				4114DC4E1C187C3A003CD988 /* RNSnackbar */,
 				4114DC4D1C187C3A003CD988 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,12 +53,12 @@
 		4114DC4D1C187C3A003CD988 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4114DC4C1C187C3A003CD988 /* libReact-Native-Snackbar.a */,
+				4114DC4C1C187C3A003CD988 /* libRNSnackbar.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4114DC4E1C187C3A003CD988 /* React-Native-Snackbar */ = {
+		4114DC4E1C187C3A003CD988 /* RNSnackbar */ = {
 			isa = PBXGroup;
 			children = (
 				A56C9ECB1CD8E57C00F8772E /* RNSnackbar.h */,
@@ -66,16 +66,15 @@
 				A56C9ECD1CD8E57C00F8772E /* RNSnackBarView.h */,
 				A56C9ECE1CD8E57C00F8772E /* RNSnackBarView.m */,
 			);
-			name = "React-Native-Snackbar";
-			path = "React-Native-Webview-Bridge";
+			name = RNSnackbar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4114DC4B1C187C3A003CD988 /* React-Native-Snackbar */ = {
+		4114DC4B1C187C3A003CD988 /* RNSnackbar */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4114DC551C187C3A003CD988 /* Build configuration list for PBXNativeTarget "React-Native-Snackbar" */;
+			buildConfigurationList = 4114DC551C187C3A003CD988 /* Build configuration list for PBXNativeTarget "RNSnackbar" */;
 			buildPhases = (
 				4114DC481C187C3A003CD988 /* Sources */,
 				4114DC491C187C3A003CD988 /* Frameworks */,
@@ -85,9 +84,9 @@
 			);
 			dependencies = (
 			);
-			name = "React-Native-Snackbar";
+			name = RNSnackbar;
 			productName = "React-Native-Webview-Bridge";
-			productReference = 4114DC4C1C187C3A003CD988 /* libReact-Native-Snackbar.a */;
+			productReference = 4114DC4C1C187C3A003CD988 /* libRNSnackbar.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -104,7 +103,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4114DC471C187C3A003CD988 /* Build configuration list for PBXProject "React-Native-Snackbar" */;
+			buildConfigurationList = 4114DC471C187C3A003CD988 /* Build configuration list for PBXProject "RNSnackbar" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -116,7 +115,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4114DC4B1C187C3A003CD988 /* React-Native-Snackbar */,
+				4114DC4B1C187C3A003CD988 /* RNSnackbar */,
 			);
 		};
 /* End PBXProject section */
@@ -247,7 +246,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4114DC471C187C3A003CD988 /* Build configuration list for PBXProject "React-Native-Snackbar" */ = {
+		4114DC471C187C3A003CD988 /* Build configuration list for PBXProject "RNSnackbar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4114DC531C187C3A003CD988 /* Debug */,
@@ -256,7 +255,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4114DC551C187C3A003CD988 /* Build configuration list for PBXNativeTarget "React-Native-Snackbar" */ = {
+		4114DC551C187C3A003CD988 /* Build configuration list for PBXNativeTarget "RNSnackbar" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4114DC561C187C3A003CD988 /* Debug */,

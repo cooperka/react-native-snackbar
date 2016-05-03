@@ -2,7 +2,6 @@
   "name": "react-native-snackbar",
   "version": "0.1.0",
   "description": "React Native Snackbar",
-  "main": "react-native-snackbar",
   "directories": {
     "example": "example"
   },
