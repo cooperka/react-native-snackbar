@@ -1,6 +1,8 @@
 package com.azendoo.reactnativesnackbar;
 
+import android.app.Activity;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 
 import com.facebook.react.bridge.Callback;
@@ -29,7 +31,12 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void show(final ReadableMap options, @Nullable final Callback callback) {
-        // TODO: Check getCurrentActivity
+        Activity activity = getCurrentActivity();
+
+        if (activity == null) {
+            Log.d(REACT_NAME, "Trying to show Snackbar without an activity attached");
+            return;
+        }
         Snackbar snackbar = Snackbar.make(getCurrentActivity().findViewById(android.R.id.content), options.getString("title"), options.getInt("duration"));
 
         if (callback != null) { // There is an action
