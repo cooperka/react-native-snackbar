@@ -2,20 +2,23 @@
   "name": "react-native-snackbar",
   "version": "0.2.0",
   "description": "React Native Snackbar",
-  "directories": {
-    "example": "example"
-  },
+  "main": "index.js",
+  "files": [
+    "android",
+    "ios"
+  ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:azendoo/react-native-snackbar.git"
+    "url": "git+https://github.com/cooperka/react-native-snackbar.git"
   },
   "keywords": [
     "react-native",
-    "react-component",
+    "component",
     "ios",
     "android",
     "material design",
-    "snackbar"
+    "snackbar",
+    "snack bar"
   ],
   "author": "Azendoo",
   "license": "MIT",
