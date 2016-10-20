@@ -1,7 +1,11 @@
 import { NativeModules, processColor } from 'react-native';
 
 export default {
-  ...NativeModules.RNSnackbar,
+
+  LENGTH_LONG: NativeModules.RNSnackbar.LENGTH_LONG,
+  LENGTH_SHORT: NativeModules.RNSnackbar.LENGTH_SHORT,
+  LENGTH_INDEFINITE: NativeModules.RNSnackbar.LENGTH_INDEFINITE,
+
   show: (options) => {
     const action = options.action ? options.action.onPress : () => {};
 
@@ -10,4 +14,5 @@ export default {
     }
     NativeModules.RNSnackbar.show(options, action);
   },
+
 }
