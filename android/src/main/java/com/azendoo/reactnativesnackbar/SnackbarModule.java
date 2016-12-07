@@ -46,8 +46,20 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
         String title = options.hasKey("title") ? options.getString("title") : "Hello";
         int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
 
-        Snackbar
-                .make(view, title, duration)
-                .show();
+        Snackbar snackbar = Snackbar.make(view, title, duration);
+        if (options.hasKey("action")) {
+            View.OnClickListener onClickListener = new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    callback.invoke();
+                }
+            };
+
+            ReadableMap actionDetails = options.getMap("action");
+            snackbar.setAction(actionDetails.getString("title"), onClickListener);
+            snackbar.setActionTextColor(actionDetails.getInt("color"));
+        }
+
+        snackbar.show();
     }
 }
