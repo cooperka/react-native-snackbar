@@ -1,6 +1,6 @@
 {
   "name": "react-native-snackbar",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "React Native Snackbar",
   "main": "index.js",
   "files": [
