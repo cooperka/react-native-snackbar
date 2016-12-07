@@ -38,7 +38,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
     }
 
     @ReactMethod
-    public void show(ReadableMap options, Callback callback) {
+    public void show(ReadableMap options, final Callback callback) {
         View view = getCurrentActivity().findViewById(android.R.id.content);
 
         if (view == null) return;
