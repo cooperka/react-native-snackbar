@@ -7,15 +7,24 @@ Implementation of the material design Snackbar component for both Android and iO
 To use this extension, you have to do the following steps:
 
 1. In your react-native project, run
-	```
-	npm install react-native-snackbar
-	```
+
+	- using npm
+
+      	```
+    	npm install react-native-snackbar
+    	```
+
+	- using yarn:
+
+    	```
+    	yarn add react-native-snackbar
+    	```
 
 2. Link the library using `react-native link react-native-snackbar` (learn more about [linking](https://facebook.github.io/react-native/docs/linking-libraries-ios.html).
 
 3. Import it in you JS, where you want to show a snackbar
 	```
-	import Snackbar from 'react-native-snackbar'
+	import Snackbar from 'react-native-snackbar';
 	```
 
 ## Usage
@@ -27,7 +36,7 @@ Snackbar.show({
 
 	// Optional duration. Can be one of LENGTH_LONG | LENGTH_SHORT | LENGTH_INDEFINITE.
 	duration: Snackbar.LENGTH_LONG,
-})
+});
 ```
 
 *..Preview..*
@@ -43,7 +52,7 @@ Snackbar.show({
 			// do something here
 		},
 	},
-})
+});
 ```
 
 Note that actions do not currently work on Android. Feel free to submit a PR!
