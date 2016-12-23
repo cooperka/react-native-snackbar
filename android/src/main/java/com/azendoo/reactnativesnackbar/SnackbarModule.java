@@ -3,6 +3,8 @@ package com.azendoo.reactnativesnackbar;
 import android.support.design.widget.Snackbar;
 
 import android.view.View;
+import android.text.Html;
+import android.text.Spanned;
 
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -45,8 +47,10 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
 
         String title = options.hasKey("title") ? options.getString("title") : "Hello";
         int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
+        Spanned coloredTitle = Html.fromHtml("<font color=\"" + options.getString("tintColor") + "\">" + title + "</font>");
+        
+        Snackbar snackbar = Snackbar.make(view, coloredTitle, duration);
 
-        Snackbar snackbar = Snackbar.make(view, title, duration);
         if (options.hasKey("action")) {
             View.OnClickListener onClickListener = new View.OnClickListener() {
                 @Override
