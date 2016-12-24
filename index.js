@@ -13,8 +13,8 @@ export default {
       options.action.color = processColor(options.action.color);
     }
 
-     if(!options.tintColor) {
-      options.tintColor = '#ffffff';
+     if(!options.textColor) {
+      options.textColor = '#ffffff';
     }
     
     NativeModules.RNSnackbar.show(options, action);
