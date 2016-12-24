@@ -43,6 +43,14 @@ Snackbar.show({
 });
 ```
 
+Or, show one with colored text using hex codes [Android]:
+```js
+Snackbar.show({
+    title: 'Snackbars are cool',
+    textColor: '#54C7FC'
+})
+```
+
 Or, to include an action button:
 
 ```js
