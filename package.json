@@ -25,5 +25,9 @@
   "bugs": {
     "url": "https://github.com/cooperka/react-native-snackbar/issues"
   },
-  "homepage": "https://github.com/cooperka/react-native-snackbar"
+  "homepage": "https://github.com/cooperka/react-native-snackbar",
+  "devDependencies": {
+    "react": "~15.4.1",
+    "react-native": "~0.39.2"
+  }
 }
