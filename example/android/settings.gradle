@@ -1,3 +1,6 @@
-rootProject.name = 'examples'
+rootProject.name = 'SnackbarExample'
 
-include ':app', ':react-native-snackbar'
+include ':react-native-snackbar'
+project(':react-native-snackbar').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-snackbar/android')
+
+include ':app'

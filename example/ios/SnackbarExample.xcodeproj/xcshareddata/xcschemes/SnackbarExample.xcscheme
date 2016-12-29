@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "examples.app"
-               BlueprintName = "examples"
-               ReferencedContainer = "container:examples.xcodeproj">
+               BuildableName = "SnackbarExample.app"
+               BlueprintName = "SnackbarExample"
+               ReferencedContainer = "container:SnackbarExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,27 +29,27 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "examplesTests.xctest"
-               BlueprintName = "examplesTests"
-               ReferencedContainer = "container:examples.xcodeproj">
+               BuildableName = "SnackbarExampleTests.xctest"
+               BlueprintName = "SnackbarExampleTests"
+               ReferencedContainer = "container:SnackbarExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      buildConfiguration = "Debug">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "examplesTests.xctest"
-               BlueprintName = "examplesTests"
-               ReferencedContainer = "container:examples.xcodeproj">
+               BuildableName = "SnackbarExampleTests.xctest"
+               BlueprintName = "SnackbarExampleTests"
+               ReferencedContainer = "container:SnackbarExample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,51 +57,48 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "examples.app"
-            BlueprintName = "example"
-            ReferencedContainer = "container:example.xcodeproj">
+            BuildableName = "SnackbarExample.app"
+            BlueprintName = "SnackbarExample"
+            ReferencedContainer = "container:SnackbarExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Debug"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
-      debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "examples.app"
-            BlueprintName = "example"
-            ReferencedContainer = "container:example.xcodeproj">
+            BuildableName = "SnackbarExample.app"
+            BlueprintName = "SnackbarExample"
+            ReferencedContainer = "container:SnackbarExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "examples.app"
-            BlueprintName = "examples"
-            ReferencedContainer = "container:examples.xcodeproj">
+            BuildableName = "SnackbarExample.app"
+            BlueprintName = "SnackbarExample"
+            ReferencedContainer = "container:SnackbarExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
