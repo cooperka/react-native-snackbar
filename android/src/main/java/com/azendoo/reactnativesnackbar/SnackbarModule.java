@@ -1,9 +1,12 @@
 package com.azendoo.reactnativesnackbar;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.support.design.widget.Snackbar;
 
 import android.view.View;
 
+import android.widget.TextView;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -58,6 +61,14 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             ReadableMap actionDetails = options.getMap("action");
             snackbar.setAction(actionDetails.getString("title"), onClickListener);
             snackbar.setActionTextColor(actionDetails.getInt("color"));
+        }
+
+        // For older devices, explicitly set the text color; otherwise it may appear dark gray.
+        // http://stackoverflow.com/a/31084530/763231
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            View snackbarView = snackbar.getView();
+            TextView snackbarText = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+            snackbarText.setTextColor(Color.WHITE);
         }
 
         snackbar.show();
