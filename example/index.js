@@ -73,3 +73,5 @@ const styles = StyleSheet.create({
 });
 
 AppRegistry.registerComponent('SnackbarExample', () => Example);
+
+export default Example;
