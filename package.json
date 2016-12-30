@@ -1,6 +1,6 @@
 {
   "name": "react-native-snackbar",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Material-design \"Snackbar\" component for both Android and iOS",
   "main": "index.js",
   "files": [
