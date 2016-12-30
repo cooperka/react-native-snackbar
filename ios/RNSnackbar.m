@@ -13,12 +13,12 @@
 RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(show:(NSDictionary *)options callback:(RCTResponseSenderBlock)callback)
-{  
-  dispatch_async(dispatch_get_main_queue(), ^{
-    [RNSnackBarView showWithOptions:options andCallback:^{
-      callback(@[]);
-    }];
-  });
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [RNSnackBarView showWithOptions:options andCallback:^{
+            callback(@[[NSNull null], [NSNull null]]);
+        }];
+    });
 }
 
 - (NSDictionary *)constantsToExport
@@ -27,6 +27,6 @@ RCT_EXPORT_METHOD(show:(NSDictionary *)options callback:(RCTResponseSenderBlock)
              @"LENGTH_INDEFINITE": @-2,
              @"LENGTH_LONG": @0,
              @"LENGTH_SHORT": @-1
-            };
+             };
 }
 @end
