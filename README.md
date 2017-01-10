@@ -62,3 +62,7 @@ Snackbar.show({
 ```
 
 TODO: Add screenshots :sunglasses:
+
+## Notes
+
+A few people have suggested that the default Gradle configs created by `react-native init` are too outdated. If you have issues compiling for Android after linking this library, please try upgrading Gradle to the latest version (e.g. `com.android.tools.build:gradle:2.2.2`). You should also be using the latest `compileSdkVersion` (e.g. `25`) and `buildToolsVersion` (e.g. `25.0.2`). See #2 for more info.
