@@ -6,7 +6,7 @@
 //  Copyright © 2016 Facebook. All rights reserved.
 //
 
-#import "RCTBridgeModule.h"
+#import <React/RCTBridgeModule.h>
 #import <Foundation/Foundation.h>
 
 @interface RNSnackbar : NSObject<RCTBridgeModule>
