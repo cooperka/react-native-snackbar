@@ -7,7 +7,7 @@
 //
 
 #import "RNSnackBarView.h"
-#import "RCTConvert.h"
+#import <React/RCTConvert.h>
 
 typedef NS_ENUM(NSInteger, RNSnackBarViewState) {
   RNSnackBarViewStateDisplayed,
@@ -80,14 +80,14 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:titleLabel];
-  
+
     actionButton = [UIButton new];
     actionButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     [actionButton setTitle:@"" forState:UIControlStateNormal];
     [actionButton addTarget:self action:@selector(actionPressed:) forControlEvents:UIControlEventTouchUpInside];
     [actionButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:actionButton];
-  
+
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:
           @"H:|-24-[titleLabel]-24-[actionButton]-24-|"
           options:0 metrics:nil views:@{@"titleLabel": titleLabel, @"actionButton": actionButton}]];
@@ -164,7 +164,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
         }
     }];
 }
-  
+
 - (void)show {
     if (self.state == RNSnackBarViewStateDisplayed || self.state == RNSnackBarViewStatePresenting) {
       [self dismiss];
@@ -174,7 +174,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
       return;
     }
     if (!_pendingOptions) { return; }
-  
+
     self.title = _pendingOptions[@"title"];
     self.callback = _pendingCallback;
     NSDictionary* action = _pendingOptions[@"action"];
