@@ -51,7 +51,9 @@ Snackbar.show({
 });
 ```
 
-TODO: Add screenshots :sunglasses:
+It will appear on-screen as follows:
+
+![Snackbar screenshot](example/screenshots/snackbar.png)
 
 ## Notes
 
