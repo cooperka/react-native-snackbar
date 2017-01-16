@@ -10,24 +10,14 @@ See [Google Design](https://material.google.com/components/snackbars-toasts.html
 
 ## Installation
 
-To use this extension, you have to do the following steps:
+To use this module, you should do the following:
 
-1. In your react-native project, run
-
-    - using npm:
-
-        ```shell
-        npm install react-native-snackbar
-        ```
-
-    - using yarn:
-
-        ```shell
-        yarn add react-native-snackbar
-        ```
+1. In your React Native project, run:
+    - Using npm: `npm install react-native-snackbar`
+    - Using Yarn: `yarn add react-native-snackbar`
 
 2. Link the library using `react-native link react-native-snackbar`
-(learn more about [linking](https://facebook.github.io/react-native/docs/linking-libraries-ios.html).
+    - Learn more about linking [here](https://facebook.github.io/react-native/docs/linking-libraries-ios.html)
 
 3. Import it in your JS where you want to show a snackbar:
 
@@ -37,7 +27,7 @@ To use this extension, you have to do the following steps:
 
 ## Usage
 
-To show a simple snackbar:
+To show a simple Snackbar:
 
 ```js
 Snackbar.show({
@@ -65,4 +55,8 @@ TODO: Add screenshots :sunglasses:
 
 ## Notes
 
-A few people have suggested that the default Gradle configs created by `react-native init` are too outdated. If you have issues compiling for Android after linking this library, please try upgrading Gradle to the latest version (e.g. `com.android.tools.build:gradle:2.2.2`). You should also be using the latest `compileSdkVersion` (e.g. `25`) and `buildToolsVersion` (e.g. `25.0.2`). See #2 for more info.
+A few people have suggested that the default Gradle configs created by `react-native init` are too outdated.
+If you have issues compiling for Android after linking this library,
+please try upgrading Gradle to the latest version (e.g. `com.android.tools.build:gradle:2.2.2`).
+You should also be using the latest `compileSdkVersion` (e.g. `25`) and `buildToolsVersion` (e.g. `25.0.2`).
+See [#2](https://github.com/cooperka/react-native-snackbar/issues/2) for more info.
