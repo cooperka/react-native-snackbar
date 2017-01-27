@@ -1,0 +1,13 @@
+{
+  "extends": "cooperka/react-native",
+
+  "parser": "babel-eslint",
+
+  "env": {
+    "jest": true
+  },
+
+  "rules": {
+    "react-native/no-color-literals": "off"
+  }
+}
