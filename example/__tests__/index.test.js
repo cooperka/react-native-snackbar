@@ -6,8 +6,11 @@ import renderer from 'react-test-renderer';
 
 import App from '../index';
 
-it('renders correctly', () => {
-  renderer.create(
-    <App />,
-  );
+describe('Snackbar example app', () => {
+  it('renders correctly', () => {
+    const tree = renderer.create(
+      <App />,
+    );
+    expect(tree).toMatchSnapshot();
+  });
 });

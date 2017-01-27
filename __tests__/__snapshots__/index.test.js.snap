@@ -1,0 +1,25 @@
+exports[`Snackbar module calls native with default params 1`] = `
+Array [
+  Array [
+    Object {},
+    [Function],
+  ],
+]
+`;
+
+exports[`Snackbar module calls native with specified params 1`] = `
+Array [
+  Array [
+    Object {
+      "action": Object {
+        "color": 4278222848,
+        "onPress": [Function],
+        "title": "UNDO",
+      },
+      "duration": 0,
+      "title": "Hello world",
+    },
+    [Function],
+  ],
+]
+`;

@@ -1,0 +1,71 @@
+exports[`Snackbar example app renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#F5FCFF",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "color": "black",
+        "fontSize": 20,
+        "margin": 10,
+        "textAlign": "center",
+      }
+    }>
+    Snackbar Examples
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    onPress={[Function]}
+    style={
+      Object {
+        "color": "green",
+        "fontSize": 16,
+        "margin": 10,
+        "textAlign": "center",
+      }
+    }>
+    Simple Snackbar
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    onPress={[Function]}
+    style={
+      Object {
+        "color": "green",
+        "fontSize": 16,
+        "margin": 10,
+        "textAlign": "center",
+      }
+    }>
+    Simple Snackbar - two lines
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    onPress={[Function]}
+    style={
+      Object {
+        "color": "green",
+        "fontSize": 16,
+        "margin": 10,
+        "textAlign": "center",
+      }
+    }>
+    Snackbar with action
+  </Text>
+</View>
+`;

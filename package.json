@@ -3,13 +3,17 @@
   "version": "0.3.0",
   "description": "Material-design \"Snackbar\" component for both Android and iOS",
   "main": "index.js",
-  "scripts": {
-    "lint": "eslint . --ext .js,.jsx"
-  },
   "files": [
     "android",
     "ios"
   ],
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint . --ext .js,.jsx"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cooperka/react-native-snackbar.git"
@@ -42,6 +46,7 @@
     "eslint-plugin-jsx-a11y": "~3.0.2",
     "eslint-plugin-react": "~6.9.0",
     "eslint-plugin-react-native": "~2.2.1",
+    "jest": "~18.1.0",
     "react": "^15.4.2",
     "react-native": "^0.40.0"
   }
