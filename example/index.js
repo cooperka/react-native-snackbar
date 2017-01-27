@@ -5,9 +5,12 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View } from 'react-native';
+import { AppRegistry, Text, View } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 
+import styles from './styles';
+
+// eslint-disable-next-line react/prefer-stateless-function
 class Example extends Component {
 
   render() {
@@ -17,7 +20,7 @@ class Example extends Component {
           Snackbar Examples
         </Text>
 
-        <Text style={styles.button} onPress={() => Snackbar.show({title: 'Hello, World!'})}>
+        <Text style={styles.button} onPress={() => Snackbar.show({ title: 'Hello, World!' })}>
           Simple Snackbar
         </Text>
 
@@ -50,27 +53,6 @@ class Example extends Component {
   }
 
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    color: 'black',
-  },
-  button: {
-    fontSize: 16,
-    textAlign: 'center',
-    margin: 10,
-    color: 'green',
-  },
-});
 
 AppRegistry.registerComponent('SnackbarExample', () => Example);
 
