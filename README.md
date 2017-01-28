@@ -45,7 +45,7 @@ Where `duration` can be one of the following:
 Here's how to use it:
 
 1. Install:
-    - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-snackbar`
+    - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-snackbar --save`
     - Using [Yarn](https://yarnpkg.com/): `yarn add react-native-snackbar`
 
 2. [Link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html):
