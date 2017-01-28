@@ -5,37 +5,18 @@
 [![npm version](https://img.shields.io/npm/v/react-native-snackbar.svg)](https://www.npmjs.com/package/react-native-snackbar)
 [![Latest GitHub tag](https://img.shields.io/github/tag/cooperka/react-native-snackbar.svg)](https://github.com/cooperka/react-native-snackbar)
 
-Material-design "Snackbar" component for both Android and iOS.
+Material-design "Snackbar" component for Android and iOS.
 
-See [Google Design](https://material.google.com/components/snackbars-toasts.html) for more info on Snackbars.
+![Snackbar screenshot](example/screenshots/snackbar.png)
 
-## Installation
+See [Google Material Design](https://material.io/guidelines/components/snackbars-toasts.html) for more info on Snackbars.
 
-To use this module, you should do the following:
-
-1. In your React Native project, run:
-    - Using npm: `npm install react-native-snackbar`
-    - Using Yarn: `yarn add react-native-snackbar`
-
-2. Link the library using `react-native link react-native-snackbar`
-    - Learn more about linking [here](https://facebook.github.io/react-native/docs/linking-libraries-ios.html)
-
-3. Import it in your JS where you want to show a snackbar:
-
-    ```js
-    import Snackbar from 'react-native-snackbar';
-    ```
-
-## Usage
-
-To show a simple Snackbar:
+## Code
 
 ```js
 Snackbar.show({
     title: 'Hello world',
-
-    // Optional duration. Can be one of LENGTH_LONG | LENGTH_SHORT | LENGTH_INDEFINITE.
-    duration: Snackbar.LENGTH_LONG,
+    duration: Snackbar.LENGTH_SHORT,
 });
 ```
 
@@ -52,14 +33,35 @@ Snackbar.show({
 });
 ```
 
-It will appear on-screen as follows:
+## Installation
 
-![Snackbar screenshot](example/screenshots/snackbar.png)
+Here's how to use it:
+
+1. Install:
+    - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-snackbar`
+    - Using [Yarn](https://yarnpkg.com/): `yarn add react-native-snackbar`
+
+2. [Link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html):
+    - `react-native link react-native-snackbar`
+
+3. Import it in your JS:
+
+    ```js
+    import Snackbar from 'react-native-snackbar';
+    ```
 
 ## Notes
 
-A few people have suggested that the default Gradle configs created by `react-native init` are too outdated.
+A few people have [suggested](https://github.com/cooperka/react-native-snackbar/issues/2)
+that the default Gradle configs created by `react-native init` are too outdated.
 If you have issues compiling for Android after linking this library,
-please try upgrading Gradle to the latest version (e.g. `com.android.tools.build:gradle:2.2.2`).
-You should also be using the latest `compileSdkVersion` (e.g. `25`) and `buildToolsVersion` (e.g. `25.0.2`).
-See [#2](https://github.com/cooperka/react-native-snackbar/issues/2) for more info.
+please try upgrading Gradle to the latest version! For example:
+
+In your `android/build.gradle`:
+
+- `com.android.tools.build:gradle:2.2.2`
+
+In your `android/app/build.gradle`:
+
+- `compileSdkVersion 25`
+- `buildToolsVersion "25.0.2"`
