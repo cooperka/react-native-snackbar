@@ -25,6 +25,7 @@ Or, to include an action button:
 ```js
 Snackbar.show({
     title: 'Hello world',
+    duration: Snackbar.LENGTH_LONG,
     action: {
         title: 'UNDO',
         color: 'green',
@@ -32,6 +33,12 @@ Snackbar.show({
     },
 });
 ```
+
+Where `duration` can be one of the following:
+
+- `Snackbar.LENGTH_SHORT` (about a second)
+- `Snackbar.LENGTH_LONG` (about three seconds)
+- `Snackbar.LENGTH_INDEFINITE` (stays on screen until the button is pressed)
 
 ## Installation
 
