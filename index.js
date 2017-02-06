@@ -13,6 +13,11 @@ export default {
       // eslint-disable-next-line no-param-reassign
       options.action.color = processColor(options.action.color);
     }
+
+     if(!options.textColor) {
+      options.textColor = '#ffffff';
+    }
+    
     NativeModules.RNSnackbar.show(options, action);
   },
 
