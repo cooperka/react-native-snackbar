@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`Snackbar example app renders correctly 1`] = `
 <View
   style={
@@ -7,7 +9,8 @@ exports[`Snackbar example app renders correctly 1`] = `
       "flex": 1,
       "justifyContent": "center",
     }
-  }>
+  }
+>
   <Text
     accessible={true}
     allowFontScaling={true}
@@ -19,7 +22,8 @@ exports[`Snackbar example app renders correctly 1`] = `
         "margin": 10,
         "textAlign": "center",
       }
-    }>
+    }
+  >
     Snackbar Examples
   </Text>
   <Text
@@ -34,7 +38,8 @@ exports[`Snackbar example app renders correctly 1`] = `
         "margin": 10,
         "textAlign": "center",
       }
-    }>
+    }
+  >
     Simple Snackbar
   </Text>
   <Text
@@ -49,7 +54,8 @@ exports[`Snackbar example app renders correctly 1`] = `
         "margin": 10,
         "textAlign": "center",
       }
-    }>
+    }
+  >
     Simple Snackbar - two lines
   </Text>
   <Text
@@ -64,7 +70,8 @@ exports[`Snackbar example app renders correctly 1`] = `
         "margin": 10,
         "textAlign": "center",
       }
-    }>
+    }
+  >
     Snackbar with action
   </Text>
 </View>
