@@ -1,15 +1,19 @@
-# react-native-snackbar
+# React Native Snackbar
 
 [![Build status](https://travis-ci.org/cooperka/react-native-snackbar.svg?branch=master)](https://travis-ci.org/cooperka/react-native-snackbar)
 [![npm downloads](https://img.shields.io/npm/dm/react-native-snackbar.svg)](https://www.npmjs.com/package/react-native-snackbar)
 [![npm version](https://img.shields.io/npm/v/react-native-snackbar.svg)](https://www.npmjs.com/package/react-native-snackbar)
 [![Latest GitHub tag](https://img.shields.io/github/tag/cooperka/react-native-snackbar.svg)](https://github.com/cooperka/react-native-snackbar)
 
-Material-design "Snackbar" component for Android and iOS.
+Material-design "Snackbar" component for Android and iOS:
 
 ![Snackbar screenshot](example/screenshots/snackbar.png)
 
-See [Google Material Design](https://material.io/guidelines/components/snackbars-toasts.html) for more info on Snackbars.
+Snackbars are used for displaying a brief message to the user, along with an optional action.
+They animate up from the bottom of the screen and then disappear shortly afterward.
+
+See Google's [Material Design guidelines](https://material.io/guidelines/components/snackbars-toasts.html) for more info on Snackbars
+and when to use them.
 
 ## Code
 
