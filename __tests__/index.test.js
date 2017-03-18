@@ -1,14 +1,18 @@
 import { NativeModules } from 'react-native';
 
-import Snackbar from '../index';
-
-jest.mock('NativeModules', () => ({
-  RNSnackbar: {
-    show: jest.fn(),
-  },
-}));
-
 describe('Snackbar module', () => {
+  let Snackbar;
+
+  beforeAll(() => {
+    NativeModules.RNSnackbar = {
+      show: jest.fn(),
+    };
+
+    // Require Snackbar only after NativeModules have been mocked.
+    // eslint-disable-next-line global-require
+    Snackbar = require('../index').default;
+  });
+
   beforeEach(() => {
     NativeModules.RNSnackbar.show.mockClear();
   });
