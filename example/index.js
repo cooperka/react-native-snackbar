@@ -42,6 +42,22 @@ class Example extends Component {
         >
           Snackbar with action
         </Text>
+
+        <Text
+          style={styles.button}
+          onPress={() => Snackbar.show({
+            title: 'Please agree to this.',
+            duration: Snackbar.LENGTH_INDEFINITE,
+            backgroundColor: 'silver',
+            action: {
+              title: 'AGREE',
+              onPress: () => Snackbar.show({ title: 'Thank you!' }),
+              color: 'gold',
+            },
+          })}
+        >
+          Snackbar with style
+        </Text>
       </View>
     );
   }
