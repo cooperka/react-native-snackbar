@@ -28,6 +28,7 @@ Or, to include an action button:
 
 ```js
 Snackbar.show({
+    backgroundColor: 'gray',
     title: 'Hello world',
     duration: Snackbar.LENGTH_LONG,
     action: {

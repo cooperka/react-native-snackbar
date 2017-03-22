@@ -50,6 +50,12 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
         int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
 
         Snackbar snackbar = Snackbar.make(view, title, duration);
+
+        // Set the background color.
+        if (options.hasKey("backgroundColor")) {
+            snackbar.getView().setBackgroundColor(options.getInt("backgroundColor"));
+        }
+
         if (options.hasKey("action")) {
             View.OnClickListener onClickListener = new View.OnClickListener() {
                 @Override
