@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import { AppRegistry, Text, View, Modal, TouchableHighlight } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 
 import styles from './styles';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Example extends Component {
+
+  state = {
+    modalVisible: false,
+  };
 
   render() {
     return (
@@ -58,6 +62,41 @@ class Example extends Component {
         >
           Snackbar with style
         </Text>
+
+        <TouchableHighlight
+          onPress={() => {
+            this.setState({ modalVisible: true });
+          }}
+        >
+          <Text style={styles.button}>Show Modal</Text>
+        </TouchableHighlight>
+
+        <Modal
+          animationType={'slide'}
+          transparent
+          visible={this.state.modalVisible}
+          onRequestClose={() => {}}
+        >
+          <View style={{ flex: 1, paddingTop: 40, backgroundColor: 'rgba(200, 0, 0, 0.6)' }}>
+            <View>
+              <TouchableHighlight
+                onPress={() => {
+                  Snackbar.show({
+                    title: 'Hello world',
+                    duration: Snackbar.LENGTH_SHORT,
+                  });
+                }}
+              >
+                <Text style={styles.button}>Show Snackbar</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                onPress={() => { this.setState({ modalVisible: false }); }}
+              >
+                <Text style={styles.button}>Close</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </Modal>
       </View>
     );
   }
