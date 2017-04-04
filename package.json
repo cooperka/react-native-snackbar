@@ -3,6 +3,7 @@
   "version": "0.3.2",
   "description": "Material-design \"Snackbar\" component for Android and iOS",
   "main": "src/index.js",
+  "types": "./index.d.ts",
   "files": [
     "src",
     "android",
