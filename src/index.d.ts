@@ -60,12 +60,12 @@ interface SnackBarOptions {
 }
 
 /**
- * Snackbar duration of 2000ms (2 seconds)
+ * Snackbar duration of about 1 second
  */
 export const LENGTH_SHORT: number
 
 /**
- * Snackbar duration of 3 seconds
+ * Snackbar duration of about 3 seconds
  */
 export const LENGTH_LONG: number
 
