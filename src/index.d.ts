@@ -16,7 +16,7 @@ interface Action {
    * Color of the text for the button.
    * Accepts various forms of colors such as hex, literals, rgba, etc.
    */
-  color: string;
+  color: string | number;
 
   /**
    * Function called when the user presses the button.
@@ -37,7 +37,7 @@ interface SnackBarOptions {
    * Length of time the Snackbar stays on screen.
    * Must be one of Snackbar.LENGTH_SHORT, Snackbar.LENGTH_LONG, or Snackbar.LENGTH_INDEFINITE.
    */
-  duration: any;
+  duration?: number;
 
   /**
    * Background color of the snackbar
