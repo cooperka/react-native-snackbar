@@ -3,22 +3,26 @@ package com.azendoo.reactnativesnackbar;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
-
 import android.view.View;
-
+import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SnackbarModule extends ReactContextBaseJavaModule{
 
     private static final String REACT_NAME = "RNSnackbar";
+
+    // Store all modals in the screen.
+    private ArrayList<View> modals = new ArrayList<>();
 
     public SnackbarModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -42,10 +46,25 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
 
     @ReactMethod
     public void show(ReadableMap options, final Callback callback) {
-        View view = getCurrentActivity().findViewById(android.R.id.content);
+        ViewGroup view = (ViewGroup) getCurrentActivity().getWindow().getDecorView().findViewById(android.R.id.content);
 
         if (view == null) return;
 
+        if (!view.hasWindowFocus()) {
+            // The view is not focused, we should get all the modal views in the screen.
+            recursiveLoopChildren(view);
+
+            for(View modalViews : modals) {
+                displaySnackbar(modalViews, options, callback);
+            }
+
+            return;
+        }
+
+        displaySnackbar(view, options, callback);
+    }
+
+    private void displaySnackbar(View view, ReadableMap options, final Callback callback) {
         String title = options.hasKey("title") ? options.getString("title") : "Hello";
         int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
 
@@ -78,5 +97,20 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
         }
 
         snackbar.show();
+    }
+
+    private void recursiveLoopChildren(ViewGroup view) {
+        // Get all the modal views.
+        if (view.getClass().getSimpleName().equalsIgnoreCase("ReactModalHostView")) {
+            modals.add(view.getChildAt(0));
+        }
+
+        for (int i = view.getChildCount() - 1; i >= 0; i--) {
+            final View child = view.getChildAt(i);
+
+            if (child instanceof ViewGroup) {
+                recursiveLoopChildren((ViewGroup) child);
+            }
+        }
     }
 }
