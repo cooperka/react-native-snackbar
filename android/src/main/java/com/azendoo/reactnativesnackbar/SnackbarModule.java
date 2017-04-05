@@ -21,9 +21,6 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
 
     private static final String REACT_NAME = "RNSnackbar";
 
-    // Store all modals in the screen.
-    private ArrayList<View> modals = new ArrayList<>();
-
     public SnackbarModule(ReactApplicationContext reactContext) {
         super(reactContext);
     }
@@ -52,9 +49,9 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
 
         if (!view.hasWindowFocus()) {
             // The view is not focused, we should get all the modal views in the screen.
-            recursiveLoopChildren(view);
+            ArrayList<View> modals = recursiveLoopChildren(view, new ArrayList<View>());
 
-            for(View modalViews : modals) {
+            for (View modalViews : modals) {
                 displaySnackbar(modalViews, options, callback);
             }
 
@@ -99,8 +96,10 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
         snackbar.show();
     }
 
-    private void recursiveLoopChildren(ViewGroup view) {
-        // Get all the modal views.
+    /**
+     * Loop through all child modals and save references to them.
+     */
+    private ArrayList<View> recursiveLoopChildren(ViewGroup view, ArrayList<View> modals) {
         if (view.getClass().getSimpleName().equalsIgnoreCase("ReactModalHostView")) {
             modals.add(view.getChildAt(0));
         }
@@ -109,8 +108,10 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             final View child = view.getChildAt(i);
 
             if (child instanceof ViewGroup) {
-                recursiveLoopChildren((ViewGroup) child);
+                return recursiveLoopChildren((ViewGroup) child, modals);
             }
         }
+
+        return modals;
     }
 }
