@@ -3,81 +3,72 @@
 // Definitions by: Kyle Roach <https://github.com/iRoachie>
 // TypeScript Version: 2.2.2
 
-
 /**
- * Actionable button to the snackbar on right.
- * 
- * @interface Action
+ * An actionable button that can be shown on the Snackbar.
  */
 interface Action {
   /**
-   * Text for the button
+   * Text for the button.
    */
-  title: string
+  title: string;
 
   /**
-   * Color of the text for the button
-   * Accepts color strings such as hex, literals, rgba
+   * Color of the text for the button.
+   * Accepts various forms of colors such as hex, literals, rgba, etc.
    */
-  color: string
+  color: string;
 
   /**
-   * Function called when user presses the button
+   * Function called when the user presses the button.
    */
-  onPress(): void
+  onPress(): void;
 }
 
-
 /**
- * List of options to make a snackbar
- * 
- * @interface SnackBarOptions
+ * List of options to configure the Snackbar.
  */
 interface SnackBarOptions {
    /**
-   * The text that appears on the snackbar.
-   * This property is required
+   * The text that appears on the Snackbar.
    */
-  title: string
+  title: string;
 
   /**
-   * Length of time the snackbar stays on screen
-   * It takes either OF three values. Snackbar.LENGTH_SHORT, Snackbar.LENGTH_LONG, Snackbar.LENGTH_INDEFINITE
-   * This property is required
+   * Length of time the Snackbar stays on screen.
+   * Must be one of Snackbar.LENGTH_SHORT, Snackbar.LENGTH_LONG, or Snackbar.LENGTH_INDEFINITE.
    */
-  duration: any
+  duration: any;
 
   /**
    * Background color of the snackbar
    * Accepts color strings such as hex, literals, rgba
    */
-  backgroundColor?: string
+  backgroundColor?: string;
 
   /**
    * Adds an actionable button to the snackbar on the right
    */
-  action?: Action
+  action?: Action;
 }
 
 /**
- * Snackbar duration of about 1 second
+ * Snackbar duration of about a second.
  */
-export const LENGTH_SHORT: number
+export const LENGTH_SHORT: number;
 
 /**
- * Snackbar duration of about 3 seconds
+ * Snackbar duration of about three seconds.
  */
-export const LENGTH_LONG: number
+export const LENGTH_LONG: number;
 
 /**
- * Snackbar duration that lasts forever
+ * Snackbar duration that lasts forever (until a new Snackbar is shown).
  */
-export const LENGTH_INDEFINITE: number
-
+export const LENGTH_INDEFINITE: number;
 
 /**
- * Shows a snackbar defined by a set of options
- * 
- * @param {SnackBarOptions} options 
+ * Shows a native Snackbar component.
+ *
+ * @param {SnackBarOptions} options
  */
-export function show(options: SnackBarOptions): void
+export function show(options: SnackBarOptions): void;
