@@ -115,7 +115,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             final View child = view.getChildAt(i);
 
             if (child instanceof ViewGroup) {
-                return recursiveLoopChildren((ViewGroup) child, modals);
+                recursiveLoopChildren((ViewGroup) child, modals);
             }
         }
 
