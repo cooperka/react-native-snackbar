@@ -46,4 +46,4 @@ const SnackBar: ISnackBar = {
 
 };
 
-export default SnackBar
+export default SnackBar;
