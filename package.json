@@ -13,6 +13,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx",
+    "flow": "flow src",
     "clean": "rm -rf lib",
     "build": "npm run clean && babel src --out-dir lib --ignore src/__tests__",
     "prepublish": "npm run build"
@@ -53,6 +54,7 @@
     "eslint-plugin-jsx-a11y": "~4.0.0",
     "eslint-plugin-react": "~6.10.0",
     "eslint-plugin-react-native": "~2.3.1",
+    "flow-bin": "0.38",
     "jest": "~19.0.2",
     "react": "~15.4.2",
     "react-native": "~0.42.3"
