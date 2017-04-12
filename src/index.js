@@ -4,13 +4,13 @@ import { NativeModules, processColor } from 'react-native';
 
 type Action = {
   title: string,
-  color?: string | number,
+  color: string | number,
   onPress: () => void
 };
 
 type SnackBarOptions = {
   title: string,
-  duration: number,
+  duration?: number,
   backgroundColor?: string,
   action?: Action
 };
