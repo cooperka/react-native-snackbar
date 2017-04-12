@@ -1,12 +1,34 @@
+// @flow
+
 import { NativeModules, processColor } from 'react-native';
 
-export default {
+type Action = {
+  title: string,
+  color?: string | number,
+  onPress: () => void
+};
+
+type SnackBarOptions = {
+  title: string,
+  duration: number,
+  backgroundColor?: string,
+  action?: Action
+};
+
+type ISnackBar = {
+  LENGTH_LONG: number,
+  LENGTH_SHORT: number,
+  LENGTH_INDEFINITE: number,
+  show: (options: SnackBarOptions) => void
+};
+
+const SnackBar: ISnackBar = {
 
   LENGTH_LONG: NativeModules.RNSnackbar.LENGTH_LONG,
   LENGTH_SHORT: NativeModules.RNSnackbar.LENGTH_SHORT,
   LENGTH_INDEFINITE: NativeModules.RNSnackbar.LENGTH_INDEFINITE,
 
-  show: (options) => {
+  show: (options: SnackBarOptions) => {
     const action = options.action ? options.action.onPress : () => {};
 
     if (options.action && options.action.color) {
@@ -23,3 +45,5 @@ export default {
   },
 
 };
+
+export default SnackBar;

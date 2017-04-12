@@ -1,4 +1,4 @@
-// Type definitions for react-native-snackbar 0.3.2
+// Type definitions for react-native-snackbar 0.3.4
 // Project: https://github.com/cooperka/react-native-snackbar
 // Definitions by: Kyle Roach <https://github.com/iRoachie>
 // TypeScript Version: 2.2.2
