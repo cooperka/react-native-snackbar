@@ -46,17 +46,17 @@
   },
   "devDependencies": {
     "babel-cli": "6.24.1",
-    "babel-eslint": "~7.1.1",
-    "eslint": "~3.18.0",
-    "eslint-config-airbnb": "~14.1.0",
-    "eslint-config-cooperka": "~0.2.4",
-    "eslint-plugin-import": "~2.2.0",
-    "eslint-plugin-jsx-a11y": "~4.0.0",
-    "eslint-plugin-react": "~6.10.0",
-    "eslint-plugin-react-native": "~2.3.1",
-    "flow-bin": "0.38",
-    "jest": "~19.0.2",
-    "react": "~15.4.2",
-    "react-native": "~0.42.3"
+    "babel-eslint": "7.1.1",
+    "eslint": "3.18.0",
+    "eslint-config-airbnb": "14.1.0",
+    "eslint-config-cooperka": "0.2.4",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "4.0.0",
+    "eslint-plugin-react": "6.10.0",
+    "eslint-plugin-react-native": "2.3.1",
+    "flow-bin": "0.38.0",
+    "jest": "19.0.2",
+    "react": "15.4.2",
+    "react-native": "0.42.3"
   }
 }
