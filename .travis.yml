@@ -18,5 +18,6 @@ install:
  - cd ..
 
 script:
- - npm run lint
- - npm test
+ - yarn run lint
+ - yarn run flow
+ - yarn test
