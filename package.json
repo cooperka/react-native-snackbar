@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx",
+    "lint": "eslint src example --ext .js,.jsx",
     "flow": "flow src",
     "clean": "rm -rf lib",
     "build": "npm run clean && babel src --out-dir lib --ignore src/__tests__",
