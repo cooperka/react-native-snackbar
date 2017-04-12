@@ -2,16 +2,20 @@
   "name": "react-native-snackbar",
   "version": "0.3.4",
   "description": "Material-design \"Snackbar\" component for Android and iOS",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "types": "src/index.d.ts",
   "files": [
     "src",
+    "lib",
     "android",
     "ios"
   ],
   "scripts": {
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx"
+    "lint": "eslint . --ext .js,.jsx",
+    "clean": "rm -rf lib",
+    "build": "npm run clean && babel src --out-dir lib --ignore src/__tests__",
+    "prepublish": "npm run build"
   },
   "jest": {
     "preset": "react-native"
@@ -40,6 +44,7 @@
     "react-native": ">=0.40"
   },
   "devDependencies": {
+    "babel-cli": "6.24.1",
     "babel-eslint": "~7.1.1",
     "eslint": "~3.18.0",
     "eslint-config-airbnb": "~14.1.0",
