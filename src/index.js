@@ -32,8 +32,10 @@ const SnackBar: ISnackBar = {
     const action = options.action ? options.action.onPress : () => {};
 
     if (options.action && options.action.color) {
-      // eslint-disable-next-line no-param-reassign
+      /* eslint-disable no-param-reassign */
+      // $FlowFixMe
       options.action.color = processColor(options.action.color);
+      /* eslint-enable */
     }
 
     if (options.backgroundColor) {
