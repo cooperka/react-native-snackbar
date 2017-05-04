@@ -15,6 +15,24 @@ They animate up from the bottom of the screen and then disappear shortly afterwa
 See Google's [Material Design guidelines](https://material.io/guidelines/components/snackbars-toasts.html) for more info on Snackbars
 and when to use them.
 
+
+## Installation
+
+Here's how to use it:
+
+1. Install:
+    - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-snackbar --save`
+    - Using [Yarn](https://yarnpkg.com/): `yarn add react-native-snackbar`
+
+2. [Link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html):
+    - `react-native link react-native-snackbar`
+
+3. Import it in your JS:
+
+    ```js
+    import Snackbar from 'react-native-snackbar';
+    ```
+
 ## Code
 
 ```js
@@ -44,23 +62,6 @@ Where `duration` can be one of the following:
 - `Snackbar.LENGTH_SHORT` (about a second)
 - `Snackbar.LENGTH_LONG` (about three seconds)
 - `Snackbar.LENGTH_INDEFINITE` (stays on screen until the button is pressed)
-
-## Installation
-
-Here's how to use it:
-
-1. Install:
-    - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-snackbar --save`
-    - Using [Yarn](https://yarnpkg.com/): `yarn add react-native-snackbar`
-
-2. [Link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html):
-    - `react-native link react-native-snackbar`
-
-3. Import it in your JS:
-
-    ```js
-    import Snackbar from 'react-native-snackbar';
-    ```
 
 ## Notes
 
