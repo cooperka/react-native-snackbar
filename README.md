@@ -45,7 +45,7 @@ Where `duration` can be one of the following:
 - `Snackbar.LENGTH_LONG` (about three seconds)
 - `Snackbar.LENGTH_INDEFINITE` (stays on screen until the button is pressed)
 
-## Installation
+## Automatic Installation
 
 Here's how to use it:
 
@@ -61,6 +61,40 @@ Here's how to use it:
     ```js
     import Snackbar from 'react-native-snackbar';
     ```
+## Manual installation
+
+In case step 2 above throws errors:
+
+2. insert the following lines of code:
+
+In `android/settings.gradle`:
+```
+include ':react-native-snackbar'
+project(':react-native-snackbar').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-snackbar/android')
+```
+
+In `android/app/build.gradle`:
+
+```
+dependencies {
+...
+    compile project(':react-native-snackbar')
+...
+}
+```
+In `android/app/java/your.package.name/MainApplication.java`:
+
+```
+import com.azendoo.reactnativesnackbar.SnackbarPackage;  // <- add this
+
+@Override
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
+          new SnackbarPackage(), // <- add this
+      );
+    }
+```
 
 ## Notes
 
