@@ -69,7 +69,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
     }
 
     private void displaySnackbar(View view, ReadableMap options, final Callback callback) {
-        String title = options.hasKey("title") ? options.getString("title") : "Hello";
+        String title = options.hasKey("title") ? options.getString("title") : "";
         int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
 
         Snackbar snackbar = Snackbar.make(view, title, duration);
