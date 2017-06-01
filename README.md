@@ -55,6 +55,7 @@ Here's how to use it:
 
 2. [Link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html):
     - `react-native link react-native-snackbar`
+    - Or if that fails, link manually using [these steps](https://github.com/cooperka/react-native-snackbar/wiki/Manual-Installation)
 
 3. Import it in your JS:
 
