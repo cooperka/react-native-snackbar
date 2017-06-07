@@ -45,6 +45,9 @@ const SnackBar: ISnackBar = {
 
     NativeModules.RNSnackbar.show(options, onPressCallback);
   },
+  dismiss: () => {
+    NativeModules.RNSnackbar.dismiss();
+  },
 
 };
 

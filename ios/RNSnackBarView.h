@@ -10,6 +10,7 @@
 
 @interface RNSnackBarView : UIView
 
++ (void)dismissBar;
 + (void)showWithOptions:(NSDictionary*)options andCallback:(void(^)())callback;
 
 @end

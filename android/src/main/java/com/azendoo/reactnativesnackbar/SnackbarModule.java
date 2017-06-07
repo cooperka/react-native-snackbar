@@ -15,11 +15,13 @@ import com.facebook.react.bridge.ReadableMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SnackbarModule extends ReactContextBaseJavaModule{
 
     private static final String REACT_NAME = "RNSnackbar";
+    private List<Snackbar> snackbarList = new ArrayList<>();
 
     public SnackbarModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -68,11 +70,21 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
         displaySnackbar(view, options, callback);
     }
 
+    @ReactMethod
+    public void dismiss(){
+        for (Snackbar snackbar: snackbarList) {
+            if (snackbar != null) {
+                snackbar.dismiss();
+            }
+        }
+    }
+
     private void displaySnackbar(View view, ReadableMap options, final Callback callback) {
         String title = options.hasKey("title") ? options.getString("title") : "";
         int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
 
         Snackbar snackbar = Snackbar.make(view, title, duration);
+        snackbarList.add(snackbar);
 
         // Set the background color.
         if (options.hasKey("backgroundColor")) {

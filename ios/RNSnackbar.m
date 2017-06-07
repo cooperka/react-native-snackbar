@@ -21,6 +21,13 @@ RCT_EXPORT_METHOD(show:(NSDictionary *)options callback:(RCTResponseSenderBlock)
     });
 }
 
+RCT_EXPORT_METHOD(dismiss)
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [RNSnackBarView dismissBar];
+    });
+}
+
 - (NSDictionary *)constantsToExport
 {
     return @{

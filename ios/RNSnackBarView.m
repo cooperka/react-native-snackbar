@@ -62,6 +62,12 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     [snackBar show];
 }
 
++ (void)dismissBar
+{
+    RNSnackBarView *snackBar = [RNSnackBarView sharedSnackBar];
+    [snackBar dismiss];
+}
+
 - (instancetype)init
 {
     self = [super initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 48, [UIScreen mainScreen].bounds.size.width, 48)];
