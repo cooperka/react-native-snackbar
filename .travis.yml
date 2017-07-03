@@ -4,7 +4,12 @@ node_js:
  - "7"
  - "6"
 
-cache: yarn
+cache:
+  yarn: true
+  directories:
+    - node_modules
+    - example/node_modules
+    - jest-cache
 
 install:
  - yarn install
@@ -14,4 +19,4 @@ install:
 script:
  - yarn run lint
  - yarn run flow
- - yarn test
+ - yarn test -- --cacheDirectory="jest-cache"
