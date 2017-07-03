@@ -10,6 +10,7 @@ cache:
     - node_modules
     - example/node_modules
     - jest-cache
+    - example/jest-cache
 
 install:
  - yarn install
@@ -21,3 +22,4 @@ script:
 # Ignoring flow for now because it just fails on all sorts of React Native issues.
 # - yarn run flow
  - yarn test -- --cacheDirectory="jest-cache"
+ - cd example && yarn test -- --cacheDirectory="jest-cache"

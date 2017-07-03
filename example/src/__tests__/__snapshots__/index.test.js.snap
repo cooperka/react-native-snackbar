@@ -14,6 +14,7 @@ exports[`Snackbar example app renders correctly 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
+    disabled={false}
     ellipsizeMode="tail"
     style={
       Object {
@@ -29,6 +30,7 @@ exports[`Snackbar example app renders correctly 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
+    disabled={false}
     ellipsizeMode="tail"
     onPress={[Function]}
     style={
@@ -45,6 +47,7 @@ exports[`Snackbar example app renders correctly 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
+    disabled={false}
     ellipsizeMode="tail"
     onPress={[Function]}
     style={
@@ -61,6 +64,7 @@ exports[`Snackbar example app renders correctly 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
+    disabled={false}
     ellipsizeMode="tail"
     onPress={[Function]}
     style={
@@ -77,6 +81,7 @@ exports[`Snackbar example app renders correctly 1`] = `
   <Text
     accessible={true}
     allowFontScaling={true}
+    disabled={false}
     ellipsizeMode="tail"
     onPress={[Function]}
     style={
