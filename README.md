@@ -15,7 +15,7 @@ They animate up from the bottom of the screen and then disappear shortly afterwa
 See Google's [Material Design guidelines](https://material.io/guidelines/components/snackbars-toasts.html) for more info on Snackbars
 and when to use them.
 
-## Code
+## How it works
 
 ```js
 Snackbar.show({
@@ -28,9 +28,8 @@ Or, to include an action button:
 
 ```js
 Snackbar.show({
-    backgroundColor: 'gray',
     title: 'Hello world',
-    duration: Snackbar.LENGTH_LONG,
+    duration: Snackbar.LENGTH_INDEFINITE,
     action: {
         title: 'UNDO',
         color: 'green',
@@ -39,15 +38,7 @@ Snackbar.show({
 });
 ```
 
-Where `duration` can be one of the following:
-
-- `Snackbar.LENGTH_SHORT` (about a second)
-- `Snackbar.LENGTH_LONG` (about three seconds)
-- `Snackbar.LENGTH_INDEFINITE` (stays on screen until the button is pressed)
-
 ## Installation
-
-Here's how to use it:
 
 1. Install:
     - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-snackbar --save`
@@ -62,6 +53,31 @@ Here's how to use it:
     ```js
     import Snackbar from 'react-native-snackbar';
     ```
+
+## Customization
+
+`Snackbar.show()` accepts the following options:
+
+| Key | Data type | Default value? | Description |
+|-----|-----------|----------------|-------------|
+| `title` | `string` | Required. | The message to show. |
+| `duration` | See below | `Snackbar.LENGTH_SHORT` | How long to display the Snackbar. |
+| `action` | `object` (described below) | `undefined` (no button) | Optional config for the action button (described below). |
+| `backgroundColor` | `string` or `style` | `undefined` (natively renders as black) | The background color for the whole Snackbar. |
+
+Where `duration` can be one of the following (timing may vary based on device):
+
+- `Snackbar.LENGTH_SHORT` (just over a second)
+- `Snackbar.LENGTH_LONG` (about three seconds)
+- `Snackbar.LENGTH_INDEFINITE` (stays on screen until the button is pressed)
+
+And the optional `action` object can contain the following options:
+
+| Key | Data type | Default value? | Description |
+|-----|-----------|----------------|-------------|
+| `title` | `string` | Required. | The text to show on the button. |
+| `onPress` | `function` | `undefined` (Snackbar is simply dismissed) | A callback for when the user taps the button. |
+| `color` | `string` or `style` | `undefined` (natively renders as white) | The text color for the button. |
 
 ## Notes
 
