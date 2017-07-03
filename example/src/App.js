@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { AppRegistry, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 
-import styles from './styles';
+import styles from '../styles';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Example extends Component {
@@ -63,7 +63,5 @@ class Example extends Component {
   }
 
 }
-
-AppRegistry.registerComponent('SnackbarExample', () => Example);
 
 export default Example;

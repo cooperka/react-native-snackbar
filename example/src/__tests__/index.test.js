@@ -4,7 +4,7 @@ import React from 'react';
 // Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
 
-import App from '../index';
+import App from '../App';
 
 describe('Snackbar example app', () => {
   it('renders correctly', () => {
