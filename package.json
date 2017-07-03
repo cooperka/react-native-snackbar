@@ -19,7 +19,11 @@
     "prepublish": "npm run build"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "modulePathIgnorePatterns": [
+      "<rootDir>/example/"
+    ],
+    "verbose": true
   },
   "repository": {
     "type": "git",
