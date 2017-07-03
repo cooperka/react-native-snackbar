@@ -16,12 +16,12 @@ interface Action {
    * Color of the text for the button.
    * Accepts various forms of colors such as hex, literals, rgba, etc.
    */
-  color: string | number;
+  color?: string | number;
 
   /**
    * Function called when the user presses the button.
    */
-  onPress(): void;
+  onPress?(): void;
 }
 
 /**
