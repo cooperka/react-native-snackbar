@@ -6,12 +6,6 @@ node_js:
 
 cache: yarn
 
-# This normally isn't necessary, but since we're specifying an explicit install step,
-# we also need to explicitly install Yarn.
-before_install:
- - curl -o- -L https://yarnpkg.com/install.sh | bash
- - export PATH=$HOME/.yarn/bin:$PATH
-
 install:
  - yarn install
  - cd example && yarn install
