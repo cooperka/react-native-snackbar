@@ -8,7 +8,8 @@
     "src",
     "lib",
     "android",
-    "ios"
+    "ios",
+    "RNSnackbar.podspec"
   ],
   "scripts": {
     "test": "jest",
