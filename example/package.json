@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "preinstall": "cd .. && npm run build",
-    "postinstall": "rm -rf node_modules/react-native-snackbar/{node_modules,example}",
+    "postinstall": "rm -rf node_modules/react-native-snackbar/node_modules node_modules/react-native-snackbar/example",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
