@@ -8,6 +8,7 @@
 
 #import "RNSnackbar.h"
 #import "RNSnackBarView.h"
+
 @implementation RNSnackbar
 
 RCT_EXPORT_MODULE();
@@ -24,7 +25,7 @@ RCT_EXPORT_METHOD(show:(NSDictionary *)options callback:(RCTResponseSenderBlock)
 RCT_EXPORT_METHOD(dismiss)
 {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [RNSnackBarView dismissBar];
+        [RNSnackBarView dismiss];
     });
 }
 

@@ -74,6 +74,6 @@ export const LENGTH_INDEFINITE: number;
 export function show(options: SnackBarOptions): void;
 
 /**
-* Dismiss active snackbar(s)
+* Dismisses any and all active Snackbars.
 */
 export function dismiss(): void;

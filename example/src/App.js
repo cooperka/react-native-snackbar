@@ -58,13 +58,12 @@ class Example extends Component {
         >
           Snackbar with style
         </Text>
+
         <Text
           style={styles.button}
-          onPress={() => {
-            Snackbar.dismiss();
-          }}
+          onPress={() => Snackbar.dismiss()}
         >
-            Dismiss active snackbar(s)
+            Dismiss active Snackbar
         </Text>
       </View>
     );

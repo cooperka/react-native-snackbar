@@ -21,7 +21,8 @@ import java.util.Map;
 public class SnackbarModule extends ReactContextBaseJavaModule{
 
     private static final String REACT_NAME = "RNSnackbar";
-    private List<Snackbar> snackbarList = new ArrayList<>();
+
+    private List<Snackbar> mActiveSnackbars = new ArrayList<>();
 
     public SnackbarModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -56,6 +57,8 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
 
         if (view == null) return;
 
+        mActiveSnackbars.clear();
+
         if (!view.hasWindowFocus()) {
             // The view is not focused, we should get all the modal views in the screen.
             ArrayList<View> modals = recursiveLoopChildren(view, new ArrayList<View>());
@@ -71,12 +74,14 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
     }
 
     @ReactMethod
-    public void dismiss(){
-        for (Snackbar snackbar: snackbarList) {
+    public void dismiss() {
+        for (Snackbar snackbar : mActiveSnackbars) {
             if (snackbar != null) {
                 snackbar.dismiss();
             }
         }
+
+        mActiveSnackbars.clear();
     }
 
     private void displaySnackbar(View view, ReadableMap options, final Callback callback) {
@@ -84,7 +89,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
         int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
 
         Snackbar snackbar = Snackbar.make(view, title, duration);
-        snackbarList.add(snackbar);
+        mActiveSnackbars.add(snackbar);
 
         // Set the background color.
         if (options.hasKey("backgroundColor")) {
@@ -133,4 +138,5 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
 
         return modals;
     }
+
 }
