@@ -7,10 +7,9 @@ import renderer from 'react-test-renderer';
 import App from '../App';
 
 describe('Snackbar example app', () => {
-  it('renders correctly', () => {
+  it('renders without crashing', () => {
     const tree = renderer.create(
       <App />,
     );
-    expect(tree).toMatchSnapshot();
   });
 });
