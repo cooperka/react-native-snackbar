@@ -11,5 +11,6 @@
 @interface RNSnackBarView : UIView
 
 + (void)showWithOptions:(NSDictionary*)options andCallback:(void(^)())callback;
++ (void)dismiss;
 
 @end
