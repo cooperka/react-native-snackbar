@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 
 import styles from '../styles';
@@ -14,22 +14,26 @@ class Example extends Component {
           Snackbar Examples
         </Text>
 
-        <Text style={styles.button} onPress={() => Snackbar.show({ title: 'Hello, World!' })}>
-          Simple Snackbar
-        </Text>
+        <TouchableOpacity
+          onPress={() => Snackbar.show({ title: 'Hello, World!' })}
+        >
+          <Text style={styles.button}>
+            Simple Snackbar
+          </Text>
+        </TouchableOpacity>
 
-        <Text
-          style={styles.button}
+        <TouchableOpacity
           onPress={() => Snackbar.show({
             title: 'Hello, World! How are you doing today? Enjoying the sun?! This should wrap to two lines.',
             duration: Snackbar.LENGTH_LONG,
           })}
         >
-          Simple Snackbar - two lines
-        </Text>
+          <Text style={styles.button}>
+            Simple Snackbar - two lines
+          </Text>
+        </TouchableOpacity>
 
-        <Text
-          style={styles.button}
+        <TouchableOpacity
           onPress={() => Snackbar.show({
             title: 'Please agree to this.',
             duration: Snackbar.LENGTH_INDEFINITE,
@@ -40,11 +44,12 @@ class Example extends Component {
             },
           })}
         >
-          Snackbar with action
-        </Text>
+          <Text style={styles.button}>
+            Snackbar with action
+          </Text>
+        </TouchableOpacity>
 
-        <Text
-          style={styles.button}
+        <TouchableOpacity
           onPress={() => Snackbar.show({
             title: 'Please agree to this.',
             duration: Snackbar.LENGTH_INDEFINITE,
@@ -56,15 +61,18 @@ class Example extends Component {
             },
           })}
         >
-          Snackbar with style
-        </Text>
+          <Text style={styles.button}>
+            Snackbar with style
+          </Text>
+        </TouchableOpacity>
 
-        <Text
-          style={styles.button}
+        <TouchableOpacity
           onPress={() => Snackbar.dismiss()}
         >
+          <Text style={styles.button}>
             Dismiss active Snackbar
-        </Text>
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }
