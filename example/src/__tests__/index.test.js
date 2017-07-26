@@ -8,7 +8,7 @@ import App from '../App';
 
 describe('Snackbar example app', () => {
   it('renders without crashing', () => {
-    const tree = renderer.create(
+    renderer.create(
       <App />,
     );
   });
