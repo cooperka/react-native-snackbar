@@ -14,7 +14,7 @@ cache:
 
 install:
  - yarn install
- - cd example && yarn install
+ - cd example && yarn install && yarn run sync
  - cd ..
 
 script:
