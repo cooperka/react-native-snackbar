@@ -16,7 +16,6 @@ public class SnackbarPackage implements ReactPackage {
         return Collections.<NativeModule>singletonList((new SnackbarModule(reactContext)));
     }
 
-    @Override
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
     }
