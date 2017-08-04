@@ -16,6 +16,8 @@ public class SnackbarPackage implements ReactPackage {
         return Collections.<NativeModule>singletonList((new SnackbarModule(reactContext)));
     }
 
+    // This "Override" method is being kept for backwards compatibilty with React Native
+    // releases earlier than https://github.com/facebook/react-native/releases/tag/v0.47.0
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return Collections.emptyList();
     }
