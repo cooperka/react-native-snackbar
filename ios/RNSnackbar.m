@@ -29,6 +29,11 @@ RCT_EXPORT_METHOD(dismiss)
     });
 }
 
++ (BOOL)requiresMainQueueSetup
+{
+    return YES;
+}
+
 - (NSDictionary *)constantsToExport
 {
     return @{
