@@ -1,6 +1,6 @@
 {
   "name": "react-native-snackbar",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Material-design \"Snackbar\" component for Android and iOS",
   "main": "lib/index.js",
   "types": "src/index.d.ts",
