@@ -23,7 +23,7 @@ type ISnackBar = {
   dismiss: () => void,
 };
 
-const SnackBar: ISnackBar = {
+const SnackBar: ISnackBar = NativeModules.RNSnackbar ? {
 
   LENGTH_LONG: NativeModules.RNSnackbar.LENGTH_LONG,
   LENGTH_SHORT: NativeModules.RNSnackbar.LENGTH_SHORT,
@@ -51,6 +51,6 @@ const SnackBar: ISnackBar = {
     NativeModules.RNSnackbar.dismiss();
   },
 
-};
+} : {};
 
 export default SnackBar;
