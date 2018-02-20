@@ -98,8 +98,12 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
 
         if (options.hasKey("action")) {
             View.OnClickListener onClickListener = new View.OnClickListener() {
+                boolean callbackWasCalled = false;
+                
                 @Override
                 public void onClick(View v) {
+                    if (callbackWasCalled) return;
+                    callbackWasCalled = true;
                     callback.invoke();
                 }
             };
