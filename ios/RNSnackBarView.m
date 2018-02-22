@@ -77,6 +77,16 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 }
 
 - (void)buildView {
+    CGFloat topPadding = 14;
+    CGFloat bottomPadding = topPadding;
+
+    if (@available(iOS 11.0, *)) {
+        UIWindow *window = UIApplication.sharedApplication.keyWindow;
+
+        if (window.safeAreaInsets.bottom > bottomPadding)
+            bottomPadding = window.safeAreaInsets.bottom;
+    }
+
     self.backgroundColor = [UIColor colorWithRed:0.196078F green:0.196078F blue:0.196078F alpha:1.0F];
     self.accessibilityIdentifier = @"snackbar";
   
@@ -98,8 +108,8 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:
           @"H:|-24-[titleLabel]-24-[actionButton]-24-|"
           options:0 metrics:nil views:@{@"titleLabel": titleLabel, @"actionButton": actionButton}]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-14-[titleLabel]-14-|" options:0 metrics:nil views:@{@"titleLabel": titleLabel}]];
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[actionButton]|" options:0 metrics:nil views:@{@"actionButton": actionButton}]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%f-[titleLabel]-%f-|", topPadding, bottomPadding] options:0 metrics:nil views:@{@"titleLabel": titleLabel}]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:actionButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:titleLabel attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
     [titleLabel setContentCompressionResistancePriority:250 forAxis:UILayoutConstraintAxisHorizontal];
     [titleLabel setContentHuggingPriority:250 forAxis:UILayoutConstraintAxisHorizontal];
     [actionButton setContentCompressionResistancePriority:750 forAxis:UILayoutConstraintAxisHorizontal];
