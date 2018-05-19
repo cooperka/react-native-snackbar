@@ -79,18 +79,24 @@ And the optional `action` object can contain the following options:
 | `onPress` | `function` | `undefined` (Snackbar is simply dismissed) | A callback for when the user taps the button. |
 | `color` | `string` or `style` | `undefined` (natively renders as white) | The text color for the button. |
 
-## Notes
+## Troubleshooting
+
+#### Undefined import
+
+If you see errors similar to `Cannot read property 'LENGTH_LONG' of undefined` or `Undefined not an object (NativeModules.RNSnackbar)`, please refer to [issue #43](https://github.com/cooperka/react-native-snackbar/issues/43) for help.
+
+#### Compiling for Android
 
 A few people have [suggested](https://github.com/cooperka/react-native-snackbar/issues/2)
 that the default Gradle configs created by `react-native init` are too outdated.
 If you have issues compiling for Android after linking this library,
-please try upgrading Gradle to the latest version! For example:
+please try upgrading your Gradle to the latest version. For example:
 
 In your `android/build.gradle`:
 
-- `com.android.tools.build:gradle:2.2.2`
+- `com.android.tools.build:gradle:2.2.2` (or higher)
 
 In your `android/app/build.gradle`:
 
-- `compileSdkVersion 25`
-- `buildToolsVersion "25.0.2"`
+- `compileSdkVersion 25` (or higher)
+- `buildToolsVersion "25.0.2"` (or higher)
