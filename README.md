@@ -5,7 +5,7 @@
 [![npm version](https://img.shields.io/npm/v/react-native-snackbar.svg)](https://www.npmjs.com/package/react-native-snackbar)
 [![Latest GitHub tag](https://img.shields.io/github/tag/cooperka/react-native-snackbar.svg)](https://github.com/cooperka/react-native-snackbar)
 
-Material-design "Snackbar" component for Android and iOS:
+Material Design "Snackbar" component for Android and iOS.
 
 ![Snackbar screenshot](example/screenshots/snackbar.png)
 
