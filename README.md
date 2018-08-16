@@ -87,16 +87,18 @@ If you see errors similar to `Cannot read property 'LENGTH_LONG' of undefined` o
 
 #### Compiling for Android
 
-A few people have [suggested](https://github.com/cooperka/react-native-snackbar/issues/2)
-that the default Gradle configs created by `react-native init` are too outdated.
 If you have issues compiling for Android after linking this library,
-please try upgrading your Gradle to the latest version. For example:
+please try updating your Gradle and Android configs to the latest versions. For example:
 
 In your `android/build.gradle`:
 
-- `com.android.tools.build:gradle:2.2.2` (or higher)
+- `com.android.tools.build:gradle:2.3.3` (or higher)
 
 In your `android/app/build.gradle`:
 
-- `compileSdkVersion 25` (or higher)
-- `buildToolsVersion "25.0.2"` (or higher)
+- `compileSdkVersion 26` (or higher)
+- `buildToolsVersion "26.0.3"` (or higher)
+
+#### Compiling for iOS
+
+Make sure your Deployment Target is iOS 9.0 or above.
