@@ -19,8 +19,8 @@ and when to use them.
 
 ```js
 Snackbar.show({
-    title: 'Hello world',
-    duration: Snackbar.LENGTH_SHORT,
+  title: 'Hello world',
+  duration: Snackbar.LENGTH_SHORT,
 });
 ```
 
@@ -28,13 +28,13 @@ Or, to include an action button:
 
 ```js
 Snackbar.show({
-    title: 'Hello world',
-    duration: Snackbar.LENGTH_INDEFINITE,
-    action: {
-        title: 'UNDO',
-        color: 'green',
-        onPress: () => { /* Do something. */ },
-    },
+  title: 'Hello world',
+  duration: Snackbar.LENGTH_INDEFINITE,
+  action: {
+    title: 'UNDO',
+    color: 'green',
+    onPress: () => { /* Do something. */ },
+  },
 });
 ```
 
