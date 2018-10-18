@@ -64,6 +64,8 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             ArrayList<View> modals = recursiveLoopChildren(view, new ArrayList<View>());
 
             for (View modalViews : modals) {
+                if (modalViews == null) continue;
+
                 displaySnackbar(modalViews, options, callback);
             }
 
