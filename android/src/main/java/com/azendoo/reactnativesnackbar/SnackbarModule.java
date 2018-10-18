@@ -63,10 +63,10 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             // The view is not focused, we should get all the modal views in the screen.
             ArrayList<View> modals = recursiveLoopChildren(view, new ArrayList<View>());
 
-            for (View modalViews : modals) {
-                if (modalViews == null) continue;
+            for (View modal : modals) {
+                if (modal == null) continue;
 
-                displaySnackbar(modalViews, options, callback);
+                displaySnackbar(modal, options, callback);
             }
 
             return;
@@ -102,7 +102,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             View.OnClickListener onClickListener = new View.OnClickListener() {
                 // Prevent double-taps which can lead to a crash.
                 boolean callbackWasCalled = false;
-                
+
                 @Override
                 public void onClick(View v) {
                     if (callbackWasCalled) return;
