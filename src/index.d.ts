@@ -40,6 +40,11 @@ interface SnackBarOptions {
   duration?: number;
 
   /**
+   * Margin from the bottom of the screen
+   */
+  bottom?: number,
+
+  /**
    * Background color of the snackbar
    * Accepts color strings such as hex, literals, rgba
    */

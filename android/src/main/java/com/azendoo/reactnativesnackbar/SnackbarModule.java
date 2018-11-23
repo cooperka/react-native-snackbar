@@ -1,10 +1,13 @@
 package com.azendoo.reactnativesnackbar;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.facebook.react.bridge.Callback;
@@ -86,12 +89,29 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
         mActiveSnackbars.clear();
     }
 
+    public static int dpToPx(int dp) {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
     private void displaySnackbar(View view, ReadableMap options, final Callback callback) {
         String title = options.hasKey("title") ? options.getString("title") : "";
+        int bottom = options.hasKey("bottom") ? options.getInt("bottom") : 0;
         int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
 
         Snackbar snackbar = Snackbar.make(view, title, duration);
         mActiveSnackbars.add(snackbar);
+
+        View snackBarView = snackbar.getView();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackBarView.getLayoutParams();
+
+        params.setMargins(params.leftMargin + 0, params.topMargin,
+                params.rightMargin + 0,
+                params.bottomMargin + dpToPx(bottom));
+
+        snackBarView.setLayoutParams(params);
+
+        // Remove elevation, as iOS
+        ViewCompat.setElevation(snackbar.getView(), 0);
 
         // Set the background color.
         if (options.hasKey("backgroundColor")) {

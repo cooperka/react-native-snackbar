@@ -11,6 +11,7 @@ type Action = {
 type SnackBarOptions = {
   title: string,
   duration?: number,
+  bottom?: number,
   backgroundColor?: string,
   action?: Action,
 };
@@ -50,7 +51,7 @@ const SnackBar: ISnackBar = {
   dismiss() {
     NativeModules.RNSnackbar.dismiss();
   },
-
+  
 };
 
 export default SnackBar;
