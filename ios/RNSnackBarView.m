@@ -100,25 +100,28 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     
     actionButton = [UIButton new];
     actionButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    actionButton.hidden = TRUE;
     [actionButton setTitle:@"" forState:UIControlStateNormal];
     [actionButton addTarget:self action:@selector(actionPressed:) forControlEvents:UIControlEventTouchUpInside];
     [actionButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:actionButton];
     
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:
-                          @"H:|-24-[titleLabel]-24-|"
-                          options:0 metrics:nil views:@{@"titleLabel": titleLabel, @"actionButton": actionButton}]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-24-[titleLabel]-(>=0)-[actionButton(>=0)]-24-|" options:0 metrics:nil views:@{@"titleLabel": titleLabel, @"actionButton": actionButton}]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[titleLabel]|" options: NSLayoutFormatAlignAllCenterY metrics:nil views:@{@"titleLabel": titleLabel}]];
     [self addConstraint:[NSLayoutConstraint constraintWithItem:actionButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:titleLabel attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    [titleLabel setContentCompressionResistancePriority:250 forAxis:UILayoutConstraintAxisHorizontal];
-    [titleLabel setContentHuggingPriority:250 forAxis:UILayoutConstraintAxisHorizontal];
-    [actionButton setContentCompressionResistancePriority:750 forAxis:UILayoutConstraintAxisHorizontal];
-    [actionButton setContentHuggingPriority:750 forAxis:UILayoutConstraintAxisHorizontal];
+    [titleLabel setContentCompressionResistancePriority:750 forAxis:UILayoutConstraintAxisHorizontal];
+    [titleLabel setContentHuggingPriority:750 forAxis:UILayoutConstraintAxisHorizontal];
+    [actionButton setContentCompressionResistancePriority:250 forAxis:UILayoutConstraintAxisHorizontal];
+    [actionButton setContentHuggingPriority:250 forAxis:UILayoutConstraintAxisHorizontal];
     
 }
 
 -(void)setTitle:(NSString *)title {
     titleLabel.text = title;
+}
+
+-(void)setActionHidden:(BOOL *)hidden {
+    actionButton.hidden = hidden;
 }
 
 -(void)setActionTitle:(NSString *)actionTitle {
@@ -201,6 +204,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     NSDictionary* action = _pendingOptions[@"action"];
     if (action) {
         self.actionTitle = _pendingOptions[@"action"][@"title"];
+        self.actionHidden = _pendingOptions[@"action"][@"title"] ? (BOOL*) FALSE : (BOOL*) TRUE;
         NSNumber* color = _pendingOptions[@"action"][@"color"];
         self.actionTitleColor = [RCTConvert UIColor:color];
     } else {
