@@ -51,7 +51,7 @@ const SnackBar: ISnackBar = {
   dismiss() {
     NativeModules.RNSnackbar.dismiss();
   },
-  
+
 };
 
 export default SnackBar;
