@@ -117,9 +117,15 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             snackbar.setActionTextColor(actionDetails.getInt("color"));
         }
 
+        if (options.hasKey("color")) {
+          View snackbarView = snackbar.getView();
+          TextView snackbarText = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+          snackbarText.setTextColor(options.getInt("color"));
+        }
+
         // For older devices, explicitly set the text color; otherwise it may appear dark gray.
         // http://stackoverflow.com/a/31084530/763231
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+        if (!options.hasKey("color") && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             View snackbarView = snackbar.getView();
             TextView snackbarText = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
             snackbarText.setTextColor(Color.WHITE);
