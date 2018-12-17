@@ -64,6 +64,7 @@ Snackbar.show({
 | `duration` | See below | `Snackbar.LENGTH_SHORT` | How long to display the Snackbar. |
 | `action` | `object` (described below) | `undefined` (no button) | Optional config for the action button (described below). |
 | `backgroundColor` | `string` or `style` | `undefined` (natively renders as black) | The background color for the whole Snackbar. |
+| `color` | `string` or `style` | `undefined` (natively renders as white) | The text color for the title. |
 
 Where `duration` can be one of the following (timing may vary based on device):
 
