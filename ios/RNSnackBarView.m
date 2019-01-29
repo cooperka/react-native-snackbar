@@ -29,6 +29,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
 @property (nonatomic) RNSnackBarViewState state;
 @property (nonatomic, strong) NSString* title;
+@property (nonatomic, strong) UIColor* titleColor;
 @property (nonatomic, strong) NSString* actionTitle;
 @property (nonatomic, strong) UIColor* actionTitleColor;
 @property (nonatomic, strong) void (^pendingCallback)();
@@ -93,7 +94,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     titleLabel = [UILabel new];
     titleLabel.text = _title;
     titleLabel.numberOfLines = 2;
-    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.textColor = _titleColor;
     titleLabel.font = [UIFont boldSystemFontOfSize:14];
     [titleLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:titleLabel];
@@ -119,6 +120,10 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
 -(void)setTitle:(NSString *)title {
     titleLabel.text = title;
+}
+
+-(void)setTitleColor:(UIColor *)titleColor {
+    titleLabel.textColor = titleColor;
 }
 
 -(void)setActionTitle:(NSString *)actionTitle {
@@ -197,6 +202,12 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
     self.backgroundColor = backgroundColor ? [RCTConvert UIColor:backgroundColor] : [UIColor colorWithRed:0.196078F green:0.196078F blue:0.196078F alpha:1.0F];
     self.title = _pendingOptions[@"title"];
+    NSNumber* titleColor =_pendingOptions[@"color"];
+    if (titleColor) {
+        self.titleColor = [RCTConvert UIColor:titleColor];
+    } else {
+        self.titleColor = [UIColor whiteColor];
+    }
     self.callback = _pendingCallback;
     NSDictionary* action = _pendingOptions[@"action"];
     if (action) {

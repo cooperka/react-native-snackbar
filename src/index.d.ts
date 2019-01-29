@@ -28,10 +28,16 @@ interface Action {
  * List of options to configure the Snackbar.
  */
 interface SnackBarOptions {
-   /**
+  /**
    * The text that appears on the Snackbar.
    */
   title: string;
+
+  /**
+   * Color of the Snackbar title.
+   * Accepts various forms of colors such as hex, literals, rgba, etc.
+   */
+  color?: string | number;
 
   /**
    * Length of time the Snackbar stays on screen.
