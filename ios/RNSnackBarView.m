@@ -115,7 +115,6 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     [titleLabel setContentHuggingPriority:250 forAxis:UILayoutConstraintAxisHorizontal];
     [actionButton setContentCompressionResistancePriority:750 forAxis:UILayoutConstraintAxisHorizontal];
     [actionButton setContentHuggingPriority:750 forAxis:UILayoutConstraintAxisHorizontal];
-
 }
 
 -(void)setTitle:(NSString *)title {
@@ -190,25 +189,29 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
 - (void)show {
     if (self.state == RNSnackBarViewStateDisplayed || self.state == RNSnackBarViewStatePresenting) {
-      [self dismiss];
-      return;
+        [self dismiss];
+        return;
     }
     if (self.state == RNSnackBarViewStateDismissing) {
-      return;
+        return;
     }
-    if (!_pendingOptions) { return; }
+    if (!_pendingOptions) {
+        return;
+    }
 
     id backgroundColor = _pendingOptions[@"backgroundColor"];
+    self.backgroundColor = backgroundColor
+        ? [RCTConvert UIColor:backgroundColor]
+        : [UIColor colorWithRed:0.196078F green:0.196078F blue:0.196078F alpha:1.0F];
 
-    self.backgroundColor = backgroundColor ? [RCTConvert UIColor:backgroundColor] : [UIColor colorWithRed:0.196078F green:0.196078F blue:0.196078F alpha:1.0F];
+    id titleColor =_pendingOptions[@"color"];
+    self.titleColor = titleColor
+        ? [RCTConvert UIColor:titleColor]
+        : [UIColor whiteColor];
+
     self.title = _pendingOptions[@"title"];
-    NSNumber* titleColor =_pendingOptions[@"color"];
-    if (titleColor) {
-        self.titleColor = [RCTConvert UIColor:titleColor];
-    } else {
-        self.titleColor = [UIColor whiteColor];
-    }
     self.callback = _pendingCallback;
+
     NSDictionary* action = _pendingOptions[@"action"];
     if (action) {
         self.actionTitle = _pendingOptions[@"action"][@"title"];
@@ -217,7 +220,11 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     } else {
         self.actionTitle = @"";
     }
-    NSNumber* duration = _pendingOptions[@"duration"] ? (NSNumber*)_pendingOptions[@"duration"] : @(-1);
+
+    NSNumber* duration = _pendingOptions[@"duration"]
+        ? (NSNumber*)_pendingOptions[@"duration"]
+        : @(-1);
+
     [self presentWithDuration:duration];
 }
 
