@@ -54,10 +54,11 @@ class Example extends Component {
             title: 'Please agree to this.',
             duration: Snackbar.LENGTH_INDEFINITE,
             backgroundColor: 'silver',
+            color: 'blue',
             action: {
               title: 'AGREE',
               onPress: () => Snackbar.show({ title: 'Thank you!' }),
-              color: 'gold',
+              color: 'blue',
             },
           })}
         >

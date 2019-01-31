@@ -91,11 +91,14 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
         int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
 
         Snackbar snackbar = Snackbar.make(view, title, duration);
+        View snackbarView = snackbar.getView();
+        TextView snackbarText = snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+
         mActiveSnackbars.add(snackbar);
 
         // Set the background color.
         if (options.hasKey("backgroundColor")) {
-            snackbar.getView().setBackgroundColor(options.getInt("backgroundColor"));
+            snackbarView.setBackgroundColor(options.getInt("backgroundColor"));
         }
 
         if (options.hasKey("action")) {
@@ -117,11 +120,11 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             snackbar.setActionTextColor(actionDetails.getInt("color"));
         }
 
-        // For older devices, explicitly set the text color; otherwise it may appear dark gray.
-        // http://stackoverflow.com/a/31084530/763231
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            View snackbarView = snackbar.getView();
-            TextView snackbarText = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+        if (options.hasKey("color")) {
+            snackbarText.setTextColor(options.getInt("color"));
+        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            // For older devices, explicitly set the text color; otherwise it may appear dark gray.
+            // http://stackoverflow.com/a/31084530/763231
             snackbarText.setTextColor(Color.WHITE);
         }
 

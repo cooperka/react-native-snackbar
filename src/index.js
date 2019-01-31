@@ -11,6 +11,7 @@ type Action = {
 type SnackBarOptions = {
   title: string,
   duration?: number,
+  color?: string | number,
   backgroundColor?: string,
   action?: Action,
 };
@@ -30,21 +31,20 @@ const SnackBar: ISnackBar = {
   LENGTH_INDEFINITE: NativeModules.RNSnackbar.LENGTH_INDEFINITE,
 
   show(options: SnackBarOptions) {
-    const onPressCallback = (options.action && options.action.onPress) || (() => {});
+    const action = options.action || {};
+    const onPressCallback = action.onPress || (() => {});
+    const actionColor = action.color && processColor(action.color);
+    const backgroundColor = options.backgroundColor && processColor(options.backgroundColor);
+    const color = options.color && processColor(options.color);
 
-    if (options.action && options.action.color) {
-      /* eslint-disable no-param-reassign */
-      // $FlowFixMe
-      options.action.color = processColor(options.action.color);
-      /* eslint-enable */
-    }
+    const snackConfig = {
+      ...options,
+      action: options.action ? { ...action, color: actionColor } : undefined,
+      backgroundColor,
+      color,
+    };
 
-    if (options.backgroundColor) {
-      // eslint-disable-next-line no-param-reassign
-      options.backgroundColor = processColor(options.backgroundColor);
-    }
-
-    NativeModules.RNSnackbar.show(options, onPressCallback);
+    NativeModules.RNSnackbar.show(snackConfig, onPressCallback);
   },
 
   dismiss() {
