@@ -3,7 +3,11 @@
 exports[`Snackbar module calls native with default params 1`] = `
 Array [
   Array [
-    Object {},
+    Object {
+      "action": undefined,
+      "backgroundColor": undefined,
+      "color": undefined,
+    },
     [Function],
   ],
 ]
@@ -18,6 +22,8 @@ Array [
         "onPress": [MockFunction],
         "title": "UNDO",
       },
+      "backgroundColor": undefined,
+      "color": undefined,
       "duration": 0,
       "title": "Hello world",
     },
