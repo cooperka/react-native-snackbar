@@ -39,7 +39,7 @@ const SnackBar: ISnackBar = {
 
     const snackConfig = {
       ...options,
-      action: { ...action, color: actionColor },
+      action: options.action ? { ...action, color: actionColor } : undefined,
       backgroundColor,
       color,
     };
