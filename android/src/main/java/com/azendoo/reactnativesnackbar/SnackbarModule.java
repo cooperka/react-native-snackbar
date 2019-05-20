@@ -1,6 +1,7 @@
 package com.azendoo.reactnativesnackbar;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,11 +90,25 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         String text = getOptionValue(options, "text", "");
         int duration = getOptionValue(options, "duration", Snackbar.LENGTH_SHORT);
         int textColor = getOptionValue(options, "textColor", Color.WHITE);
+        String fontFamily = getOptionValue(options, "fontFamily", null);
+        Typeface font = null;
+        if (fontFamily != null) {
+            try {
+                font = Typeface.createFromAsset(view.getContext().getAssets(), "fonts/" + fontFamily + ".ttf");
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new Error("Failed to load font " + fontFamily + ".ttf, did you include it in your assets?");
+            }
+        }
 
         Snackbar snackbar = Snackbar.make(view, text, duration);
         View snackbarView = snackbar.getView();
         TextView snackbarText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
         snackbarText.setTextColor(textColor);
+
+        if (font != null) {
+            snackbarText.setTypeface(font);
+        }
 
         mActiveSnackbars.add(snackbar);
 
@@ -121,6 +136,11 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
 
             snackbar.setAction(actionText, onClickListener);
             snackbar.setActionTextColor(actionTextColor);
+
+            if (font != null) {
+                TextView snackbarActionText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_action);
+                snackbarActionText.setTypeface(font);
+            }
         }
 
         snackbar.show();

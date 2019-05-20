@@ -51,6 +51,11 @@ type SnackBarOptions = {
   backgroundColor?: string,
 
   /**
+   * [Android] The basename of a .ttf font from assets/fonts/.
+   */
+  fontFamily?: string,
+
+  /**
    * Action button configuration options.
    */
   action?: Action,

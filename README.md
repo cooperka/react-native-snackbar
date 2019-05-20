@@ -68,6 +68,7 @@ Shows a Snackbar, dismissing any existing Snackbar first. Accepts an object with
 | `duration` | See below | `Snackbar.LENGTH_SHORT` | How long to display the Snackbar. |
 | `textColor` | `string` or `style` | `'white'` | The color of the message text. |
 | `backgroundColor` | `string` or `style` | `undefined` (dark gray) | The background color for the whole Snackbar. |
+| `fontFamily` | `string` | `undefined` | [Android only] The basename of a `.ttf` font from `assets/fonts/` (see [setup guide](https://github.com/facebook/react-native/issues/25852) and [example app](/example), remember to `react-native link` after). |
 | `action` | `object` (described below) | `undefined` (no button) | Optional config for the action button (described below). |
 
 Where `duration` can be one of the following (timing may vary based on device):
