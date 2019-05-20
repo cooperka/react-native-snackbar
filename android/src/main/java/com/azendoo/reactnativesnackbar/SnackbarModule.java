@@ -1,6 +1,8 @@
 package com.azendoo.reactnativesnackbar;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
@@ -20,12 +22,15 @@ import java.util.Map;
 
 public class SnackbarModule extends ReactContextBaseJavaModule{
 
+    Context context;
+
     private static final String REACT_NAME = "RNSnackbar";
 
     private List<Snackbar> mActiveSnackbars = new ArrayList<>();
 
     public SnackbarModule(ReactApplicationContext reactContext) {
         super(reactContext);
+        this.context = reactContext.getApplicationContext();
     }
 
     @Override
@@ -89,6 +94,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
     private void displaySnackbar(View view, ReadableMap options, final Callback callback) {
         String title = options.hasKey("title") ? options.getString("title") : "";
         int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
+        String fontFamily = options.hasKey("fontFamily") ? options.getString("fontFamily") : null;
 
         Snackbar snackbar = Snackbar.make(view, title, duration);
         View snackbarView = snackbar.getView();
@@ -126,6 +132,11 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             // For older devices, explicitly set the text color; otherwise it may appear dark gray.
             // http://stackoverflow.com/a/31084530/763231
             snackbarText.setTextColor(Color.WHITE);
+        }
+
+        if (fontFamily != null) {
+            Typeface font = Typeface.createFromAsset(this.context.getAssets(), "fonts/" + fontFamily + ".ttf");
+            snackbarText.setTypeface(font);
         }
 
         snackbar.show();
