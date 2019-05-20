@@ -14,6 +14,7 @@ type SnackBarOptions = {
   color?: string | number,
   backgroundColor?: string,
   action?: Action,
+  fontFamily?: string,
 };
 
 type ISnackBar = {
@@ -36,12 +37,14 @@ const SnackBar: ISnackBar = {
     const actionColor = action.color && processColor(action.color);
     const backgroundColor = options.backgroundColor && processColor(options.backgroundColor);
     const color = options.color && processColor(options.color);
+    const fontFamily = options.fontFamily;
 
     const snackConfig = {
       ...options,
       action: options.action ? { ...action, color: actionColor } : undefined,
       backgroundColor,
       color,
+      fontFamily,
     };
 
     NativeModules.RNSnackbar.show(snackConfig, onPressCallback);
