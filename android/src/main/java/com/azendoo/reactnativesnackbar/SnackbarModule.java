@@ -124,6 +124,12 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             ReadableMap actionDetails = options.getMap("action");
             snackbar.setAction(actionDetails.getString("title"), onClickListener);
             snackbar.setActionTextColor(actionDetails.getInt("color"));
+
+            if (fontFamily != null) {
+                Typeface font = Typeface.createFromAsset(this.context.getAssets(), "fonts/" + fontFamily + ".ttf");
+                TextView action = snackbar.getView().findViewById(android.support.design.R.id.snackbar_action);
+                action.setTypeface(font);
+            }
         }
 
         if (options.hasKey("color")) {
