@@ -15,6 +15,7 @@ type SnackBarOptions = {
   backgroundColor?: string,
   action?: Action,
   fontFamily?: string,
+  RTL?: boolean
 };
 
 type ISnackBar = {
@@ -38,6 +39,7 @@ const SnackBar: ISnackBar = {
     const backgroundColor = options.backgroundColor && processColor(options.backgroundColor);
     const color = options.color && processColor(options.color);
     const fontFamily = options.fontFamily;
+    const RTL = options.RTL || false;
 
     const snackConfig = {
       ...options,
@@ -45,6 +47,7 @@ const SnackBar: ISnackBar = {
       backgroundColor,
       color,
       fontFamily,
+      RTL,
     };
 
     NativeModules.RNSnackbar.show(snackConfig, onPressCallback);

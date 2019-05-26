@@ -95,6 +95,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
         String title = options.hasKey("title") ? options.getString("title") : "";
         int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
         String fontFamily = options.hasKey("fontFamily") ? options.getString("fontFamily") : null;
+        boolean RTL = options.hasKey("RTL") ? options.getBoolean("RTL") : false;
 
         Snackbar snackbar = Snackbar.make(view, title, duration);
         View snackbarView = snackbar.getView();
@@ -138,6 +139,11 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             // For older devices, explicitly set the text color; otherwise it may appear dark gray.
             // http://stackoverflow.com/a/31084530/763231
             snackbarText.setTextColor(Color.WHITE);
+        }
+
+        if (RTL) {
+            snackbarView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            snackbarView.setTextDirection(View.TEXT_DIRECTION_RTL);
         }
 
         if (fontFamily != null) {
