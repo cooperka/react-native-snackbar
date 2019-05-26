@@ -17,7 +17,8 @@
     "flow": "flow src",
     "clean": "rm -rf lib",
     "build": "npm run clean && babel src --out-dir lib --ignore src/__tests__",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "preinstall": "npm run build"
   },
   "jest": {
     "preset": "react-native",
