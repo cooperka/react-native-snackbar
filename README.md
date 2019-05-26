@@ -69,6 +69,7 @@ Shows a Snackbar, dismissing any existing Snackbar first. Accepts an object with
 | `textColor` | `string` or `style` | `'white'` | The color of the message text. |
 | `backgroundColor` | `string` or `style` | `undefined` (dark gray) | The background color for the whole Snackbar. |
 | `fontFamily` | `string` | `undefined` | [Android only] The basename of a `.ttf` font from `assets/fonts/` (see [setup guide](https://github.com/facebook/react-native/issues/25852) and [example app](/example), remember to `react-native link` after). |
+| `rtl` | `boolean` | `false` | [Android only, API 17+] Whether the Snackbar should render right-to-left (requires `android:supportsRtl="true"`, see [setup guide](https://android-developers.googleblog.com/2013/03/native-rtl-support-in-android-42.html) and [example app](/example)). |
 | `action` | `object` (described below) | `undefined` (no button) | Optional config for the action button (described below). |
 
 Where `duration` can be one of the following (timing may vary based on device):

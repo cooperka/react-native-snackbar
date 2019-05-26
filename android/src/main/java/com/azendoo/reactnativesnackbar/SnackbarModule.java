@@ -3,6 +3,8 @@ package com.azendoo.reactnativesnackbar;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import com.google.android.material.snackbar.Snackbar;
+
+import android.os.Build;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -90,6 +92,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         String text = getOptionValue(options, "text", "");
         int duration = getOptionValue(options, "duration", Snackbar.LENGTH_SHORT);
         int textColor = getOptionValue(options, "textColor", Color.WHITE);
+        boolean rtl = getOptionValue(options, "rtl", false);
         String fontFamily = getOptionValue(options, "fontFamily", null);
         Typeface font = null;
         if (fontFamily != null) {
@@ -103,6 +106,12 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
 
         Snackbar snackbar = Snackbar.make(view, text, duration);
         View snackbarView = snackbar.getView();
+
+        if (rtl && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            snackbarView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            snackbarView.setTextDirection(View.TEXT_DIRECTION_RTL);
+        }
+
         TextView snackbarText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
         snackbarText.setTextColor(textColor);
 
@@ -171,6 +180,10 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
 
     private int getOptionValue(ReadableMap options, String key, int fallback) {
         return options.hasKey(key) ? options.getInt(key) : fallback;
+    }
+
+    private boolean getOptionValue(ReadableMap options, String key, boolean fallback) {
+        return options.hasKey(key) ? options.getBoolean(key) : fallback;
     }
 
 }
