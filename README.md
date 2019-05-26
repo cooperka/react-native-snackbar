@@ -21,6 +21,8 @@ and when to use them.
 Snackbar.show({
   title: 'Hello world',
   duration: Snackbar.LENGTH_SHORT,
+  RTL: true,
+  fontFamily: 'IRANSansMobile'
 });
 ```
 
@@ -65,6 +67,8 @@ Snackbar.show({
 | `action` | `object` (described below) | `undefined` (no button) | Optional config for the action button (described below). |
 | `backgroundColor` | `string` or `style` | `undefined` (natively renders as black) | The background color for the whole Snackbar. |
 | `color` | `string` or `style` | `undefined` (natively renders as white) | The text color for the title. |
+| `fontFamily` | `string` | `undefined` (use native default font) | Font family of snackbar title and action (See **Font support for android** section below). |
+| `RTL` | `boolean` | `false` | Direction of the snackbar (See **RTL support for android** section below). |
 
 Where `duration` can be one of the following (timing may vary based on device):
 
@@ -105,3 +109,13 @@ In your `android/app/build.gradle`:
 #### Compiling for iOS
 
 Make sure your Deployment Target is iOS 9.0 or above.
+
+#### RTL support for android
+Specifically, add `android:supportsRtl="true"` to the `<application>` element in your manifest file.
+
+[More details](https://android-developers.googleblog.com/2013/03/native-rtl-support-in-android-42.html)
+
+#### Font support for android
+ * Fonts should be place in `assets/fonts` folder.
+ * Extention of font should be `.ttf` (Exclude extention from font name in `fontFamily` prop)
+  
