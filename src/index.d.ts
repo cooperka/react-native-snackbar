@@ -58,28 +58,35 @@ interface SnackBarOptions {
 }
 
 /**
- * Snackbar duration of about a second.
+ * Snackbar definition
  */
-export const LENGTH_SHORT: number;
+interface Snackbar{
+  /**
+   * Snackbar duration of about a second.
+   */
+  LENGTH_SHORT: number;
 
-/**
- * Snackbar duration of about three seconds.
- */
-export const LENGTH_LONG: number;
+  /**
+   * Snackbar duration of about three seconds.
+   */
+  LENGTH_LONG: number;
 
-/**
- * Snackbar duration that lasts forever (until a new Snackbar is shown).
- */
-export const LENGTH_INDEFINITE: number;
+  /**
+   * Snackbar duration that lasts forever (until a new Snackbar is shown).
+   */
+  LENGTH_INDEFINITE: number;
 
-/**
- * Shows a native Snackbar component.
- *
- * @param {SnackBarOptions} options
- */
-export function show(options: SnackBarOptions): void;
+  /**
+   * Shows a native Snackbar component.
+   *
+   * @param {SnackBarOptions} options
+   */
+  show(options: SnackBarOptions): void;
+  
+  /**
+   * Dismisses any and all active Snackbars.
+   */
+  dismiss(): void;
+}
 
-/**
-* Dismisses any and all active Snackbars.
-*/
-export function dismiss(): void;
+export default Snackbar;
