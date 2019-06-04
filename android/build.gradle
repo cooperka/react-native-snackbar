@@ -50,9 +50,9 @@ repositories {
 }
 
 dependencies {
-    compile "com.facebook.react:react-native:${_reactNativeVersion}"
+    implementation "com.facebook.react:react-native:${_reactNativeVersion}"
 
-    compile "com.android.support:appcompat-v7:${_supportLibVersion}"
-    compile "com.android.support:support-v4:${_supportLibVersion}"
-    compile "com.android.support:design:${_supportLibVersion}"
+    implementation "com.android.support:appcompat-v7:${_supportLibVersion}"
+    implementation "com.android.support:support-v4:${_supportLibVersion}"
+    implementation "com.android.support:design:${_supportLibVersion}"
 }
