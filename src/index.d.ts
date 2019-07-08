@@ -82,11 +82,12 @@ interface Snackbar{
    * @param {SnackBarOptions} options
    */
   show(options: SnackBarOptions): void;
-  
+
   /**
    * Dismisses any and all active Snackbars.
    */
   dismiss(): void;
 }
 
-export default Snackbar;
+export const SnackbarInstance: Snackbar
+export default SnackbarInstance;
