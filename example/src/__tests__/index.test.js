@@ -8,8 +8,6 @@ import App from '../App';
 
 describe('Snackbar example app', () => {
   it('renders without crashing', () => {
-    renderer.create(
-      <App />,
-    );
+    renderer.create(<App />);
   });
 });
