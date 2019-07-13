@@ -4,27 +4,25 @@
   "private": true,
   "scripts": {
     "preinstall": "cd .. && npm run build",
-    "postinstall": "rm -rf node_modules/react-native-snackbar/node_modules node_modules/react-native-snackbar/example",
+    "postinstall": "rm -rf node_modules/react-native-snackbar/node_modules node_modules/react-native-snackbar/example && cd ios && pod install && cd ..",
     "sync": "./sync.sh",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "react-native start",
     "test": "jest"
   },
   "dependencies": {
-    "react": "16.4.1",
-    "react-native": "0.56.0",
+    "react": "16.8.6",
+    "react-native": "0.60.3",
     "react-native-snackbar": "file:.."
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.47",
-    "babel-jest": "23.4.2",
-    "babel-preset-react-native": "5.0.2",
-    "jest": "23.5.0",
-    "react-test-renderer": "16.4.2"
+    "@babel/core": "^7.5.4",
+    "@babel/runtime": "^7.5.4",
+    "babel-jest": "^24.8.0",
+    "jest": "^24.8.0",
+    "metro-react-native-babel-preset": "^0.55.0",
+    "react-test-renderer": "16.8.6"
   },
   "jest": {
-    "preset": "react-native",
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
-    }
+    "preset": "react-native"
   }
 }
