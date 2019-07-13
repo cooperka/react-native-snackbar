@@ -6,6 +6,7 @@ import styles from '../styles';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Example extends Component {
+
   render() {
     return (
       <View style={styles.container}>
@@ -18,46 +19,43 @@ class Example extends Component {
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() =>
-            Snackbar.show({
-              title:
+          onPress={() => Snackbar.show({
+            title:
                 'Hello, World! How are you doing today? Enjoying the sun?! This should wrap to two lines.',
-              duration: Snackbar.LENGTH_LONG,
-            })
+            duration: Snackbar.LENGTH_LONG,
+          })
           }
         >
           <Text style={styles.button}>Simple Snackbar - two lines</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() =>
-            Snackbar.show({
-              title: 'Please agree to this.',
-              duration: Snackbar.LENGTH_INDEFINITE,
-              action: {
-                title: 'AGREE',
-                onPress: () => Snackbar.show({ title: 'Thank you!' }),
-                color: 'green'
-              },
-            })
+          onPress={() => Snackbar.show({
+            title: 'Please agree to this.',
+            duration: Snackbar.LENGTH_INDEFINITE,
+            action: {
+              title: 'AGREE',
+              onPress: () => Snackbar.show({ title: 'Thank you!' }),
+              color: 'green',
+            },
+          })
           }
         >
           <Text style={styles.button}>Snackbar with action</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() =>
-            Snackbar.show({
-              title: 'Please agree to this.',
-              duration: Snackbar.LENGTH_INDEFINITE,
-              backgroundColor: 'silver',
+          onPress={() => Snackbar.show({
+            title: 'Please agree to this.',
+            duration: Snackbar.LENGTH_INDEFINITE,
+            backgroundColor: 'silver',
+            color: 'blue',
+            action: {
+              title: 'AGREE',
+              onPress: () => Snackbar.show({ title: 'Thank you!' }),
               color: 'blue',
-              action: {
-                title: 'AGREE',
-                onPress: () => Snackbar.show({ title: 'Thank you!' }),
-                color: 'blue'
-              },
-            })
+            },
+          })
           }
         >
           <Text style={styles.button}>Snackbar with style</Text>
@@ -69,6 +67,7 @@ class Example extends Component {
       </View>
     );
   }
+
 }
 
 export default Example;
