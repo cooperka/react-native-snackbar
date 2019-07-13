@@ -18,10 +18,10 @@ apply plugin: "com.android.library"
 // https://github.com/facebook/react-native/blob/v0.56.0/local-cli/templates/HelloWorld/android/build.gradle
 def _ext = rootProject.ext
 def _reactNativeVersion = _ext.has('reactNative') ? _ext.reactNative : '+'
-def _compileSdkVersion = _ext.has('compileSdkVersion') ? _ext.compileSdkVersion : 28
-def _materialVersion = _ext.has('materialVersion') ? _ext.materialVersion : '1.0.0'
+def _compileSdkVersion = _ext.has('compileSdkVersion') ? _ext.compileSdkVersion : 26
+def _supportLibVersion = _ext.has('supportLibVersion') ? _ext.supportLibVersion : '26.1.0'
 def _minSdkVersion = _ext.has('minSdkVersion') ? _ext.minSdkVersion : 16
-def _targetSdkVersion = _ext.has('targetSdkVersion') ? _ext.targetSdkVersion : 28
+def _targetSdkVersion = _ext.has('targetSdkVersion') ? _ext.targetSdkVersion : 26
 
 android {
     compileSdkVersion _compileSdkVersion
@@ -50,5 +50,8 @@ repositories {
 
 dependencies {
     implementation "com.facebook.react:react-native:${_reactNativeVersion}"
-    implementation "com.google.android.material:material:${_materialVersion}"
+
+    implementation "com.android.support:appcompat-v7:${_supportLibVersion}"
+    implementation "com.android.support:support-v4:${_supportLibVersion}"
+    implementation "com.android.support:design:${_supportLibVersion}"
 }

@@ -2,7 +2,7 @@ package com.azendoo.reactnativesnackbar;
 
 import android.graphics.Color;
 import android.os.Build;
-import com.google.android.material.snackbar.Snackbar;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -92,7 +92,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
 
         Snackbar snackbar = Snackbar.make(view, title, duration);
         View snackbarView = snackbar.getView();
-        TextView snackbarText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
+        TextView snackbarText = snackbarView.findViewById(android.support.design.R.id.snackbar_text);
 
         mActiveSnackbars.add(snackbar);
 
