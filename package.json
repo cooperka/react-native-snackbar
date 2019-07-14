@@ -50,8 +50,8 @@
   },
   "homepage": "https://github.com/cooperka/react-native-snackbar",
   "peerDependencies": {
-    "react": ">=15.1 || >=16.0.0-alpha.6",
-    "react-native": ">=0.40"
+    "react": ">=16",
+    "react-native": ">=0.60"
   },
   "devDependencies": {
     "@babel/cli": "7.0.0-beta.47",
