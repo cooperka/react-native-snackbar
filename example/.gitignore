@@ -39,7 +39,6 @@ yarn-error.log
 # BUCK
 buck-out/
 \.buckd/
-*.keystore
 
 # fastlane
 #
@@ -51,3 +50,6 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+
+# CocoaPods
+/ios/Pods/

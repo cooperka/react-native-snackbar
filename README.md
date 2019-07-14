@@ -93,12 +93,12 @@ please try updating your Gradle and Android configs to the latest versions. For 
 
 In your `android/build.gradle`:
 
-- `com.android.tools.build:gradle:2.3.3` (or higher)
+- `com.android.tools.build:gradle:3.4.1` (or higher)
 
 In your `android/app/build.gradle`:
 
-- `compileSdkVersion 26` (or higher)
-- `buildToolsVersion "26.0.3"` (or higher)
+- `compileSdkVersion 28` (or higher)
+- `buildToolsVersion "28.0.3"` (or higher)
 
 #### Compiling for iOS
 
