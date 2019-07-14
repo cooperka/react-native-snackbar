@@ -1,12 +1,7 @@
-// Type definitions for react-native-snackbar 0.3.4
-// Project: https://github.com/cooperka/react-native-snackbar
-// Definitions by: Kyle Roach <https://github.com/iRoachie>
-// TypeScript Version: 2.2.2
-
 /**
  * An actionable button that can be shown on the Snackbar.
  */
-interface Action {
+export interface SnackbarAction {
   /**
    * Text for the button.
    */
@@ -27,7 +22,7 @@ interface Action {
 /**
  * List of options to configure the Snackbar.
  */
-interface SnackBarOptions {
+export interface SnackBarOptions {
   /**
    * The text that appears on the Snackbar.
    */
@@ -54,13 +49,13 @@ interface SnackBarOptions {
   /**
    * Adds an actionable button to the snackbar on the right
    */
-  action?: Action;
+  action?: SnackbarAction;
 }
 
 /**
  * Snackbar definition
  */
-interface Snackbar{
+export interface SnackbarStatic {
   /**
    * Snackbar duration of about a second.
    */
@@ -89,5 +84,5 @@ interface Snackbar{
   dismiss(): void;
 }
 
-export const SnackbarInstance: Snackbar
-export default SnackbarInstance;
+declare const Snackbar: SnackbarStatic;
+export default Snackbar;
