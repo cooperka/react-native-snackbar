@@ -60,7 +60,7 @@ Snackbar.show({
 
 | Key | Data type | Default value? | Description |
 |-----|-----------|----------------|-------------|
-| `title` | `string` | Required. | The message to show. |
+| `title` | `string` | Required. | The message to show. (max characters: 70) | 
 | `duration` | See below | `Snackbar.LENGTH_SHORT` | How long to display the Snackbar. |
 | `action` | `object` (described below) | `undefined` (no button) | Optional config for the action button (described below). |
 | `backgroundColor` | `string` or `style` | `undefined` (natively renders as black) | The background color for the whole Snackbar. |
