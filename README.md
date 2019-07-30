@@ -60,7 +60,7 @@ Snackbar.show({
 
 | Key | Data type | Default value? | Description |
 |-----|-----------|----------------|-------------|
-| `title` | `string` | Required. | The message to show. (max characters: 70) | 
+| `title` | `string` | Required. | The message to show. | 
 | `duration` | See below | `Snackbar.LENGTH_SHORT` | How long to display the Snackbar. |
 | `action` | `object` (described below) | `undefined` (no button) | Optional config for the action button (described below). |
 | `backgroundColor` | `string` or `style` | `undefined` (natively renders as black) | The background color for the whole Snackbar. |
@@ -79,6 +79,8 @@ And the optional `action` object can contain the following options:
 | `title` | `string` | Required. | The text to show on the button. |
 | `onPress` | `function` | `undefined` (Snackbar is simply dismissed) | A callback for when the user taps the button. |
 | `color` | `string` or `style` | `undefined` (natively renders as white) | The text color for the button. |
+
+Note: the `title` will ellipsize after 2 lines of text on most platforms. See #110 if you need to display more lines.
 
 ## Troubleshooting
 
