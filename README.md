@@ -80,6 +80,8 @@ And the optional `action` object can contain the following options:
 | `onPress` | `function` | `undefined` (Snackbar is simply dismissed) | A callback for when the user taps the button. |
 | `color` | `string` or `style` | `undefined` (natively renders as white) | The text color for the button. |
 
+Note: the `title` will ellipsize after 2 lines of text on most platforms. See [#110](https://github.com/cooperka/react-native-snackbar/issues/110) if you need to display more lines.
+
 ## Troubleshooting
 
 #### Undefined import
