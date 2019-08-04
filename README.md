@@ -20,9 +20,7 @@ and when to use them.
 ```js
 Snackbar.show({
   title: 'Hello world',
-  duration: Snackbar.LENGTH_SHORT,
-  RTL: true,
-  fontFamily: 'IRANSansMobile'
+  duration: Snackbar.LENGTH_SHORT
 });
 ```
 
@@ -67,8 +65,8 @@ Snackbar.show({
 | `action` | `object` (described below) | `undefined` (no button) | Optional config for the action button (described below). |
 | `backgroundColor` | `string` or `style` | `undefined` (natively renders as black) | The background color for the whole Snackbar. |
 | `color` | `string` or `style` | `undefined` (natively renders as white) | The text color for the title. |
-| `fontFamily` | `string` | `undefined` (use native default font) | Font family of snackbar title and action (See **Font support for android** section below). |
-| `RTL` | `boolean` | `false` | Direction of the snackbar (See **RTL support for android** section below). |
+| `fontFamily` | `string` | `undefined` (use native default font) | Font family of snackbar title and action (Android only) (See **Font support for android** section below). |
+| `rtl` | `boolean` | `false` | Direction of the snackbar (Android only) (See **RTL support for android** section below). |
 
 Where `duration` can be one of the following (timing may vary based on device):
 
