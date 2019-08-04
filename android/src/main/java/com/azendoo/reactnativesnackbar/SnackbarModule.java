@@ -95,7 +95,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
         String title = options.hasKey("title") ? options.getString("title") : "";
         int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
         String fontFamily = options.hasKey("fontFamily") ? options.getString("fontFamily") : null;
-        boolean RTL = options.hasKey("RTL") ? options.getBoolean("RTL") : false;
+        boolean rtl = options.hasKey("rtl") ? options.getBoolean("rtl") : false;
 
         Snackbar snackbar = Snackbar.make(view, title, duration);
         View snackbarView = snackbar.getView();
@@ -141,9 +141,11 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             snackbarText.setTextColor(Color.WHITE);
         }
 
-        if (RTL) {
-            snackbarView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
-            snackbarView.setTextDirection(View.TEXT_DIRECTION_RTL);
+        if (rtl) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                snackbarView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+                snackbarView.setTextDirection(View.TEXT_DIRECTION_RTL);
+            }
         }
 
         if (fontFamily != null) {
