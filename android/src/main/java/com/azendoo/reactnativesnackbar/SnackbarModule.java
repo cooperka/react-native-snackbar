@@ -122,9 +122,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
 
         if (options.hasKey("color")) {
             snackbarText.setTextColor(options.getInt("color"));
-        } else if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-            // For older devices, explicitly set the text color; otherwise it may appear dark gray.
-            // http://stackoverflow.com/a/31084530/763231
+        } else {
             snackbarText.setTextColor(Color.WHITE);
         }
 
