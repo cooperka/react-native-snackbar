@@ -2,6 +2,5 @@
   "compilerOptions": {
     "noEmit": true,
     "strict": true
-  },
-  "include": ["src/__tests__/types.ts"]
+  }
 }
