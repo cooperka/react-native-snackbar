@@ -8,18 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* SnackbarExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SnackbarExampleTests.m */; };
-		0433FB99EFD9D53D1D2886BB /* libPods-SnackbarExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA8240AC4DBCCD4A79A805E /* libPods-SnackbarExampleTests.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1EEAE54E923A31BC49D1CDD6 /* libPods-SnackbarExample-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EADDA6C763014BFF7B1BA79 /* libPods-SnackbarExample-tvOS.a */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* SnackbarExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SnackbarExampleTests.m */; };
-		517CA7751CF0DB7B46BE62DE /* libPods-SnackbarExample-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E283F830439667A9D22AF86 /* libPods-SnackbarExample-tvOSTests.a */; };
-		D22E9F7887757148228C2A39 /* libPods-SnackbarExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CEFCB644E9D945938F01BB4 /* libPods-SnackbarExample.a */; };
+		6BC4F00ED3BA32D9A546428F /* libPods-SnackbarExample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 69F84FE27BA00C4C5D635453 /* libPods-SnackbarExample.a */; };
+		BBEFB3217F63FCB99230B016 /* libPods-SnackbarExample-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 118A4F2CBE580717159031CA /* libPods-SnackbarExample-tvOSTests.a */; };
+		E7E3B656B52BF7E10DCAB09C /* libPods-SnackbarExample-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A796DDDC3F2B21A1B073187 /* libPods-SnackbarExample-tvOS.a */; };
+		ED3DFB053CAB1666B7A78152 /* libPods-SnackbarExampleTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EFADD89CE5244A6A1CEC979 /* libPods-SnackbarExampleTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +44,7 @@
 		00E356EE1AD99517003FC87E /* SnackbarExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnackbarExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* SnackbarExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnackbarExampleTests.m; sourceTree = "<group>"; };
+		118A4F2CBE580717159031CA /* libPods-SnackbarExample-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnackbarExample-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07F961A680F5B00A75B9A /* SnackbarExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnackbarExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SnackbarExample/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = SnackbarExample/AppDelegate.m; sourceTree = "<group>"; };
@@ -54,12 +55,11 @@
 		1577AD43BE31A8A95F415739 /* Pods-SnackbarExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnackbarExample.release.xcconfig"; path = "Target Support Files/Pods-SnackbarExample/Pods-SnackbarExample.release.xcconfig"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* SnackbarExample-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SnackbarExample-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* SnackbarExample-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SnackbarExample-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2E283F830439667A9D22AF86 /* libPods-SnackbarExample-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnackbarExample-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3DA8240AC4DBCCD4A79A805E /* libPods-SnackbarExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnackbarExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4CEFCB644E9D945938F01BB4 /* libPods-SnackbarExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnackbarExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		50960512490FD74AFDB6A136 /* Pods-SnackbarExample-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnackbarExample-tvOS.release.xcconfig"; path = "Target Support Files/Pods-SnackbarExample-tvOS/Pods-SnackbarExample-tvOS.release.xcconfig"; sourceTree = "<group>"; };
-		7EADDA6C763014BFF7B1BA79 /* libPods-SnackbarExample-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnackbarExample-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69F84FE27BA00C4C5D635453 /* libPods-SnackbarExample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnackbarExample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7EFADD89CE5244A6A1CEC979 /* libPods-SnackbarExampleTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnackbarExampleTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88AABC5E389F378ADAF1E47C /* Pods-SnackbarExample-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnackbarExample-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-SnackbarExample-tvOSTests/Pods-SnackbarExample-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8A796DDDC3F2B21A1B073187 /* libPods-SnackbarExample-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SnackbarExample-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9A76C909A68510A63153059 /* Pods-SnackbarExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnackbarExampleTests.release.xcconfig"; path = "Target Support Files/Pods-SnackbarExampleTests/Pods-SnackbarExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		AF621C69F422821622CFCF6F /* Pods-SnackbarExample-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnackbarExample-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-SnackbarExample-tvOSTests/Pods-SnackbarExample-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		D05FDA20E0EB969015C34258 /* Pods-SnackbarExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SnackbarExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-SnackbarExampleTests/Pods-SnackbarExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0433FB99EFD9D53D1D2886BB /* libPods-SnackbarExampleTests.a in Frameworks */,
+				ED3DFB053CAB1666B7A78152 /* libPods-SnackbarExampleTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,7 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D22E9F7887757148228C2A39 /* libPods-SnackbarExample.a in Frameworks */,
+				6BC4F00ED3BA32D9A546428F /* libPods-SnackbarExample.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1EEAE54E923A31BC49D1CDD6 /* libPods-SnackbarExample-tvOS.a in Frameworks */,
+				E7E3B656B52BF7E10DCAB09C /* libPods-SnackbarExample-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				517CA7751CF0DB7B46BE62DE /* libPods-SnackbarExample-tvOSTests.a in Frameworks */,
+				BBEFB3217F63FCB99230B016 /* libPods-SnackbarExample-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,10 +156,10 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				4CEFCB644E9D945938F01BB4 /* libPods-SnackbarExample.a */,
-				7EADDA6C763014BFF7B1BA79 /* libPods-SnackbarExample-tvOS.a */,
-				2E283F830439667A9D22AF86 /* libPods-SnackbarExample-tvOSTests.a */,
-				3DA8240AC4DBCCD4A79A805E /* libPods-SnackbarExampleTests.a */,
+				69F84FE27BA00C4C5D635453 /* libPods-SnackbarExample.a */,
+				8A796DDDC3F2B21A1B073187 /* libPods-SnackbarExample-tvOS.a */,
+				118A4F2CBE580717159031CA /* libPods-SnackbarExample-tvOSTests.a */,
+				7EFADD89CE5244A6A1CEC979 /* libPods-SnackbarExampleTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
