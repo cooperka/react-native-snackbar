@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "preinstall": "cd .. && npm run build",
+    "preinstall": "cd .. && yarn run build",
     "postinstall": "rm -rf node_modules/react-native-snackbar/node_modules node_modules/react-native-snackbar/example",
     "sync": "./sync.sh",
     "start": "react-native start",
