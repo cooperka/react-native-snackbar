@@ -23,7 +23,7 @@
   "jest": {
     "preset": "react-native",
     "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+      "node_modules/react-native/.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
     },
     "modulePathIgnorePatterns": [
       "<rootDir>/example/"
@@ -57,9 +57,10 @@
     "@babel/cli": "7.6.4",
     "@babel/core": "7.6.4",
     "babel-eslint": "10.0.3",
+    "babel-jest": "24.9.0",
     "eslint": "6.5.1",
     "eslint-config-airbnb": "18.0.1",
-    "eslint-config-cooperka": "1.0.2",
+    "eslint-config-cooperka": "1.0.4",
     "eslint-plugin-import": "2.18.2",
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "7.16.0",

@@ -1387,7 +1387,7 @@ babel-eslint@10.0.3:
     eslint-visitor-keys "^1.0.0"
     resolve "^1.12.0"
 
-babel-jest@^24.9.0:
+babel-jest@24.9.0, babel-jest@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/babel-jest/-/babel-jest-24.9.0.tgz#3fc327cb8467b89d14d7bc70e315104a783ccd54"
   integrity sha512-ntuddfyiN+EhMw58PTNL1ph4C9rECiQXjI4nMMBKBaNjXvqLdkXpPRcMSr4iyBrJg/+wz9brFUD6RhOAT6r4Iw==
@@ -2283,10 +2283,10 @@ eslint-config-airbnb@18.0.1:
     object.assign "^4.1.0"
     object.entries "^1.1.0"
 
-eslint-config-cooperka@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-cooperka/-/eslint-config-cooperka-1.0.2.tgz#9c2294bfe276102d545c20b550d4e79da778e42b"
-  integrity sha512-YH/kPPgLDtHrhEIiVTgRY3dcpMMsSOCRAYPwbsfQMvt7UiZHp253G4lWK0hyu2sP2PO19xGn4Mhb8/NZV26muQ==
+eslint-config-cooperka@1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/eslint-config-cooperka/-/eslint-config-cooperka-1.0.4.tgz#733c4ce66c74d3314f6970ced22515beb3e5c151"
+  integrity sha512-Aq9+NQ3E2e05wAl/rC7F7HLDJJH/GxEOkU+9Buulem+Bd3NnBvlSvJO4tbT5yNJjp9My4gvOwKv7biTtXlzaiQ==
 
 eslint-import-resolver-node@^0.3.2:
   version "0.3.2"
