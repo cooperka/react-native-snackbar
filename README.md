@@ -84,11 +84,17 @@ Note: the `title` will ellipsize after 2 lines of text on most platforms. See [#
 
 ## Troubleshooting
 
+#### Snackbar not appearing [Android]
+
+The Snackbar is designed to attach to whatever view is on top of your screen when `show` is called. If that view happens to be a temporary alert modal or some other view that goes away, you'll never see the Snackbar.
+
+A workaround in some cases is to use `setTimeout` to show the Snackbar a few seconds later after the modal is gone. See [issue #28](https://github.com/cooperka/react-native-snackbar/issues/28) for further discussion. If you want to submit a PR to improve the view-finding logic, feel free.
+
 #### Undefined import
 
 If you see errors similar to `Cannot read property 'LENGTH_LONG' of undefined` or `Undefined not an object (NativeModules.RNSnackbar)`, please refer to [issue #43](https://github.com/cooperka/react-native-snackbar/issues/43) for help.
 
-#### Compiling for Android
+#### Compiling [Android]
 
 If you have issues compiling for Android after linking this library,
 please try updating your Gradle and Android configs to the latest versions. For example:
@@ -102,6 +108,6 @@ In your `android/app/build.gradle`:
 - `compileSdkVersion 28` (or higher)
 - `buildToolsVersion "28.0.3"` (or higher)
 
-#### Compiling for iOS
+#### Compiling [iOS]
 
 Make sure your Deployment Target is iOS 9.0 or above.
