@@ -43,6 +43,7 @@ Snackbar.show({
 1. Install:
     - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-snackbar --save`
     - Using [Yarn](https://yarnpkg.com/): `yarn add react-native-snackbar`
+    - RN >= 0.60 supports autolinking: just install pod `cd ios && Pod install` and jump to 3
 
 2. [Link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html):
     - `react-native link react-native-snackbar`
