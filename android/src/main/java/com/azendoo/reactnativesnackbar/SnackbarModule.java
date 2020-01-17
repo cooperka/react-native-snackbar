@@ -1,7 +1,6 @@
 package com.azendoo.reactnativesnackbar;
 
 import android.graphics.Color;
-import android.os.Build;
 import com.google.android.material.snackbar.Snackbar;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SnackbarModule extends ReactContextBaseJavaModule{
+public class SnackbarModule extends ReactContextBaseJavaModule {
 
     private static final String REACT_NAME = "RNSnackbar";
 
@@ -87,12 +86,14 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
     }
 
     private void displaySnackbar(View view, ReadableMap options, final Callback callback) {
-        String title = options.hasKey("title") ? options.getString("title") : "";
-        int duration = options.hasKey("duration") ? options.getInt("duration") : Snackbar.LENGTH_SHORT;
+        String title = getOptionValue(options, "title", "");
+        int duration = getOptionValue(options, "duration", Snackbar.LENGTH_SHORT);
+        int textColor = getOptionValue(options, "color", Color.WHITE);
 
         Snackbar snackbar = Snackbar.make(view, title, duration);
         View snackbarView = snackbar.getView();
         TextView snackbarText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
+        snackbarText.setTextColor(textColor);
 
         mActiveSnackbars.add(snackbar);
 
@@ -101,6 +102,10 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
         }
 
         if (options.hasKey("action")) {
+            ReadableMap actionOptions = options.getMap("action");
+            String actionTitle = getOptionValue(actionOptions, "title", "");
+            int actionTextColor = getOptionValue(actionOptions, "color", Color.WHITE);
+
             View.OnClickListener onClickListener = new View.OnClickListener() {
                 // Prevent double-taps which can lead to a crash.
                 boolean callbackWasCalled = false;
@@ -114,15 +119,9 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
                 }
             };
 
-            ReadableMap actionDetails = options.getMap("action");
-            String actionTitle = actionDetails.hasKey("title") ? actionDetails.getString("title") : "";
-            int actionTextColor = actionDetails.hasKey("color") ? actionDetails.getInt("color") : Color.WHITE;
             snackbar.setAction(actionTitle, onClickListener);
             snackbar.setActionTextColor(actionTextColor);
         }
-
-        int textColor = options.hasKey("color") ? options.getInt("color") : Color.WHITE;
-        snackbarText.setTextColor(textColor);
 
         snackbar.show();
     }
@@ -144,6 +143,14 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
         }
 
         return modals;
+    }
+
+    private String getOptionValue(ReadableMap options, String key, String fallback) {
+        return options.hasKey(key) ? options.getString(key) : fallback;
+    }
+
+    private int getOptionValue(ReadableMap options, String key, int fallback) {
+        return options.hasKey(key) ? options.getInt(key) : fallback;
     }
 
 }
