@@ -13,7 +13,7 @@ Array [
 ]
 `;
 
-exports[`Snackbar module calls native with specified params 1`] = `
+exports[`Snackbar module calls native with normal params 1`] = `
 Array [
   Array [
     Object {
@@ -22,8 +22,8 @@ Array [
         "onPress": [MockFunction],
         "title": "UNDO",
       },
-      "backgroundColor": undefined,
-      "color": undefined,
+      "backgroundColor": 4294901760,
+      "color": 4278190335,
       "duration": 0,
       "title": "Hello world",
     },
