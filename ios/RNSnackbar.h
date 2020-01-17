@@ -1,14 +1,11 @@
 //
-//  RNSnackbar.h
-//  React-Native-Snackbar
-//
 //  Created by Remi Santos on 13/04/16.
-//  Copyright © 2016 Facebook. All rights reserved.
+//  Copyrights by Facebook, Remi Santos, and Kevin Cooper.
 //
 
-#import <React/RCTBridgeModule.h>
 #import <Foundation/Foundation.h>
+#import <React/RCTBridgeModule.h>
 
-@interface RNSnackbar : NSObject<RCTBridgeModule>
+@interface RNSnackbar : NSObject <RCTBridgeModule>
 
 @end

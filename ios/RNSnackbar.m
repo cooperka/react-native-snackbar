@@ -1,45 +1,40 @@
 //
-//  RNSnackbar.m
-//  React-Native-Snackbar
-//
 //  Created by Remi Santos on 13/04/16.
-//  Copyright © 2016 Facebook. All rights reserved.
+//  Copyrights by Facebook, Remi Santos, and Kevin Cooper.
 //
 
-#import "RNSnackbar.h"
 #import "RNSnackBarView.h"
+#import "RNSnackbar.h"
 
 @implementation RNSnackbar
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(show:(NSDictionary *)options callback:(RCTResponseSenderBlock)callback)
-{
+RCT_EXPORT_METHOD(show : (NSDictionary *)options callback : (RCTResponseSenderBlock)callback) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [RNSnackBarView showWithOptions:options andCallback:^{
-            callback(@[[NSNull null], [NSNull null]]);
-        }];
+      [RNSnackBarView showWithOptions:options
+                          andCallback:^{
+                            callback(@[ [NSNull null], [NSNull null] ]);
+                          }];
     });
 }
 
-RCT_EXPORT_METHOD(dismiss)
-{
+RCT_EXPORT_METHOD(dismiss) {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [RNSnackBarView dismiss];
+      [RNSnackBarView dismiss];
     });
 }
 
-+ (BOOL)requiresMainQueueSetup
-{
++ (BOOL)requiresMainQueueSetup {
     return YES;
 }
 
-- (NSDictionary *)constantsToExport
-{
+- (NSDictionary *)constantsToExport {
     return @{
-             @"LENGTH_INDEFINITE": @-2,
-             @"LENGTH_LONG": @0,
-             @"LENGTH_SHORT": @-1
-             };
+        @"LENGTH_SHORT" : @-1,
+        @"LENGTH_LONG" : @0,
+        @"LENGTH_INDEFINITE" : @-2,
+    };
 }
+
 @end

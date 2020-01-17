@@ -1,51 +1,43 @@
 //
-//  RNSnackBarView.m
-//  RNSnackBarTest
-//
 //  Created by Remi Santos on 13/04/16.
-//  Copyright © 2016 Remi Santos. All rights reserved.
+//  Copyrights by Facebook, Remi Santos, and Kevin Cooper.
 //
 
 #import "RNSnackBarView.h"
 #import <React/RCTConvert.h>
 
 typedef NS_ENUM(NSInteger, RNSnackBarViewState) {
-  RNSnackBarViewStateDisplayed,
-  RNSnackBarViewStatePresenting,
-  RNSnackBarViewStateDismissing,
-  RNSnackBarViewStateDismissed
+    RNSnackBarViewStateDisplayed,
+    RNSnackBarViewStatePresenting,
+    RNSnackBarViewStateDismissing,
+    RNSnackBarViewStateDismissed
 };
 
-static NSDictionary* DEFAULT_DURATIONS;
+static NSDictionary *DEFAULT_DURATIONS;
 static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
-@interface RNSnackBarView ()
-{
-    UILabel* titleLabel;
-    UIButton* actionButton;
-    NSArray* horizontalLayoutConstraints;
-    NSTimer* dismissTimer;
+@interface RNSnackBarView () {
+    UILabel *titleLabel;
+    UIButton *actionButton;
+    NSArray *horizontalLayoutConstraints;
+    NSTimer *dismissTimer;
 }
-@property (nonatomic, strong) NSDictionary* pendingOptions;
+@property(nonatomic, strong) NSDictionary *pendingOptions;
 
-@property (nonatomic) RNSnackBarViewState state;
-@property (nonatomic, strong) NSString* title;
-@property (nonatomic, strong) UIColor* titleColor;
-@property (nonatomic, strong) NSString* actionTitle;
-@property (nonatomic, strong) UIColor* actionTitleColor;
-@property (nonatomic, strong) void (^pendingCallback)();
-@property (nonatomic, strong) void (^callback)();
+@property(nonatomic) RNSnackBarViewState state;
+@property(nonatomic, strong) NSString *title;
+@property(nonatomic, strong) UIColor *titleColor;
+@property(nonatomic, strong) NSString *actionTitle;
+@property(nonatomic, strong) UIColor *actionTitleColor;
+@property(nonatomic, strong) void (^pendingCallback)();
+@property(nonatomic, strong) void (^callback)();
 
 @end
 
 @implementation RNSnackBarView
 
 + (void)initialize {
-    DEFAULT_DURATIONS = @{
-                          @"-2": @INT_MAX,
-                          @"-1": @1500,
-                           @"0": @2750
-                         };
+    DEFAULT_DURATIONS = @{@"-2" : @INT_MAX, @"-1" : @1500, @"0" : @2750};
 }
 
 + (id)sharedSnackBar {
@@ -69,9 +61,9 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     [snackBar dismiss];
 }
 
-- (instancetype)init
-{
-    self = [super initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 48, [UIScreen mainScreen].bounds.size.width, 48)];
+- (instancetype)init {
+    self = [super initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 48,
+                                           [UIScreen mainScreen].bounds.size.width, 48)];
     if (self) {
         [self buildView];
     }
@@ -89,7 +81,10 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
             bottomPadding = window.safeAreaInsets.bottom;
     }
 
-    self.backgroundColor = [UIColor colorWithRed:0.196078F green:0.196078F blue:0.196078F alpha:1.0F];
+    self.backgroundColor = [UIColor colorWithRed:0.196078F
+                                           green:0.196078F
+                                            blue:0.196078F
+                                           alpha:1.0F];
     self.accessibilityIdentifier = @"snackbar";
 
     titleLabel = [UILabel new];
@@ -103,103 +98,140 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     actionButton = [UIButton new];
     actionButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
     [actionButton setTitle:@"" forState:UIControlStateNormal];
-    [actionButton addTarget:self action:@selector(actionPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [actionButton addTarget:self
+                     action:@selector(actionPressed:)
+           forControlEvents:UIControlEventTouchUpInside];
     [actionButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self addSubview:actionButton];
 
-    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%f-[titleLabel]-%f-|", topPadding, bottomPadding] options:0 metrics:nil views:@{@"titleLabel": titleLabel}]];
-    [self addConstraint:[NSLayoutConstraint constraintWithItem:actionButton attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:titleLabel attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
-    [titleLabel setContentCompressionResistancePriority:250 forAxis:UILayoutConstraintAxisHorizontal];
+    [self addConstraints:[NSLayoutConstraint
+                             constraintsWithVisualFormat:
+                                 [NSString stringWithFormat:@"V:|-%f-[titleLabel]-%f-|", topPadding,
+                                                            bottomPadding]
+                                                 options:0
+                                                 metrics:nil
+                                                   views:@{@"titleLabel" : titleLabel}]];
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:actionButton
+                                                     attribute:NSLayoutAttributeCenterY
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:titleLabel
+                                                     attribute:NSLayoutAttributeCenterY
+                                                    multiplier:1
+                                                      constant:0]];
+    [titleLabel setContentCompressionResistancePriority:250
+                                                forAxis:UILayoutConstraintAxisHorizontal];
     [titleLabel setContentHuggingPriority:250 forAxis:UILayoutConstraintAxisHorizontal];
-    [actionButton setContentCompressionResistancePriority:750 forAxis:UILayoutConstraintAxisHorizontal];
+    [actionButton setContentCompressionResistancePriority:750
+                                                  forAxis:UILayoutConstraintAxisHorizontal];
     [actionButton setContentHuggingPriority:750 forAxis:UILayoutConstraintAxisHorizontal];
 
     self.actionHidden = YES;
 }
 
--(void)setTitle:(NSString *)title {
+- (void)setTitle:(NSString *)title {
     titleLabel.text = title;
 }
 
--(void)setActionHidden:(BOOL)hidden {
+- (void)setActionHidden:(BOOL)hidden {
     if (actionButton.hidden != hidden || horizontalLayoutConstraints == nil) {
         actionButton.hidden = hidden;
         if (horizontalLayoutConstraints != nil) {
             [self removeConstraints:horizontalLayoutConstraints];
         }
         if (hidden) {
-            horizontalLayoutConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-24-[titleLabel]-24-|" options:0 metrics:nil views:@{@"titleLabel": titleLabel}];
+            horizontalLayoutConstraints =
+                [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-24-[titleLabel]-24-|"
+                                                        options:0
+                                                        metrics:nil
+                                                          views:@{@"titleLabel" : titleLabel}];
         } else {
-            horizontalLayoutConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-24-[titleLabel]-24-[actionButton]-24-|" options:0 metrics:nil views:@{@"titleLabel": titleLabel, @"actionButton": actionButton}];
+            horizontalLayoutConstraints = [NSLayoutConstraint
+                constraintsWithVisualFormat:@"H:|-24-[titleLabel]-24-[actionButton]-24-|"
+                                    options:0
+                                    metrics:nil
+                                      views:@{
+                                          @"titleLabel" : titleLabel,
+                                          @"actionButton" : actionButton
+                                      }];
         }
         [self addConstraints:horizontalLayoutConstraints];
     }
 }
 
--(void)setTitleColor:(UIColor *)titleColor {
+- (void)setTitleColor:(UIColor *)titleColor {
     titleLabel.textColor = titleColor;
 }
 
--(void)setActionTitle:(NSString *)actionTitle {
+- (void)setActionTitle:(NSString *)actionTitle {
     [actionButton setTitle:actionTitle forState:UIControlStateNormal];
 }
 
--(void)setActionTitleColor:(UIColor *)actionTitleColor {
+- (void)setActionTitleColor:(UIColor *)actionTitleColor {
     [actionButton setTitleColor:actionTitleColor forState:UIControlStateNormal];
 }
 
-- (void)actionPressed:(UIButton*)sender {
+- (void)actionPressed:(UIButton *)sender {
     [self dismiss];
     self.callback();
 }
 
-- (void)presentWithDuration:(NSNumber*)duration {
+- (void)presentWithDuration:(NSNumber *)duration {
     _pendingOptions = nil;
     _pendingCallback = nil;
-    UIWindow* keyWindow = [UIApplication sharedApplication].keyWindow;
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
     [self setTranslatesAutoresizingMaskIntoConstraints:false];
-    [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[self(>=48)]|" options:0 metrics:nil views:@{@"self": self}]];
-    [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[self]|" options:0 metrics:nil views:@{@"self": self}]];
+    [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[self(>=48)]|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:@{@"self" : self}]];
+    [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[self]|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:@{@"self" : self}]];
 
     self.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
     titleLabel.alpha = 0;
     actionButton.alpha = 0;
     self.state = RNSnackBarViewStatePresenting;
-    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
-        self.transform = CGAffineTransformIdentity;
-        titleLabel.alpha = 1;
-        actionButton.alpha = 1;
-     } completion:^(BOOL finished) {
-        self.state = RNSnackBarViewStateDisplayed;
-        NSTimeInterval interval;
-        if ([duration doubleValue] <= 0) {
-            NSString* durationString = [duration stringValue];
-            interval = [(NSNumber*)DEFAULT_DURATIONS[durationString] floatValue] / 1000;
-        } else {
-            interval = [duration doubleValue] / 1000;
+    [UIView animateWithDuration:ANIMATION_DURATION
+        animations:^{
+          self.transform = CGAffineTransformIdentity;
+          titleLabel.alpha = 1;
+          actionButton.alpha = 1;
         }
-        dismissTimer = [NSTimer scheduledTimerWithTimeInterval:interval
-                                                        target:self
-                                                      selector:@selector(dismiss)
-                                                      userInfo:nil
-                                                       repeats:FALSE];
-     }];
+        completion:^(BOOL finished) {
+          self.state = RNSnackBarViewStateDisplayed;
+          NSTimeInterval interval;
+          if ([duration doubleValue] <= 0) {
+              NSString *durationString = [duration stringValue];
+              interval = [(NSNumber *)DEFAULT_DURATIONS[durationString] floatValue] / 1000;
+          } else {
+              interval = [duration doubleValue] / 1000;
+          }
+          dismissTimer = [NSTimer scheduledTimerWithTimeInterval:interval
+                                                          target:self
+                                                        selector:@selector(dismiss)
+                                                        userInfo:nil
+                                                         repeats:FALSE];
+        }];
 }
 
 - (void)dismiss {
     [self.layer removeAllAnimations];
     [dismissTimer invalidate];
     self.state = RNSnackBarViewStateDismissing;
-    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
-        self.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
-    } completion:^(BOOL finished) {
-        self.state = RNSnackBarViewStateDismissed;
-        [self removeFromSuperview];
-        if (_pendingOptions) {
-            [self show];
+    [UIView animateWithDuration:ANIMATION_DURATION
+        animations:^{
+          self.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
         }
-    }];
+        completion:^(BOOL finished) {
+          self.state = RNSnackBarViewStateDismissed;
+          [self removeFromSuperview];
+          if (_pendingOptions) {
+              [self show];
+          }
+        }];
 }
 
 - (void)show {
@@ -215,32 +247,31 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     }
 
     id backgroundColor = _pendingOptions[@"backgroundColor"];
-    self.backgroundColor = backgroundColor
-        ? [RCTConvert UIColor:backgroundColor]
-        : [UIColor colorWithRed:0.196078F green:0.196078F blue:0.196078F alpha:1.0F];
+    self.backgroundColor = backgroundColor ? [RCTConvert UIColor:backgroundColor]
+                                           : [UIColor colorWithRed:0.196078F
+                                                             green:0.196078F
+                                                              blue:0.196078F
+                                                             alpha:1.0F];
 
-    id titleColor =_pendingOptions[@"color"];
-    self.titleColor = titleColor
-        ? [RCTConvert UIColor:titleColor]
-        : [UIColor whiteColor];
+    id titleColor = _pendingOptions[@"color"];
+    self.titleColor = titleColor ? [RCTConvert UIColor:titleColor] : [UIColor whiteColor];
 
     self.title = _pendingOptions[@"title"];
     self.callback = _pendingCallback;
 
-    NSDictionary* action = _pendingOptions[@"action"];
+    NSDictionary *action = _pendingOptions[@"action"];
     if (action) {
         self.actionTitle = _pendingOptions[@"action"][@"title"];
         self.actionHidden = _pendingOptions[@"action"][@"title"] ? NO : YES;
-        NSNumber* color = _pendingOptions[@"action"][@"color"];
+        NSNumber *color = _pendingOptions[@"action"][@"color"];
         self.actionTitleColor = [RCTConvert UIColor:color];
     } else {
         self.actionTitle = @"";
         self.actionHidden = YES;
     }
 
-    NSNumber* duration = _pendingOptions[@"duration"]
-        ? (NSNumber*)_pendingOptions[@"duration"]
-        : @(-1);
+    NSNumber *duration =
+        _pendingOptions[@"duration"] ? (NSNumber *)_pendingOptions[@"duration"] : @(-1);
 
     [self presentWithDuration:duration];
 }
