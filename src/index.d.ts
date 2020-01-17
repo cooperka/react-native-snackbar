@@ -69,7 +69,7 @@ export interface SnackbarStatic {
   LENGTH_LONG: number;
 
   /**
-   * Snackbar duration that lasts forever (until dismissed or replaced).
+   * Snackbar duration that lasts forever (until dismissed, replaced, or action button is tapped).
    */
   LENGTH_INDEFINITE: number;
 

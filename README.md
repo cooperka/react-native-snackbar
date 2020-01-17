@@ -56,9 +56,11 @@ Snackbar.show({
     import Snackbar from 'react-native-snackbar';
     ```
 
-## Customization
+## Usage
 
-`Snackbar.show()` accepts the following options:
+### Snackbar.show(options)
+
+Shows a Snackbar, dismissing any existing Snackbar first. Accepts an object with the following options:
 
 | Key | Data type | Default value? | Description |
 |-----|-----------|----------------|-------------|
@@ -72,7 +74,7 @@ Where `duration` can be one of the following (timing may vary based on device):
 
 - `Snackbar.LENGTH_SHORT` (just over a second)
 - `Snackbar.LENGTH_LONG` (about three seconds)
-- `Snackbar.LENGTH_INDEFINITE` (stays on screen until the button is pressed)
+- `Snackbar.LENGTH_INDEFINITE` (stays on screen until dismissed, replaced, or action button is tapped)
 
 Note: the `text` will ellipsize after 2 lines of text on most platforms. See [#110](https://github.com/cooperka/react-native-snackbar/issues/110) if you need to display more lines.
 
@@ -86,6 +88,10 @@ The optional `action` object can contain the following options:
 
 Deprecation note: The old keys `title` and `color` have been replaced by `text` and `textColor` for consistency.
 The old keys will continue to work for now but are deprecated and may be removed at any time.
+
+### Snackbar.dismiss()
+
+Dismisses any existing Snackbars.
 
 ## Troubleshooting
 
