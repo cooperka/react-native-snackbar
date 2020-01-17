@@ -96,7 +96,6 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
 
         mActiveSnackbars.add(snackbar);
 
-        // Set the background color.
         if (options.hasKey("backgroundColor")) {
             snackbarView.setBackgroundColor(options.getInt("backgroundColor"));
         }
@@ -116,15 +115,14 @@ public class SnackbarModule extends ReactContextBaseJavaModule{
             };
 
             ReadableMap actionDetails = options.getMap("action");
-            snackbar.setAction(actionDetails.getString("title"), onClickListener);
-            snackbar.setActionTextColor(actionDetails.getInt("color"));
+            String actionTitle = actionDetails.hasKey("title") ? actionDetails.getString("title") : "";
+            int actionTextColor = actionDetails.hasKey("color") ? actionDetails.getInt("color") : Color.WHITE;
+            snackbar.setAction(actionTitle, onClickListener);
+            snackbar.setActionTextColor(actionTextColor);
         }
 
-        if (options.hasKey("color")) {
-            snackbarText.setTextColor(options.getInt("color"));
-        } else {
-            snackbarText.setTextColor(Color.WHITE);
-        }
+        int textColor = options.hasKey("color") ? options.getInt("color") : Color.WHITE;
+        snackbarText.setTextColor(textColor);
 
         snackbar.show();
     }
