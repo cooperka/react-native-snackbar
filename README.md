@@ -19,7 +19,7 @@ and when to use them.
 
 ```js
 Snackbar.show({
-  title: 'Hello world',
+  text: 'Hello world',
   duration: Snackbar.LENGTH_SHORT,
 });
 ```
@@ -28,11 +28,11 @@ Or, to include an action button:
 
 ```js
 Snackbar.show({
-  title: 'Hello world',
+  text: 'Hello world',
   duration: Snackbar.LENGTH_INDEFINITE,
   action: {
-    title: 'UNDO',
-    color: 'green',
+    text: 'UNDO',
+    textColor: 'green',
     onPress: () => { /* Do something. */ },
   },
 });
@@ -62,11 +62,11 @@ Snackbar.show({
 
 | Key | Data type | Default value? | Description |
 |-----|-----------|----------------|-------------|
-| `title` | `string` | Required. | The message to show. |
+| `text` | `string` | Required. | The message to show. |
 | `duration` | See below | `Snackbar.LENGTH_SHORT` | How long to display the Snackbar. |
+| `textColor` | `string` or `style` | `'white'` | The color of the message text. |
+| `backgroundColor` | `string` or `style` | `undefined` (dark gray) | The background color for the whole Snackbar. |
 | `action` | `object` (described below) | `undefined` (no button) | Optional config for the action button (described below). |
-| `backgroundColor` | `string` or `style` | `undefined` (natively renders as black) | The background color for the whole Snackbar. |
-| `color` | `string` or `style` | `undefined` (natively renders as white) | The text color for the title. |
 
 Where `duration` can be one of the following (timing may vary based on device):
 
@@ -74,15 +74,18 @@ Where `duration` can be one of the following (timing may vary based on device):
 - `Snackbar.LENGTH_LONG` (about three seconds)
 - `Snackbar.LENGTH_INDEFINITE` (stays on screen until the button is pressed)
 
-And the optional `action` object can contain the following options:
+Note: the `text` will ellipsize after 2 lines of text on most platforms. See [#110](https://github.com/cooperka/react-native-snackbar/issues/110) if you need to display more lines.
+
+The optional `action` object can contain the following options:
 
 | Key | Data type | Default value? | Description |
 |-----|-----------|----------------|-------------|
-| `title` | `string` | Required. | The text to show on the button. |
+| `text` | `string` | Required. | The button text. |
+| `textColor` | `string` or `style` | `'white'` | The color of the button text. |
 | `onPress` | `function` | `undefined` (Snackbar is simply dismissed) | A callback for when the user taps the button. |
-| `color` | `string` or `style` | `undefined` (natively renders as white) | The text color for the button. |
 
-Note: the `title` will ellipsize after 2 lines of text on most platforms. See [#110](https://github.com/cooperka/react-native-snackbar/issues/110) if you need to display more lines.
+Deprecation note: The old keys `title` and `color` have been replaced by `text` and `textColor` for consistency.
+The old keys will continue to work for now but are deprecated and may be removed at any time.
 
 ## Troubleshooting
 

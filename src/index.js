@@ -9,13 +9,13 @@ type Action = {
   /**
    * Button text.
    */
-  title: string,
+  text: string,
 
   /**
    * Button text color.
    * Accepts various forms of colors such as hex, literals, rgba, etc.
    */
-  color?: string | number,
+  textColor?: string | number,
 
   /**
    * Function called when the user taps the button.
@@ -30,7 +30,7 @@ type SnackBarOptions = {
   /**
    * Snackbar text.
    */
-  title: string,
+  text: string,
 
   /**
    * Length of time the Snackbar stays on screen.
@@ -42,7 +42,7 @@ type SnackBarOptions = {
    * Snackbar text color.
    * Accepts various forms of colors such as hex, literals, rgba, etc.
    */
-  color?: string | number,
+  textColor?: string | number,
 
   /**
    * Background color of the snackbar.
@@ -92,25 +92,52 @@ const SnackBar: ISnackBar = {
   LENGTH_INDEFINITE: NativeModules.RNSnackbar.LENGTH_INDEFINITE,
 
   show(options: SnackBarOptions) {
-    const action = options.action || {};
-    const onPressCallback = action.onPress || (() => {});
-    const actionColor = action.color && processColor(action.color);
-    const backgroundColor = options.backgroundColor && processColor(options.backgroundColor);
-    const color = options.color && processColor(options.color);
+    warnDeprecation(options, 'title', 'text');
+    warnDeprecation(options, 'color', 'textColor');
 
-    const snackConfig = {
+    const text = options.text || options.title;
+    delete options.title;
+    const textColorRaw = options.textColor || options.color;
+    delete options.color;
+    const textColor = textColorRaw && processColor(textColorRaw);
+    const backgroundColor = options.backgroundColor && processColor(options.backgroundColor);
+
+    const action = options.action || {};
+
+    warnDeprecation(action, 'title', 'text');
+    warnDeprecation(action, 'color', 'textColor');
+
+    const actionText = action.text || action.title;
+    delete action.title;
+    const actionTextColorRaw = action.textColor || action.color;
+    delete action.color;
+    const actionTextColor = actionTextColorRaw && processColor(actionTextColorRaw);
+    const onPressCallback = action.onPress || (() => {});
+
+    const nativeOptions = {
       ...options,
-      action: options.action ? { ...action, color: actionColor } : undefined,
+      text,
+      textColor,
       backgroundColor,
-      color,
+      action: options.action ? {
+        ...action,
+        text: actionText,
+        textColor: actionTextColor,
+      } : undefined,
     };
 
-    NativeModules.RNSnackbar.show(snackConfig, onPressCallback);
+    NativeModules.RNSnackbar.show(nativeOptions, onPressCallback);
   },
 
   dismiss() {
     NativeModules.RNSnackbar.dismiss();
   },
 };
+
+function warnDeprecation(options, deprecatedKey, newKey) {
+  if (options && options[deprecatedKey]) {
+    console.warn(`The Snackbar '${deprecatedKey}' option has been deprecated. Please switch to '${newKey}' instead.`);
+  }
+}
 
 export default SnackBar;
