@@ -96,8 +96,10 @@ const SnackBar: ISnackBar = {
     warnDeprecation(options, 'color', 'textColor');
 
     const text = options.text || options.title;
+    // eslint-disable-next-line no-param-reassign
     delete options.title;
     const textColorRaw = options.textColor || options.color;
+    // eslint-disable-next-line no-param-reassign
     delete options.color;
     const textColor = textColorRaw && processColor(textColorRaw);
     const backgroundColor = options.backgroundColor && processColor(options.backgroundColor);
