@@ -1,38 +1,34 @@
+// TypeScript typings.
+
 /**
- * An actionable button that can be shown on the Snackbar.
+ * An optional, actionable button on the Snackbar.
  */
 export interface SnackbarAction {
   /**
-   * Text for the button.
+   * Button text.
    */
   title: string;
 
   /**
-   * Color of the text for the button.
+   * Button text color.
    * Accepts various forms of colors such as hex, literals, rgba, etc.
    */
   color?: string | number;
 
   /**
-   * Function called when the user presses the button.
+   * Function called when the user taps the button.
    */
   onPress?(): void;
 }
 
 /**
- * List of options to configure the Snackbar.
+ * Snackbar configuration options.
  */
 export interface SnackBarOptions {
   /**
-   * The text that appears on the Snackbar.
+   * Snackbar text.
    */
   title: string;
-
-  /**
-   * Color of the Snackbar title.
-   * Accepts various forms of colors such as hex, literals, rgba, etc.
-   */
-  color?: string | number;
 
   /**
    * Length of time the Snackbar stays on screen.
@@ -41,40 +37,44 @@ export interface SnackBarOptions {
   duration?: number;
 
   /**
-   * Background color of the snackbar
+   * Snackbar text color.
+   * Accepts various forms of colors such as hex, literals, rgba, etc.
+   */
+  color?: string | number;
+
+  /**
+   * Background color of the snackbar.
    * Accepts color strings such as hex, literals, rgba
    */
   backgroundColor?: string;
 
   /**
-   * Adds an actionable button to the snackbar on the right
+   * Action button configuration options.
    */
   action?: SnackbarAction;
 }
 
 /**
- * Snackbar definition
+ * Static Snackbar attributes.
  */
 export interface SnackbarStatic {
   /**
-   * Snackbar duration of about a second.
+   * Snackbar duration of about one second (varies per device).
    */
   LENGTH_SHORT: number;
 
   /**
-   * Snackbar duration of about three seconds.
+   * Snackbar duration of about three seconds (varies per device).
    */
   LENGTH_LONG: number;
 
   /**
-   * Snackbar duration that lasts forever (until a new Snackbar is shown).
+   * Snackbar duration that lasts forever (until dismissed or replaced).
    */
   LENGTH_INDEFINITE: number;
 
   /**
    * Shows a native Snackbar component.
-   *
-   * @param {SnackBarOptions} options
    */
   show(options: SnackBarOptions): void;
 
