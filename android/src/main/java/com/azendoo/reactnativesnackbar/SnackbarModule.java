@@ -86,11 +86,11 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
     }
 
     private void displaySnackbar(View view, ReadableMap options, final Callback callback) {
-        String title = getOptionValue(options, "title", "");
+        String text = getOptionValue(options, "text", "");
         int duration = getOptionValue(options, "duration", Snackbar.LENGTH_SHORT);
-        int textColor = getOptionValue(options, "color", Color.WHITE);
+        int textColor = getOptionValue(options, "textColor", Color.WHITE);
 
-        Snackbar snackbar = Snackbar.make(view, title, duration);
+        Snackbar snackbar = Snackbar.make(view, text, duration);
         View snackbarView = snackbar.getView();
         TextView snackbarText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
         snackbarText.setTextColor(textColor);
@@ -103,8 +103,8 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
 
         if (options.hasKey("action")) {
             ReadableMap actionOptions = options.getMap("action");
-            String actionTitle = getOptionValue(actionOptions, "title", "");
-            int actionTextColor = getOptionValue(actionOptions, "color", Color.WHITE);
+            String actionText = getOptionValue(actionOptions, "text", "");
+            int actionTextColor = getOptionValue(actionOptions, "textColor", Color.WHITE);
 
             View.OnClickListener onClickListener = new View.OnClickListener() {
                 // Prevent double-taps which can lead to a crash.
@@ -119,7 +119,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
                 }
             };
 
-            snackbar.setAction(actionTitle, onClickListener);
+            snackbar.setAction(actionText, onClickListener);
             snackbar.setActionTextColor(actionTextColor);
         }
 

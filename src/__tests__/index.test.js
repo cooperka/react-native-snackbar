@@ -23,15 +23,29 @@ describe('Snackbar module', () => {
     expect(NativeModules.RNSnackbar.show.mock.calls).toMatchSnapshot();
   });
 
-  it('calls native with normal params', () => {
+  it('calls native with deprecated params', () => {
     Snackbar.show({
       title: 'Hello world',
-      duration: 0,
       color: 'blue',
-      backgroundColor: 'red',
       action: {
         title: 'UNDO',
         color: 'green',
+        onPress: jest.fn(),
+      },
+    });
+
+    expect(NativeModules.RNSnackbar.show.mock.calls).toMatchSnapshot();
+  });
+
+  it('calls native with normal params', () => {
+    Snackbar.show({
+      text: 'Hello world',
+      duration: 0,
+      textColor: 'blue',
+      backgroundColor: 'red',
+      action: {
+        text: 'UNDO',
+        textColor: 'green',
         onPress: jest.fn(),
       },
     });

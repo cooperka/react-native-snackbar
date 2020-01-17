@@ -12,15 +12,14 @@ class Example extends Component {
         <Text style={styles.title}>Snackbar Examples</Text>
 
         <TouchableOpacity
-          onPress={() => Snackbar.show({ title: 'Hello, World!' })}
+          onPress={() => Snackbar.show({ text: 'Hello, World!' })}
         >
           <Text style={styles.button}>Simple Snackbar</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={() => Snackbar.show({
-            title:
-                'Hello, World! How are you doing today? Enjoying the sun?! This should wrap to two lines.',
+            text: 'Hello, World! How are you doing today? Enjoying the sun?! This should wrap to two lines.',
             duration: Snackbar.LENGTH_LONG,
           })}
         >
@@ -29,12 +28,12 @@ class Example extends Component {
 
         <TouchableOpacity
           onPress={() => Snackbar.show({
-            title: 'Please agree to this.',
+            text: 'Please agree to this.',
             duration: Snackbar.LENGTH_INDEFINITE,
             action: {
-              title: 'AGREE',
-              onPress: () => Snackbar.show({ title: 'Thank you!' }),
-              color: 'green',
+              text: 'AGREE',
+              textColor: 'green',
+              onPress: () => Snackbar.show({ text: 'Thank you!' }),
             },
           })}
         >
@@ -43,14 +42,14 @@ class Example extends Component {
 
         <TouchableOpacity
           onPress={() => Snackbar.show({
-            title: 'Please agree to this.',
+            text: 'Please agree to this.',
             duration: Snackbar.LENGTH_INDEFINITE,
+            textColor: 'blue',
             backgroundColor: 'silver',
-            color: 'blue',
             action: {
-              title: 'AGREE',
-              onPress: () => Snackbar.show({ title: 'Thank you!' }),
-              color: 'blue',
+              text: 'AGREE',
+              textColor: 'blue',
+              onPress: () => Snackbar.show({ text: 'Thank you!' }),
             },
           })}
         >

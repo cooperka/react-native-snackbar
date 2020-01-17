@@ -7,13 +7,13 @@ export interface SnackbarAction {
   /**
    * Button text.
    */
-  title: string;
+  text: string;
 
   /**
    * Button text color.
    * Accepts various forms of colors such as hex, literals, rgba, etc.
    */
-  color?: string | number;
+  textColor?: string | number;
 
   /**
    * Function called when the user taps the button.
@@ -28,7 +28,7 @@ export interface SnackBarOptions {
   /**
    * Snackbar text.
    */
-  title: string;
+  text: string;
 
   /**
    * Length of time the Snackbar stays on screen.
@@ -40,7 +40,7 @@ export interface SnackBarOptions {
    * Snackbar text color.
    * Accepts various forms of colors such as hex, literals, rgba, etc.
    */
-  color?: string | number;
+  textColor?: string | number;
 
   /**
    * Background color of the snackbar.

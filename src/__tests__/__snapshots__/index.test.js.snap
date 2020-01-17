@@ -6,9 +6,28 @@ Array [
     Object {
       "action": undefined,
       "backgroundColor": undefined,
-      "color": undefined,
+      "text": undefined,
+      "textColor": undefined,
     },
     [Function],
+  ],
+]
+`;
+
+exports[`Snackbar module calls native with deprecated params 1`] = `
+Array [
+  Array [
+    Object {
+      "action": Object {
+        "onPress": [MockFunction],
+        "text": "UNDO",
+        "textColor": 4278222848,
+      },
+      "backgroundColor": undefined,
+      "text": "Hello world",
+      "textColor": 4278190335,
+    },
+    [MockFunction],
   ],
 ]
 `;
@@ -18,14 +37,14 @@ Array [
   Array [
     Object {
       "action": Object {
-        "color": 4278222848,
         "onPress": [MockFunction],
-        "title": "UNDO",
+        "text": "UNDO",
+        "textColor": 4278222848,
       },
       "backgroundColor": 4294901760,
-      "color": 4278190335,
       "duration": 0,
-      "title": "Hello world",
+      "text": "Hello world",
+      "textColor": 4278190335,
     },
     [MockFunction],
   ],
