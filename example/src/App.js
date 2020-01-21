@@ -57,6 +57,21 @@ class Example extends Component {
           <Text style={styles.button}>Snackbar with style</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity
+          onPress={() => Snackbar.show({
+            text: 'يرجى الموافقة على هذا.',
+            rtl: true,
+            duration: Snackbar.LENGTH_INDEFINITE,
+            action: {
+              text: 'يوافق على',
+              textColor: 'green',
+              onPress: () => Snackbar.show({ text: 'شكرا لكم!', rtl: true }),
+            },
+          })}
+        >
+          <Text style={styles.button}>Snackbar with RTL text</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={() => Snackbar.dismiss()}>
           <Text style={styles.button}>Dismiss active Snackbar</Text>
         </TouchableOpacity>
