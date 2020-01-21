@@ -46,6 +46,7 @@ class Example extends Component {
             duration: Snackbar.LENGTH_INDEFINITE,
             textColor: 'blue',
             backgroundColor: 'silver',
+            fontFamily: 'Lobster-Regular',
             action: {
               text: 'AGREE',
               textColor: 'blue',
