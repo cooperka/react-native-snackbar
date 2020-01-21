@@ -6,6 +6,7 @@
 [![Latest GitHub tag](https://img.shields.io/github/tag/cooperka/react-native-snackbar.svg)](https://github.com/cooperka/react-native-snackbar)
 
 Material Design "Snackbar" component for Android and iOS.
+Supports custom colors, fonts, and languages.
 
 ![Snackbar screenshot](example/screenshots/snackbar.png)
 
