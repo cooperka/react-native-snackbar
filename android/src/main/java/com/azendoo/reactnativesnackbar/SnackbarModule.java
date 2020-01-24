@@ -93,6 +93,10 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         int duration = getOptionValue(options, "duration", Snackbar.LENGTH_SHORT);
         int textColor = getOptionValue(options, "textColor", Color.WHITE);
         boolean rtl = getOptionValue(options, "rtl", false);
+          int left_ = options.hasKey("left") ? options.getInt("left") : 0;
+        int right_ = options.hasKey("right") ? options.getInt("right") : 0;
+        int bottom_ = options.hasKey("bottom") ? options.getInt("bottom") : 0;
+        
         String fontFamily = getOptionValue(options, "fontFamily", null);
         Typeface font = null;
         if (fontFamily != null) {
@@ -111,6 +115,14 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
             snackbarView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             snackbarView.setTextDirection(View.TEXT_DIRECTION_RTL);
         }
+        
+         FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+        param.setMargins(
+                (int)convertDpToPixel(left_ ,snackbarView.getContext()),
+                0,
+                (int)convertDpToPixel(right_ ,snackbarView.getContext()),
+                (int)convertDpToPixel(bottom_ ,snackbarView.getContext()));
+        snackbarView.setLayoutParams(param );
 
         TextView snackbarText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
         snackbarText.setTextColor(textColor);
@@ -153,6 +165,10 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         }
 
         snackbar.show();
+    }
+    
+    public static float convertDpToPixel(float dp, Context context){
+        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
     /**
