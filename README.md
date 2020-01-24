@@ -39,6 +39,24 @@ Snackbar.show({
 });
 ```
 
+Include an action Button with Margin:
+
+
+```js
+ Snackbar.show({
+    title: "Your Message",
+    left: 8,
+    bottom: 8,
+    right: 8,
+    action: {
+      title: "Dismiss",
+      onPress: () => {
+        /* Do something. */
+        Snackbar.dismiss();
+      }
+    }
+  });
+
 ## Installation
 
 1. Install:
@@ -72,6 +90,9 @@ Shows a Snackbar, dismissing any existing Snackbar first. Accepts an object with
 | `fontFamily` | `string` | `undefined` | [Android only] The basename of a `.ttf` font from `assets/fonts/` (see [setup guide](https://github.com/facebook/react-native/issues/25852) and [example app](/example), remember to `react-native link` after). |
 | `rtl` | `boolean` | `false` | [Android only, API 17+] Whether the Snackbar should render right-to-left (requires `android:supportsRtl="true"`, see [setup guide](https://android-developers.googleblog.com/2013/03/native-rtl-support-in-android-42.html) and [example app](/example)). |
 | `action` | `object` (described below) | `undefined` (no button) | Optional config for the action button (described below). |
+| `left`    | number  | 0 | Margin Left|
+| `Right`    | number  | 0 | Margin Right|
+| `Bottom`    | number  | 0 | Margin Bottom|
 
 Where `duration` can be one of the following (timing may vary based on device):
 
