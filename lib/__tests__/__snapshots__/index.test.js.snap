@@ -1,1 +1,52 @@
-.
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snackbar module calls native with default params 1`] = `
+Array [
+  Array [
+    Object {
+      "action": undefined,
+      "backgroundColor": undefined,
+      "text": undefined,
+      "textColor": undefined,
+    },
+    [Function],
+  ],
+]
+`;
+
+exports[`Snackbar module calls native with deprecated params 1`] = `
+Array [
+  Array [
+    Object {
+      "action": Object {
+        "onPress": [MockFunction],
+        "text": "UNDO",
+        "textColor": 4278222848,
+      },
+      "backgroundColor": undefined,
+      "text": "Hello world",
+      "textColor": 4278190335,
+    },
+    [MockFunction],
+  ],
+]
+`;
+
+exports[`Snackbar module calls native with normal params 1`] = `
+Array [
+  Array [
+    Object {
+      "action": Object {
+        "onPress": [MockFunction],
+        "text": "UNDO",
+        "textColor": 4278222848,
+      },
+      "backgroundColor": 4294901760,
+      "duration": 0,
+      "text": "Hello world",
+      "textColor": 4278190335,
+    },
+    [MockFunction],
+  ],
+]
+`;
