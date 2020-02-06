@@ -91,6 +91,12 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
     private void displaySnackbar(View view, ReadableMap options, final Callback callback) {
         String text = getOptionValue(options, "text", "");
         int duration = getOptionValue(options, "duration", Snackbar.LENGTH_SHORT);
+
+
+     int left_ = options.hasKey("left") ? options.getInt("left") : 0;
+        int right_ = options.hasKey("right") ? options.getInt("right") : 0;
+        int bottom_ = options.hasKey("bottom") ? options.getInt("bottom") : 0;
+
         int textColor = getOptionValue(options, "textColor", Color.WHITE);
         boolean rtl = getOptionValue(options, "rtl", false);
         String fontFamily = getOptionValue(options, "fontFamily", null);
@@ -107,6 +113,15 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         Snackbar snackbar = Snackbar.make(view, text, duration);
         View snackbarView = snackbar.getView();
 
+        FrameLayout.LayoutParams param = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+        param.setMargins(
+                (int)convertDpToPixel(left_ ,snackbarView.getContext()),
+                0,
+                (int)convertDpToPixel(right_ ,snackbarView.getContext()),
+                (int)convertDpToPixel(bottom_ ,snackbarView.getContext()));
+        snackbarView.setLayoutParams(param );
+
+
         if (rtl && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             snackbarView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             snackbarView.setTextDirection(View.TEXT_DIRECTION_RTL);
@@ -114,6 +129,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
 
         TextView snackbarText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
         snackbarText.setTextColor(textColor);
+                snackbarText.setMaxLines(200); 
 
         if (font != null) {
             snackbarText.setTypeface(font);
@@ -149,11 +165,17 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
             if (font != null) {
                 TextView snackbarActionText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_action);
                 snackbarActionText.setTypeface(font);
+                        snackbarActionText.setMaxLines(200); v
             }
         }
 
         snackbar.show();
     }
+
+       public static float convertDpToPixel(float dp, Context context){
+        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
+    }
+
 
     /**
      * Loop through all child modals and save references to them.

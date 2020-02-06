@@ -89,7 +89,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
     textLabel = [UILabel new];
     textLabel.text = _text;
-    textLabel.numberOfLines = 2;
+    textLabel.numberOfLines = 200;
     textLabel.textColor = _textColor;
     textLabel.font = [UIFont boldSystemFontOfSize:14];
     [textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -176,19 +176,26 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 }
 
 - (void)presentWithDuration:(NSNumber *)duration {
+
+    NSString* left= [NSString stringWithFormat:@"%@",_pendingOptions[@"left"]] ? [NSString stringWithFormat:@"%@",_pendingOptions[@"left"]] : @"0.0";
+    NSString* right= [NSString stringWithFormat:@"%@",_pendingOptions[@"right"]] ? [NSString stringWithFormat:@"%@",_pendingOptions[@"right"]] : @"0.0";
+    NSString* bottom= [NSString stringWithFormat:@"%@",_pendingOptions[@"bottom"]] ? [NSString stringWithFormat:@"%@",_pendingOptions[@"bottom"]] : @"0.0";
+
+
+    float leftVal = [left floatValue];
+    float rightVal = [right floatValue];
+    float bottomVal = [bottom floatValue];
+
     _pendingOptions = nil;
     _pendingCallback = nil;
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self];
     [self setTranslatesAutoresizingMaskIntoConstraints:false];
-    [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[self(>=48)]|"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:@{@"self" : self}]];
-    [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[self]|"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:@{@"self" : self}]];
+
+     [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-%f-[self]-%f-|", leftVal, rightVal] options:0 metrics:nil views:@{@"self": self}]];
+
+     [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:[self]-%f-|", bottomVal] options:0 metrics:nil views:@{@"self": self}]];
+
 
     self.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
     textLabel.alpha = 0;
