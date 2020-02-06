@@ -71,8 +71,8 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 }
 
 - (void)buildView {
-    CGFloat topPadding = 14;
-    CGFloat bottomPadding = topPadding;
+    CGFloat topPadding = 25;
+    CGFloat bottomPadding = 10;
 
     if (@available(iOS 11.0, *)) {
         UIWindow *window = UIApplication.sharedApplication.keyWindow;
