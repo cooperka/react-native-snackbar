@@ -2,6 +2,8 @@ package com.azendoo.reactnativesnackbar;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.widget.FrameLayout;
+
 import android.graphics.Color;
 import android.graphics.Typeface;
 import com.google.android.material.snackbar.Snackbar;
