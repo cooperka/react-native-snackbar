@@ -119,7 +119,7 @@ const SnackBar: ISnackBar = {
     const actionTextColorRaw = action.textColor || action.color;
     delete action.color;
     const actionTextColor = actionTextColorRaw && processColor(actionTextColorRaw);
-    const onPressCallback = action.onPress || (() => {});
+    const onPressCallback = action.onPress || (() => { });
 
     const nativeOptions = {
       ...options,
@@ -147,4 +147,6 @@ function warnDeprecation(options, deprecatedKey, newKey) {
   }
 }
 
+
 export default SnackBar;
+

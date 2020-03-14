@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snackbar module #1-check full setting with theme 1`] = `
+Array [
+  Array [
+    Object {
+      "action": Object {
+        "onPress": [MockFunction],
+        "text": "UNDO",
+        "textColor": 4278222848,
+      },
+      "backgroundColor": 4293300882,
+      "duration": 0,
+      "text": "Hello world",
+      "textColor": 4285988873,
+    },
+    [MockFunction],
+  ],
+]
+`;
