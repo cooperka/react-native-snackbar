@@ -52,29 +52,29 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
 
         try {
             view = (ViewGroup) getCurrentActivity().getWindow().getDecorView().findViewById(android.R.id.content);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
+            if (view == null) return;
 
-        if (view == null) return;
+            mActiveSnackbars.clear();
 
-        mActiveSnackbars.clear();
+            if (!view.hasWindowFocus()) {
+                // The view is not focused, we should get all the modal views in the screen.
+                ArrayList<View> modals = recursiveLoopChildren(view, new ArrayList<View>());
 
-        if (!view.hasWindowFocus()) {
-            // The view is not focused, we should get all the modal views in the screen.
-            ArrayList<View> modals = recursiveLoopChildren(view, new ArrayList<View>());
+                for (View modal : modals) {
+                    if (modal == null) continue;
 
-            for (View modal : modals) {
-                if (modal == null) continue;
+                    displaySnackbar(modal, options, callback);
+                }
 
-                displaySnackbar(modal, options, callback);
+                return;
             }
 
-            return;
-        }
+            displaySnackbar(view, options, callback);
 
-        displaySnackbar(view, options, callback);
+        } catch (Exception e) {
+         e.printStackTrace();
+            return;
+         }
     }
 
     @ReactMethod
