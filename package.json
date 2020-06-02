@@ -4,13 +4,6 @@
   "description": "Material Design \"Snackbar\" component for Android and iOS.",
   "main": "lib/index.js",
   "types": "src/index.d.ts",
-  "files": [
-    "src",
-    "lib",
-    "android",
-    "ios",
-    "RNSnackbar.podspec"
-  ],
   "scripts": {
     "test": "jest",
     "test:types": "tsc",
