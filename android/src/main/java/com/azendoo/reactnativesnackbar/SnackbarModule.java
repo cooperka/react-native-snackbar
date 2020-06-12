@@ -65,12 +65,15 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
             // The view is not focused, we should get all the modal views in the screen.
             ArrayList<View> modals = recursiveLoopChildren(view, new ArrayList<View>());
 
-            for (View modal : modals) {
-                if (modal == null) continue;
+            if (modals.size() > 0) {
+                for (View modal : modals) {
+                    if (modal == null) continue;
 
-                displaySnackbar(modal, options, callback);
+                    displaySnackbar(modal, options, callback);
+                }
+            } else if (view.getVisibility() == View.VISIBLE) {
+                displaySnackbar(view, options, callback);
             }
-
             return;
         }
 
