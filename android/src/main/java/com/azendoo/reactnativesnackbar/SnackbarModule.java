@@ -73,6 +73,8 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
                 }
             } else if (view.getVisibility() == View.VISIBLE) {
                 displaySnackbar(view, options, callback);
+            } else {
+                throw new Error("Content view is not in focus or not visible");
             }
             return;
         }
