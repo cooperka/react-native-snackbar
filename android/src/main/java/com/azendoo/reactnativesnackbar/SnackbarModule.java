@@ -115,7 +115,14 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
             }
         }
 
-        Snackbar snackbar = Snackbar.make(view, text, duration);
+        Snackbar snackbar;
+        try {
+            snackbar = Snackbar.make(view, text, duration);
+        } catch (IllegalArgumentException e) {
+            // TODO: Fix root cause of "No suitable parent found from the given view. Please provide a valid view."
+            e.printStackTrace();
+            return;
+        }
         View snackbarView = snackbar.getView();
 
         if (rtl && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
