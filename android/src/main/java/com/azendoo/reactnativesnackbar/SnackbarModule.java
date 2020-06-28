@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -61,21 +62,26 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
 
         mActiveSnackbars.clear();
 
+        // `hasWindowFocus`: Returns true if this activity's *main* window currently has window focus.
+        // Note that this is not the same as the view itself having focus.
         if (!view.hasWindowFocus()) {
-            // The view is not focused, we should get all the modal views in the screen.
+            // Get all modal views on the screen.
             ArrayList<View> modals = recursiveLoopChildren(view, new ArrayList<View>());
 
-            if (modals.size() > 0) {
-                for (View modal : modals) {
-                    if (modal == null) continue;
+            for (View modal : modals) {
+                if (modal == null) continue;
 
-                    displaySnackbar(modal, options, callback);
-                }
-            } else if (view.getVisibility() == View.VISIBLE) {
+                displaySnackbar(modal, options, callback);
+                return;
+            }
+
+            // No valid modals.
+            if (view.getVisibility() == View.VISIBLE) {
                 displaySnackbar(view, options, callback);
             } else {
-                throw new Error("Content view is not in focus or not visible");
+                Log.w(REACT_NAME, "Content view is not in focus or not visible");
             }
+
             return;
         }
 
