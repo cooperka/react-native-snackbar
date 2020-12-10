@@ -162,6 +162,10 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     textLabel.textColor = textColor;
 }
 
+- (void)setNumberOfLines:(int *)numberOfLines {
+    textLabel.numberOfLines = numberOfLines;
+}
+
 - (void)setActionText:(NSString *)actionText {
     [actionButton setTitle:actionText forState:UIControlStateNormal];
 }
@@ -246,6 +250,9 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
         return;
     }
 
+    NSNumber *numberOfLines = _pendingOptions[@"numberOfLines"];
+    self.numberOfLines = [RCTConvert int:numberOfLines] ? [RCTConvert int:numberOfLines] : 2;
+    
     id backgroundColor = _pendingOptions[@"backgroundColor"];
     self.backgroundColor = backgroundColor ? [RCTConvert UIColor:backgroundColor]
                                            : [UIColor colorWithRed:0.196078F
