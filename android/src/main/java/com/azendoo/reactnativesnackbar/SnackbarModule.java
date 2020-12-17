@@ -102,6 +102,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
     private void displaySnackbar(View view, ReadableMap options, final Callback callback) {
         String text = getOptionValue(options, "text", "");
         int duration = getOptionValue(options, "duration", Snackbar.LENGTH_SHORT);
+        int numberOfLines = getOptionValue(options, "numberOfLines", 2);
         int textColor = getOptionValue(options, "textColor", Color.WHITE);
         boolean rtl = getOptionValue(options, "rtl", false);
         String fontFamily = getOptionValue(options, "fontFamily", null);
@@ -124,6 +125,9 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
             return;
         }
         View snackbarView = snackbar.getView();
+
+        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+        textView.setMaxLines(numberOfLines);
 
         if (rtl && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             snackbarView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);

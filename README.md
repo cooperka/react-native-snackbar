@@ -67,6 +67,7 @@ Shows a Snackbar, dismissing any existing Snackbar first. Accepts an object with
 |-----|-----------|----------------|-------------|
 | `text` | `string` | Required. | The message to show. |
 | `duration` | See below | `Snackbar.LENGTH_SHORT` | How long to display the Snackbar. |
+| `numberOfLines` | `number` | `2` | The max number of text lines to allow before ellipsizing. |
 | `textColor` | `string` or `style` | `'white'` | The color of the message text. |
 | `backgroundColor` | `string` or `style` | `undefined` (dark gray) | The background color for the whole Snackbar. |
 | `fontFamily` | `string` | `undefined` | [Android only] The basename of a `.ttf` font from `assets/fonts/` (see [setup guide](https://github.com/facebook/react-native/issues/25852) and [example app](/example), remember to `react-native link` after). |
@@ -78,8 +79,6 @@ Where `duration` can be one of the following (timing may vary based on device):
 - `Snackbar.LENGTH_SHORT` (just over a second)
 - `Snackbar.LENGTH_LONG` (about three seconds)
 - `Snackbar.LENGTH_INDEFINITE` (stays on screen until dismissed, replaced, or action button is tapped)
-
-Note: the `text` will ellipsize after 2 lines of text on most platforms. See [#110](https://github.com/cooperka/react-native-snackbar/issues/110) if you need to display more lines.
 
 The optional `action` object can contain the following options:
 

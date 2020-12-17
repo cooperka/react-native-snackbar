@@ -28,6 +28,16 @@ class Example extends Component {
 
         <TouchableOpacity
           onPress={() => Snackbar.show({
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+            duration: Snackbar.LENGTH_LONG,
+            numberOfLines: 5,
+          })}
+        >
+          <Text style={styles.button}>Simple Snackbar - extra lines</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => Snackbar.show({
             text: 'Please agree to this.',
             duration: Snackbar.LENGTH_INDEFINITE,
             action: {

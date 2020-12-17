@@ -6,6 +6,7 @@ Array [
     Object {
       "action": undefined,
       "backgroundColor": undefined,
+      "numberOfLines": undefined,
       "text": undefined,
       "textColor": undefined,
     },
@@ -24,6 +25,7 @@ Array [
         "textColor": 4278222848,
       },
       "backgroundColor": undefined,
+      "numberOfLines": undefined,
       "text": "Hello world",
       "textColor": 4278190335,
     },
@@ -43,6 +45,7 @@ Array [
       },
       "backgroundColor": 4294901760,
       "duration": 0,
+      "numberOfLines": undefined,
       "text": "Hello world",
       "textColor": 4278190335,
     },
