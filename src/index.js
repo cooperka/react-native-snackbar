@@ -107,7 +107,7 @@ const SnackBar: ISnackBar = {
     warnDeprecation(options, 'color', 'textColor');
 
     const text = options.text || options.title;
-    const { numberOfLines = 2 } = options;
+    const { numberOfLines } = options;
     // eslint-disable-next-line no-param-reassign
     delete options.title;
     const textColorRaw = options.textColor || options.color;
