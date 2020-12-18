@@ -31,10 +31,10 @@ export interface SnackBarOptions {
   text: string;
 
   /**
-   * Number of text lines to display on the snackbar. 
+   * Number of text lines to display on the snackbar.
    * Default 2 lines are shown.
    */
-  numberOfLines: number;
+  numberOfLines?: number;
 
   /**
    * Length of time the Snackbar stays on screen.
