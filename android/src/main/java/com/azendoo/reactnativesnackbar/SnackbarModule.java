@@ -126,7 +126,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         }
         View snackbarView = snackbar.getView();
 
-        TextView textView = (TextView) snackbarView.findViewById(android.support.design.R.id.snackbar_text);
+        TextView textView = (TextView) snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
         textView.setMaxLines(numberOfLines);
 
         if (rtl && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
