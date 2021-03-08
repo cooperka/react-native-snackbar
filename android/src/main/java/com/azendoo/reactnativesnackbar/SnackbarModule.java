@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Collections;
 
 public class SnackbarModule extends ReactContextBaseJavaModule {
 
@@ -67,6 +68,9 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         if (!view.hasWindowFocus()) {
             // Get all modal views on the screen.
             ArrayList<View> modals = recursiveLoopChildren(view, new ArrayList<View>());
+
+            // Reverse array in order to get first the last modal rendered.
+            Collections.reverse(modals);
 
             for (View modal : modals) {
                 if (modal == null) continue;
