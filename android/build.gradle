@@ -2,7 +2,6 @@ buildscript {
     repositories {
         mavenCentral()
         google()
-        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.4.1'
@@ -45,7 +44,6 @@ repositories {
             url("$rootDir/../node_modules/react-native/android")
         }
         google()
-        jcenter()
 }
 
 dependencies {
