@@ -1,10 +1,10 @@
 buildscript {
     repositories {
+        mavenCentral()
         google()
-        jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.1'
+        classpath 'com.android.tools.build:gradle:4.2.2'
     }
 }
 
@@ -15,7 +15,7 @@ apply plugin: "com.android.library"
 def _ext = rootProject.ext
 def _reactNativeVersion = _ext.has('reactNative') ? _ext.reactNative : '+'
 def _compileSdkVersion = _ext.has('compileSdkVersion') ? _ext.compileSdkVersion : 28
-def _materialVersion = _ext.has('materialVersion') ? _ext.materialVersion : '1.0.0'
+def _materialVersion = _ext.has('materialVersion') ? _ext.materialVersion : '1.4.0'
 def _minSdkVersion = _ext.has('minSdkVersion') ? _ext.minSdkVersion : 16
 def _targetSdkVersion = _ext.has('targetSdkVersion') ? _ext.targetSdkVersion : 28
 
@@ -38,12 +38,12 @@ android {
 
 repositories {
         mavenLocal()
+        mavenCentral()
         maven {
             // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
             url("$rootDir/../node_modules/react-native/android")
         }
         google()
-        jcenter()
 }
 
 dependencies {
