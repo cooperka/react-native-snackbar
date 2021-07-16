@@ -2,6 +2,8 @@ package com.azendoo.reactnativesnackbar;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.os.Build;
@@ -10,7 +12,6 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.facebook.react.bridge.Callback;
@@ -134,8 +135,8 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         }
 
         snackbar.setAnimationMode(marginBottom == 0
-                ? 0 // Slide
-                : 1 // Fade
+                ? BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+                : BaseTransientBottomBar.ANIMATION_MODE_FADE
         );
 
         View snackbarView = snackbar.getView();
@@ -145,7 +146,9 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
             snackbarView.setTextDirection(View.TEXT_DIRECTION_RTL);
         }
 
-        snackbarView.setTranslationY(-(convertDpToPixel(marginBottom, snackbarView.getContext())));
+        if (marginBottom != 0) {
+            snackbarView.setTranslationY(-(convertDpToPixel(marginBottom, snackbarView.getContext())));
+        }
 
         TextView snackbarText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
         snackbarText.setMaxLines(numberOfLines);

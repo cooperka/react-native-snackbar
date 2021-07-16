@@ -135,7 +135,7 @@ If you want to help contribute to this library, here are local setup steps:
 1. Set up the example app too: `cd example && yarn install`
 1. Within the example directory, `react-native run-android` to run it
 
-The example app will update automatically when changing JS code. To see your changes in the example app after updating native library code:
+The example app will update automatically when changing JS code. To see your changes in the example app after updating native library code, reinstall it via:
 
-1. `yarn install && react-native run-android` in the example directory
+1. `yarn add file:.. && react-native run-android` in the example directory
 1. Type "rr" in the app to trigger a reload
