@@ -4,7 +4,7 @@ buildscript {
     ext {
         kotlinVersion = '1.3.50'
         buildToolsVersion = "29.0.3"
-        minSdkVersion = 16
+        minSdkVersion = 21
         compileSdkVersion = 29
         targetSdkVersion = 29
         supportLibVersion = "29.0.0"
@@ -12,6 +12,9 @@ buildscript {
     repositories {
         mavenCentral()
         google()
+
+        // Being deprecated soon, but is required for some RN things for the time being.
+        jcenter()
     }
     dependencies {
         classpath('com.android.tools.build:gradle:4.2.2')
@@ -35,5 +38,8 @@ allprojects {
         }
 
         google()
+
+        // Being deprecated soon, but is required for some RN things for the time being.
+        jcenter()
     }
 }
