@@ -1,5 +1,5 @@
 // TypeScript typings.
-
+import { EmitterSubscription } from 'react-native';
 /**
  * An optional, actionable button on the Snackbar.
  */
@@ -95,6 +95,36 @@ export interface SnackbarStatic {
   LENGTH_INDEFINITE: number;
 
   /**
+   * Indicates that the Snackbar was dismissed via a swipe.
+   */
+  DISMISS_EVENT_SWIPE: number;
+
+  /**
+   * Indicates that the Snackbar was dismissed via an action click.
+   */
+  DISMISS_EVENT_ACTION: number;
+
+  /**
+   * Indicates that the Snackbar was dismissed via a timeout.
+   */
+  DISMISS_EVENT_TIMEOUT: number;
+
+  /**
+   * Indicates that the Snackbar was dismissed via a call to {@link #dismiss()}.
+   */
+  DISMISS_EVENT_MANUAL: number;
+
+  /**
+   * Indicates that the Snackbar was dismissed from a new Snackbar being shown.
+   */
+  DISMISS_EVENT_CONSECUTIVE: number;
+
+  /**
+   * Indicates that Snackbar appears.
+   */
+  SHOW_EVENT: number;
+
+  /**
    * Shows a native Snackbar component.
    */
   show(options: SnackBarOptions): void;
@@ -103,6 +133,11 @@ export interface SnackbarStatic {
    * Dismisses any and all active Snackbars.
    */
   dismiss(): void;
+
+  /**
+   * Snackbar event emitter
+   */
+  emitter: EmitterSubscription;
 }
 
 declare const Snackbar: SnackbarStatic;

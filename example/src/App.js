@@ -6,6 +6,16 @@ import styles from '../styles';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Example extends Component {
+  componentDidMount() {
+    this.eventListener = Snackbar.emitter.addListener('onSnackbarVisibility', (event) => {
+      console.log(event.event);
+    });
+  }
+
+  componentWillUnmount() {
+    this.eventListener.remove();
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -39,7 +49,7 @@ class Example extends Component {
         <TouchableOpacity
           onPress={() => Snackbar.show({
             text: 'Please agree to this.',
-            duration: Snackbar.LENGTH_INDEFINITE,
+            duration: Snackbar.LENGTH_LONG,
             action: {
               text: 'AGREE',
               textColor: 'green',
