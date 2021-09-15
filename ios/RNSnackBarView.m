@@ -37,7 +37,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 @implementation RNSnackBarView
 
 + (void)initialize {
-    DEFAULT_DURATIONS = @{@"-1" : @1500, @"-2" : @2750, @"0" : @INT_MAX};
+    DEFAULT_DURATIONS = @{@"-1" : @1500, @"0" : @2750, @"-2" : @INT_MAX};
 }
 
 + (id)sharedSnackBar {

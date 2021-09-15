@@ -32,8 +32,8 @@ RCT_EXPORT_METHOD(dismiss) {
 - (NSDictionary *)constantsToExport {
     return @{
         @"LENGTH_SHORT" : @-1,
-        @"LENGTH_LONG" : @-2,
-        @"LENGTH_INDEFINITE" : @0,
+        @"LENGTH_LONG" : @0,
+        @"LENGTH_INDEFINITE" : @-2,
     };
 }
 
