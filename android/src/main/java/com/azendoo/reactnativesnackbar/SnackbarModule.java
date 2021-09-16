@@ -85,7 +85,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         // Note that this is not the same as the view itself having focus.
         if (!view.hasWindowFocus()) {
             // Get all modal views on the screen.
-            ArrayList<View> modals = recursiveLoopChildren(view, new ArrayList<>());
+            ArrayList<View> modals = recursiveLoopChildren(view, new ArrayList<View>());
 
             // Reverse array in order to get first the last modal rendered.
             Collections.reverse(modals);
