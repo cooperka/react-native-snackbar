@@ -5,7 +5,11 @@
 
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
+#import <React/RCTEventEmitter.h>
 
-@interface RNSnackbar : NSObject <RCTBridgeModule>
+@interface RNSnackbar : RCTEventEmitter <RCTBridgeModule>
+
+- (void)sendSnackbarVisibilityEvent:(NSNumber *)event;
+- (NSDictionary *)constantsToExport;
 
 @end

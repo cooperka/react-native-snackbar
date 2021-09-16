@@ -7,10 +7,11 @@
 #import <React/RCTConvert.h>
 
 typedef NS_ENUM(NSInteger, RNSnackBarViewState) {
+    // Put RNSnackBarViewStateDismissed on the top to set it as a default value
+    RNSnackBarViewStateDismissed,
     RNSnackBarViewStateDisplayed,
     RNSnackBarViewStatePresenting,
-    RNSnackBarViewStateDismissing,
-    RNSnackBarViewStateDismissed
+    RNSnackBarViewStateDismissing
 };
 
 static NSDictionary *DEFAULT_DURATIONS;
@@ -25,6 +26,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
 @property(nonatomic) RNSnackBarViewState state;
 @property(nonatomic, strong) NSDictionary *pendingOptions;
+@property(nonatomic, strong) RNSnackbar *rnSnackbar;
 @property(nonatomic, strong) NSString *text;
 @property(nonatomic, strong) UIColor *textColor;
 @property(nonatomic, strong) NSString *actionText;
@@ -49,16 +51,21 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     return sharedSnackBar;
 }
 
-+ (void)showWithOptions:(NSDictionary *)options andCallback:(void (^)())callback {
++ (void)showWithOptions:(NSDictionary *)options andCallback:(void (^)())callback rnSnackbar:(RNSnackbar *)rnSnackbar {
     RNSnackBarView *snackBar = [RNSnackBarView sharedSnackBar];
     snackBar.pendingOptions = options;
     snackBar.pendingCallback = callback;
+    snackBar.rnSnackbar = rnSnackbar;
     [snackBar show];
+    NSNumber *showEvent = [rnSnackbar constantsToExport][@"SHOW_EVENT"];
+    [rnSnackbar sendSnackbarVisibilityEvent:showEvent];
 }
 
 + (void)dismiss {
     RNSnackBarView *snackBar = [RNSnackBarView sharedSnackBar];
     [snackBar dismiss];
+    NSNumber *dismissEventManual = [snackBar->_rnSnackbar constantsToExport][@"DISMISS_EVENT_MANUAL"];
+    [snackBar->_rnSnackbar sendSnackbarVisibilityEvent:dismissEventManual];
 }
 
 - (instancetype)init {
@@ -176,6 +183,8 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
 - (void)actionPressed:(UIButton *)sender {
     [self dismiss];
+    NSNumber *dismissEventAction = [self->_rnSnackbar constantsToExport][@"DISMISS_EVENT_ACTION"];
+    [self->_rnSnackbar sendSnackbarVisibilityEvent:dismissEventAction];
     self.callback();
 }
 
@@ -195,14 +204,14 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
                                                                         views:@{@"self" : self}]];
 
     self.transform = CGAffineTransformMakeTranslation(0, self.bounds.size.height);
-    textLabel.alpha = 0;
-    actionButton.alpha = 0;
+    self->textLabel.alpha = 0;
+    self->actionButton.alpha = 0;
     self.state = RNSnackBarViewStatePresenting;
     [UIView animateWithDuration:ANIMATION_DURATION
         animations:^{
           self.transform = CGAffineTransformIdentity;
-          textLabel.alpha = 1;
-          actionButton.alpha = 1;
+          self->textLabel.alpha = 1;
+          self->actionButton.alpha = 1;
         }
         completion:^(BOOL finished) {
           self.state = RNSnackBarViewStateDisplayed;
@@ -213,12 +222,18 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
           } else {
               interval = [duration doubleValue] / 1000;
           }
-          dismissTimer = [NSTimer scheduledTimerWithTimeInterval:interval
+          self->dismissTimer = [NSTimer scheduledTimerWithTimeInterval:interval
                                                           target:self
-                                                        selector:@selector(dismiss)
+                                                        selector:@selector(dismissWithTimeout)
                                                         userInfo:nil
                                                          repeats:FALSE];
         }];
+}
+
+- (void)dismissWithTimeout {
+    NSNumber *dismissEventTimeout = [self->_rnSnackbar constantsToExport][@"DISMISS_EVENT_TIMEOUT"];
+    [self->_rnSnackbar sendSnackbarVisibilityEvent:dismissEventTimeout];
+    [self dismiss];
 }
 
 - (void)dismiss {
@@ -232,7 +247,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
         completion:^(BOOL finished) {
           self.state = RNSnackBarViewStateDismissed;
           [self removeFromSuperview];
-          if (_pendingOptions) {
+          if (self->_pendingOptions) {
               [self show];
           }
         }];
@@ -240,6 +255,8 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
 - (void)show {
     if (self.state == RNSnackBarViewStateDisplayed || self.state == RNSnackBarViewStatePresenting) {
+        NSNumber *dismissEventConsecutive = [self->_rnSnackbar constantsToExport][@"DISMISS_EVENT_CONSECUTIVE"];
+        [self->_rnSnackbar sendSnackbarVisibilityEvent:dismissEventConsecutive];
         [self dismiss];
         return;
     }
