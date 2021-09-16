@@ -1,6 +1,6 @@
 // @flow
 
-import { NativeModules, processColor, NativeEventEmitter, EmitterSubscription } from 'react-native';
+import { NativeModules, processColor } from 'react-native';
 
 /**
  * An optional, actionable button on the Snackbar.
@@ -125,11 +125,6 @@ type ISnackBar = {
    * Dismisses any and all active Snackbars.
    */
   dismiss: () => void,
-
-  /**
-   * Snackbar event emitter
-   */
-  emitter: EmitterSubscription
 };
 
 const SnackBar: ISnackBar = {
@@ -188,8 +183,6 @@ const SnackBar: ISnackBar = {
   dismiss() {
     NativeModules.RNSnackbar.dismiss();
   },
-
-  emitter: new NativeEventEmitter(NativeModules.RNSnackbar),
 };
 
 function warnDeprecation(options, deprecatedKey, newKey) {

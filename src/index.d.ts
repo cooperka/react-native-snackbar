@@ -1,5 +1,4 @@
 // TypeScript typings.
-import { EmitterSubscription } from 'react-native';
 /**
  * An optional, actionable button on the Snackbar.
  */
@@ -133,11 +132,6 @@ export interface SnackbarStatic {
    * Dismisses any and all active Snackbars.
    */
   dismiss(): void;
-
-  /**
-   * Snackbar event emitter
-   */
-  emitter: EmitterSubscription;
 }
 
 declare const Snackbar: SnackbarStatic;

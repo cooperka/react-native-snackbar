@@ -102,7 +102,10 @@ You can have information on snackbar visibility.
 
 ```js
   componentDidMount() {
-    this.eventListener = Snackbar.emitter.addListener('onSnackbarVisibility', (event) => {
+    const SnackbarEventEmitter = new NativeEventEmitter(
+      NativeModules.RNSnackbar,
+    );
+    this.eventListener = SnackbarEventEmitter.addListener('onSnackbarVisibility', (event) => {
       console.log(event.event);
     });
   }
@@ -116,10 +119,14 @@ Or, with functional components:
 
 ```js
   useEffect(() => {
-    const subscription = Snackbar.emitter.addListener('onSnackbarVisibility', (event) => {
+    const subscription = new NativeEventEmitter(
+      NativeModules.RNSnackbar,
+    ).addListener('onSnackbarVisibility', event => {
       console.log(event.event);
     });
-    return subscription.remove()
+    return () => {
+      subscription.remove();
+    };
   }, []);
 ```
 
