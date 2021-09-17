@@ -121,6 +121,16 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         mActiveSnackbars.clear();
     }
 
+    @ReactMethod
+    public void addListener(String eventName) {
+        // Keep: Required for RN built in Event Emitter Calls.
+    }
+
+    @ReactMethod
+    public void removeListeners(Integer count) {
+        // Keep: Required for RN built in Event Emitter Calls.
+    }
+
     private void displaySnackbar(View view, ReadableMap options, final Callback callback) {
         String text = getOptionValue(options, "text", "");
         int duration = getOptionValue(options, "duration", Snackbar.LENGTH_SHORT);
