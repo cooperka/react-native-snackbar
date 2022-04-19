@@ -280,7 +280,15 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     NSNumber *duration =
         _pendingOptions[@"duration"] ? (NSNumber *)_pendingOptions[@"duration"] : @(-1);
 
-    [self presentWithDuration:duration];
+
+   @try {
+     [self presentWithDuration:duration];
+   }
+   @catch (NSException *exception) {
+     NSLog(@"%@", exception.reason);
+   }
+
+    
 }
 
 @end
