@@ -3,6 +3,8 @@ package com.azendoo.reactnativesnackbar;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.content.Context;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -137,6 +139,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         int numberOfLines = getOptionValue(options, "numberOfLines", 2);
         int textColor = getOptionValue(options, "textColor", Color.WHITE);
         boolean rtl = getOptionValue(options, "rtl", false);
+        int marginBottom = getOptionValue(options, "marginBottom", 0);
         String fontFamily = getOptionValue(options, "fontFamily", null);
         Typeface font = null;
         if (fontFamily != null) {
@@ -156,11 +159,21 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
             e.printStackTrace();
             return;
         }
+
+        snackbar.setAnimationMode(marginBottom == 0
+                ? BaseTransientBottomBar.ANIMATION_MODE_SLIDE
+                : BaseTransientBottomBar.ANIMATION_MODE_FADE
+        );
+
         View snackbarView = snackbar.getView();
 
         if (rtl && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             snackbarView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
             snackbarView.setTextDirection(View.TEXT_DIRECTION_RTL);
+        }
+
+        if (marginBottom != 0) {
+            snackbarView.setTranslationY(-(convertDpToPixel(marginBottom, snackbarView.getContext())));
         }
 
         TextView snackbarText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
@@ -217,6 +230,10 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         });
 
         snackbar.show();
+    }
+
+    public static float convertDpToPixel(float dp, Context context){
+        return dp * ((float) context.getResources().getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT);
     }
 
     /**

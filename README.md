@@ -68,6 +68,7 @@ Shows a Snackbar, dismissing any existing Snackbar first. Accepts an object with
 | `text` | `string` | Required. | The message to show. |
 | `duration` | See below | `Snackbar.LENGTH_SHORT` | How long to display the Snackbar. |
 | `numberOfLines` | `number` | `2` | The max number of text lines to allow before ellipsizing. |
+| `marginBottom` | `number` | `0` | Margin from bottom. |
 | `textColor` | `string` or `style` | `'white'` | The color of the message text. |
 | `backgroundColor` | `string` or `style` | `undefined` (dark gray) | The background color for the whole Snackbar. |
 | `fontFamily` | `string` | `undefined` | [Android only] The basename of a `.ttf` font from `assets/fonts/` (see [setup guide](https://github.com/facebook/react-native/issues/25852) and [example app](/example), remember to `react-native link` after). |
@@ -181,7 +182,7 @@ If you want to help contribute to this library, here are local setup steps:
 1. Set up the example app too: `cd example && yarn install`
 1. Within the example directory, `react-native run-android` to run it
 
-The example app will update automatically when changing JS code. To see your changes in the example app after updating native library code:
+The example app will update automatically when changing JS code. To see your changes in the example app after updating native library code, reinstall it via:
 
-1. `yarn install && react-native run-android` in the example directory
+1. `yarn add file:.. && react-native run-android` in the example directory
 1. Type "rr" in the app to trigger a reload
