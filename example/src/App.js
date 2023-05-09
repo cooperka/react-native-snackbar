@@ -52,7 +52,7 @@ class Example extends Component {
         <TouchableOpacity
           onPress={() => Snackbar.show({
             text: 'Please agree to this.',
-            duration: Snackbar.LENGTH_LONG,
+            duration: Snackbar.LENGTH_INDEFINITE,
             action: {
               text: 'AGREE',
               textColor: 'green',
