@@ -167,7 +167,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 - (void)presentWithDuration:(NSNumber *)duration {
     _pendingOptions = nil;
     _pendingCallback = nil;
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    UIWindow *keyWindow = [[UIApplication sharedApplication] delegate].window;
     [keyWindow addSubview:self];
     [self setTranslatesAutoresizingMaskIntoConstraints:false];
     
@@ -175,7 +175,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     CGFloat topPadding = 14;
     CGFloat bottomPadding = topPadding;
     if (@available(iOS 11.0, *)) {
-        UIWindow *window = UIApplication.sharedApplication.keyWindow;
+        UIWindow *window = [[UIApplication sharedApplication] delegate].window;
 
         // If no bottom margin, increase bottom padding to size of safe area inset
         if ([self.marginBottom integerValue] == 0 && window.safeAreaInsets.bottom > bottomPadding)
