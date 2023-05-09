@@ -6,6 +6,10 @@ import renderer from 'react-test-renderer';
 
 import App from '../App';
 
+jest.mock(
+  '../../node_modules/react-native/Libraries/EventEmitter/NativeEventEmitter',
+);
+
 describe('Snackbar example app', () => {
   it('renders without crashing', () => {
     renderer.create(<App />);

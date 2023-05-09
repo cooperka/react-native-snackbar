@@ -92,6 +92,36 @@ type ISnackBar = {
   LENGTH_INDEFINITE: number,
 
   /**
+   * Indicates that the Snackbar was dismissed via a swipe.
+   */
+  DISMISS_EVENT_SWIPE: number,
+
+  /**
+   * Indicates that the Snackbar was dismissed via an action click.
+   */
+  DISMISS_EVENT_ACTION: number,
+
+  /**
+   * Indicates that the Snackbar was dismissed via a timeout.
+   */
+  DISMISS_EVENT_TIMEOUT: number,
+
+  /**
+   * Indicates that the Snackbar was dismissed via a call to {@link #dismiss()}.
+   */
+  DISMISS_EVENT_MANUAL: number,
+
+  /**
+   * Indicates that the Snackbar was dismissed from a new Snackbar being shown.
+   */
+  DISMISS_EVENT_CONSECUTIVE: number,
+
+  /**
+   * Indicates that Snackbar appears.
+   */
+  SHOW_EVENT: number,
+
+  /**
    * Shows a native Snackbar component.
    */
   show: (options: SnackBarOptions) => void,
@@ -106,6 +136,12 @@ const SnackBar: ISnackBar = {
   LENGTH_LONG: NativeModules.RNSnackbar.LENGTH_LONG,
   LENGTH_SHORT: NativeModules.RNSnackbar.LENGTH_SHORT,
   LENGTH_INDEFINITE: NativeModules.RNSnackbar.LENGTH_INDEFINITE,
+  DISMISS_EVENT_SWIPE: NativeModules.RNSnackbar.DISMISS_EVENT_SWIPE,
+  DISMISS_EVENT_ACTION: NativeModules.RNSnackbar.DISMISS_EVENT_ACTION,
+  DISMISS_EVENT_TIMEOUT: NativeModules.RNSnackbar.DISMISS_EVENT_TIMEOUT,
+  DISMISS_EVENT_MANUAL: NativeModules.RNSnackbar.DISMISS_EVENT_MANUAL,
+  DISMISS_EVENT_CONSECUTIVE: NativeModules.RNSnackbar.DISMISS_EVENT_CONSECUTIVE,
+  SHOW_EVENT: NativeModules.RNSnackbar.SHOW_EVENT,
 
   show(options: SnackBarOptions) {
     warnDeprecation(options, 'title', 'text');

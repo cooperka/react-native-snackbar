@@ -96,6 +96,53 @@ The old keys will continue to work for now but are deprecated and may be removed
 
 Dismisses any existing Snackbars.
 
+## Advanced usage
+
+### Snackbar events
+You can have information on snackbar visibility.
+
+```js
+  componentDidMount() {
+    const SnackbarEventEmitter = new NativeEventEmitter(
+      NativeModules.RNSnackbar,
+    );
+    this.eventListener = SnackbarEventEmitter.addListener('onSnackbarVisibility', (event) => {
+      console.log(event.event);
+    });
+  }
+
+  componentWillUnmount() {
+    this.eventListener.remove();
+  }
+```
+
+Or, with functional components:
+
+```js
+  useEffect(() => {
+    const subscription = new NativeEventEmitter(
+      NativeModules.RNSnackbar,
+    ).addListener('onSnackbarVisibility', event => {
+      console.log(event.event);
+    });
+    return () => {
+      subscription.remove();
+    };
+  }, []);
+```
+
+Where event is one of the following options :
+
+| Key | Data type | Value | Description |
+|-----|-----------|----------------|-------------|
+| `Snackbar.DISMISS_EVENT_SWIPE` | `number` | 0 | Indicates that the Snackbar was dismissed via a swipe. |
+| `Snackbar.DISMISS_EVENT_ACTION` | `number` | 1 | Indicates that the Snackbar was dismissed via an action click. |
+| `Snackbar.DISMISS_EVENT_TIMEOUT` | `number` | 2 | Indicates that the Snackbar was dismissed via a timeout. |
+| `Snackbar.DISMISS_EVENT_MANUAL` | `number` | 3 | Indicates that the Snackbar was dismissed via Snackbar.dismiss() call. |
+| `Snackbar.DISMISS_EVENT_CONSECUTIVE` | `number` | 4 | Indicates that the Snackbar was dismissed from a new Snackbar being shown. |
+| `Snackbar.SHOW_EVENT` | `number` | 5 | Indicates that Snackbar appears |
+
+
 ## Troubleshooting
 
 #### Snackbar not appearing [Android]

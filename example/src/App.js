@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, NativeEventEmitter, NativeModules } from 'react-native';
 import Snackbar from 'react-native-snackbar';
 
 import styles from '../styles';
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Example extends Component {
+  componentDidMount() {
+    const SnackbarEventEmitter = new NativeEventEmitter(
+      NativeModules.RNSnackbar,
+    );
+    this.eventListener = SnackbarEventEmitter.addListener('onSnackbarVisibility', (event) => {
+      console.log(event.event);
+    });
+  }
+
+  componentWillUnmount() {
+    this.eventListener.remove();
+  }
+
   render() {
     return (
       <View style={styles.container}>

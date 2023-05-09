@@ -4,10 +4,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RNSnackbar.h"
 
 @interface RNSnackBarView : UIView
 
-+ (void)showWithOptions:(NSDictionary *)options andCallback:(void (^)())callback;
++ (void)showWithOptions:(NSDictionary *)options andCallback:(void (^)())callback rnSnackbar:(RNSnackbar *)rnSnackbar;
 + (void)dismiss;
 
 @end

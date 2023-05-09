@@ -2,10 +2,6 @@ package com.azendoo.reactnativesnackbar;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
-
-import com.google.android.material.snackbar.BaseTransientBottomBar;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.os.Build;
 import android.content.Context;
 import android.util.DisplayMetrics;
@@ -14,28 +10,42 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Collections;
 
 public class SnackbarModule extends ReactContextBaseJavaModule {
 
     private static final String REACT_NAME = "RNSnackbar";
 
-    private List<Snackbar> mActiveSnackbars = new ArrayList<>();
+
+    private static final String ON_SNACKBAR_VISIBILITY_EVENT = "onSnackbarVisibility";
+    private static final int SHOW_EVENT = 5;
+
+    private final List<Snackbar> mActiveSnackbars = new ArrayList<>();
 
     public SnackbarModule(ReactApplicationContext reactContext) {
         super(reactContext);
     }
 
+    @NonNull
     @Override
     public String getName() {
         return REACT_NAME;
@@ -48,6 +58,12 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         constants.put("LENGTH_LONG", Snackbar.LENGTH_LONG);
         constants.put("LENGTH_SHORT", Snackbar.LENGTH_SHORT);
         constants.put("LENGTH_INDEFINITE", Snackbar.LENGTH_INDEFINITE);
+        constants.put("DISMISS_EVENT_SWIPE", Snackbar.Callback.DISMISS_EVENT_SWIPE);
+        constants.put("DISMISS_EVENT_ACTION", Snackbar.Callback.DISMISS_EVENT_ACTION);
+        constants.put("DISMISS_EVENT_TIMEOUT", Snackbar.Callback.DISMISS_EVENT_TIMEOUT);
+        constants.put("DISMISS_EVENT_MANUAL", Snackbar.Callback.DISMISS_EVENT_MANUAL);
+        constants.put("DISMISS_EVENT_CONSECUTIVE", Snackbar.Callback.DISMISS_EVENT_CONSECUTIVE);
+        constants.put("SHOW_EVENT", SHOW_EVENT);
 
         return constants;
     }
@@ -105,6 +121,16 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         }
 
         mActiveSnackbars.clear();
+    }
+
+    @ReactMethod
+    public void addListener(String eventName) {
+        // Keep: Required for RN built in Event Emitter Calls.
+    }
+
+    @ReactMethod
+    public void removeListeners(Integer count) {
+        // Keep: Required for RN built in Event Emitter Calls.
     }
 
     private void displaySnackbar(View view, ReadableMap options, final Callback callback) {
@@ -191,6 +217,18 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
             }
         }
 
+        snackbar.addCallback(new BaseTransientBottomBar.BaseCallback<Snackbar>() {
+            @Override
+            public void onDismissed(Snackbar transientBottomBar, int event) {
+                sendSnackbarVisibilityEvent(event);
+            }
+
+            @Override
+            public void onShown(Snackbar transientBottomBar) {
+                sendSnackbarVisibilityEvent(SHOW_EVENT);
+            }
+        });
+
         snackbar.show();
     }
 
@@ -215,6 +253,20 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         }
 
         return modals;
+    }
+
+    private void sendSnackbarVisibilityEvent(int event) {
+        WritableMap params = Arguments.createMap();
+        params.putInt("event", event);
+        sendEvent(getReactApplicationContext(), ON_SNACKBAR_VISIBILITY_EVENT, params);
+    }
+
+    private void sendEvent(ReactContext reactContext,
+                           String eventName,
+                           @Nullable WritableMap params) {
+        reactContext
+                .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit(eventName, params);
     }
 
     private String getOptionValue(ReadableMap options, String key, String fallback) {
