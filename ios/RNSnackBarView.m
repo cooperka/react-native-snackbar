@@ -213,8 +213,8 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
     // Snackbar will slide up from bottom, unless a bottom margin is set in which case we use a fade animation
     self.transform = CGAffineTransformMakeTranslation(0, [self.marginBottom integerValue] == 0 ? self.bounds.size.height : 0);
-    self.textLabel.alpha = 0;
-    self.actionButton.alpha = 0;
+    self->textLabel.alpha = 0;
+    self->actionButton.alpha = 0;
     if ([self.marginBottom integerValue] == 0) {
         self.alpha = 0;
     }
@@ -222,8 +222,8 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     [UIView animateWithDuration:ANIMATION_DURATION
         animations:^{
           self.transform = CGAffineTransformIdentity;
-          self.textLabel.alpha = 1;
-          self.actionButton.alpha = 1;
+          self->textLabel.alpha = 1;
+          self->actionButton.alpha = 1;
           self.alpha = 1;
         }
         completion:^(BOOL finished) {
