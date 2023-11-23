@@ -6,6 +6,7 @@ import android.os.Build;
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -138,6 +139,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         int duration = getOptionValue(options, "duration", Snackbar.LENGTH_SHORT);
         int numberOfLines = getOptionValue(options, "numberOfLines", 2);
         int textColor = getOptionValue(options, "textColor", Color.WHITE);
+        boolean textAlignCenter = getOptionValue(options, "textAlignCenter", false);
         boolean rtl = getOptionValue(options, "rtl", false);
         int marginBottom = getOptionValue(options, "marginBottom", 0);
         String fontFamily = getOptionValue(options, "fontFamily", null);
@@ -179,6 +181,19 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         TextView snackbarText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
         snackbarText.setMaxLines(numberOfLines);
         snackbarText.setTextColor(textColor);
+        if (textAlignCenter) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                snackbarText.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            } else {
+                snackbarText.setGravity(Gravity.CENTER_HORIZONTAL);
+            }
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                snackbarText.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+            } else {
+                snackbarText.setGravity(Gravity.START);
+            }
+        }
 
         if (font != null) {
             snackbarText.setTypeface(font);

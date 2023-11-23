@@ -39,6 +39,11 @@ type SnackBarOptions = {
   numberOfLines?: number,
 
   /**
+   * Align text center
+   */
+  textAlignCenter?: boolean,
+
+  /**
    * Length of time the Snackbar stays on screen.
    * Must be one of Snackbar.LENGTH_SHORT, Snackbar.LENGTH_LONG, or Snackbar.LENGTH_INDEFINITE.
    */
@@ -156,6 +161,7 @@ const SnackBar: ISnackBar = {
     delete options.color;
     const textColor = textColorRaw && processColor(textColorRaw);
     const backgroundColor = options.backgroundColor && processColor(options.backgroundColor);
+    const textAlignCenter = options.textAlignCenter || false;
 
     const action = options.action || {};
 
@@ -175,6 +181,7 @@ const SnackBar: ISnackBar = {
       textColor,
       numberOfLines,
       backgroundColor,
+      textAlignCenter,
       action: options.action ? {
         ...action,
         text: actionText,
