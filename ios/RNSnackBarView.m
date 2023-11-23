@@ -33,6 +33,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 @property(nonatomic, strong) UIColor *actionTextColor;
 @property(nonatomic, strong) NSNumber *marginBottom;
 @property(nonatomic, strong) NSArray<NSLayoutConstraint *> *verticalPaddingConstraints;
+@property(nonatomic) BOOL textAlignCenter;
 @property(nonatomic, strong) void (^pendingCallback)();
 @property(nonatomic, strong) void (^callback)();
 
@@ -156,6 +157,14 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
 - (void)setNumberOfLines:(int *)numberOfLines {
     textLabel.numberOfLines = numberOfLines;
+}
+
+- (void)setTextAlignCenter:(BOOL)textAlignCenter {
+    if (textAlignCenter == YES) {
+        textLabel.textAlignment = NSTextAlignmentCenter;
+    } else {
+        textLabel.textAlignment = NSTextAlignmentLeft;
+    }
 }
 
 - (void)setActionText:(NSString *)actionText {
@@ -297,6 +306,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     self.textColor = textColor ? [RCTConvert UIColor:textColor] : [UIColor whiteColor];
 
     self.text = _pendingOptions[@"text"];
+    self.textAlignCenter = [_pendingOptions[@"textAlignCenter"] boolValue];
     self.callback = _pendingCallback;
 
     NSDictionary *action = _pendingOptions[@"action"];
