@@ -142,6 +142,17 @@ Where event is one of the following options :
 | `Snackbar.DISMISS_EVENT_CONSECUTIVE` | `number` | 4 | Indicates that the Snackbar was dismissed from a new Snackbar being shown. |
 | `Snackbar.SHOW_EVENT` | `number` | 5 | Indicates that Snackbar appears |
 
+## Mocking via jest
+
+This package uses NativeModules, which `jest` does not have access to.
+
+You can use the provided mocks in your `jest.setup.js`:
+
+```js
+import mockSnackbar from 'react-native-snackbar/jest/snackbar-mock.js'
+
+jest.mock('react-native-snackbar', () => mockSnackbar);
+```
 
 ## Troubleshooting
 
