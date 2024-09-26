@@ -31,6 +31,12 @@ class Example extends Component {
         </TouchableOpacity>
 
         <TouchableOpacity
+          onPress={() => Snackbar.show({ text: 'Hello, World!', textAlignCenter: true })}
+        >
+          <Text style={styles.button}>Align text center</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
           onPress={() => Snackbar.show({
             text: 'Hello, World! How are you doing today? Enjoying the sun?! This should wrap to two lines.',
             duration: Snackbar.LENGTH_LONG,
