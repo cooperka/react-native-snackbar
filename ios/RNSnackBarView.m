@@ -304,7 +304,8 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
     id textColor = _pendingOptions[@"textColor"];
     self.textColor = textColor ? [RCTConvert UIColor:textColor] : [UIColor whiteColor];
-
+    textLabel.font = [UIFont fontWithName:_pendingOptions[@"fontFamily"] size:15];
+    textLabel.textAlignment = _pendingOptions[@"rtl"] ? NSTextAlignmentRight : NSTextAlignmentLeft ;
     self.text = _pendingOptions[@"text"];
     self.textAlignCenter = [_pendingOptions[@"textAlignCenter"] boolValue];
     self.callback = _pendingCallback;
