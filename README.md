@@ -13,7 +13,7 @@ Supports custom colors, fonts, and languages.
 Snackbars are used for displaying a brief message to the user, along with an optional action.
 They animate up from the bottom of the screen and then disappear shortly afterward.
 
-See Google's [Material Design guidelines](https://material.io/guidelines/components/snackbars-toasts.html) for more info on Snackbars
+See Google's [Material Design guidelines](https://m3.material.io/components/snackbar/overview) for more info on Snackbars
 and when to use them.
 
 ## How it works
