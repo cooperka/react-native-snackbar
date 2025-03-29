@@ -32,6 +32,8 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 @property(nonatomic, strong) NSString *actionText;
 @property(nonatomic, strong) UIColor *actionTextColor;
 @property(nonatomic, strong) NSNumber *marginBottom;
+@property(nonatomic, strong) NSString *fontFamily;
+@property(nonatomic) BOOL isRTL;
 @property(nonatomic, strong) NSArray<NSLayoutConstraint *> *verticalPaddingConstraints;
 @property(nonatomic) BOOL textAlignCenter;
 @property(nonatomic, strong) void (^pendingCallback)();
@@ -175,6 +177,14 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     [actionButton setTitleColor:actionTextColor forState:UIControlStateNormal];
 }
 
+- (void)setFontFamily:(NSString *)fontFamily {
+  textLabel.font = fontFamily ? [UIFont fontWithName:fontFamily size:14] : [UIFont boldSystemFontOfSize:14];
+}
+
+- (void)setIsRTL:(BOOL)isRTL {
+  textLabel.textAlignment = isRTL ? NSTextAlignmentRight : NSTextAlignmentLeft ;
+}
+
 - (void)actionPressed:(UIButton *)sender {
     [self dismiss];
     NSNumber *dismissEventAction = [self->_rnSnackbar constantsToExport][@"DISMISS_EVENT_ACTION"];
@@ -307,6 +317,8 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
     self.text = _pendingOptions[@"text"];
     self.textAlignCenter = [_pendingOptions[@"textAlignCenter"] boolValue];
+    self.fontFamily = [RCTConvert NSString:_pendingOptions[@"fontFamily"]];
+    self.isRTL = [RCTConvert BOOL:_pendingOptions[@"rtl"]];
     self.callback = _pendingCallback;
 
     NSDictionary *action = _pendingOptions[@"action"];
