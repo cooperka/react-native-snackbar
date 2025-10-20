@@ -69,6 +69,7 @@ Shows a Snackbar, dismissing any existing Snackbar first. Accepts an object with
 | `duration` | See below | `Snackbar.LENGTH_SHORT` | How long to display the Snackbar. |
 | `numberOfLines` | `number` | `2` | The max number of text lines to allow before ellipsizing. |
 | `marginBottom` | `number` | `0` | Margin from bottom. |
+| `marginHorizotal` | `number` | `0` | Horizontal margins. |
 | `textColor` | `string` or `style` | `'white'` | The color of the message text. |
 | `backgroundColor` | `string` or `style` | `undefined` (dark gray) | The background color for the whole Snackbar. |
 | `fontFamily` | `string` | `undefined` | The basename of a `.ttf` font from `assets/fonts/` (see [setup guide](https://github.com/facebook/react-native/issues/25852) and [example app](/example), remember to `react-native link` after). |

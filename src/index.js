@@ -1,6 +1,6 @@
 // @flow
 
-import { NativeModules, processColor } from 'react-native';
+import { NativeModules, processColor } from "react-native";
 
 /**
  * An optional, actionable button on the Snackbar.
@@ -53,6 +53,11 @@ type SnackBarOptions = {
    * Margin from bottom, defaults to 0.
    */
   marginBottom?: number,
+
+  /**
+   * Margin horizontal, defaults to 0.
+   */
+  marginHorizontal?: number,
 
   /**
    * Snackbar text color.
@@ -149,8 +154,8 @@ const SnackBar: ISnackBar = {
   SHOW_EVENT: NativeModules.RNSnackbar.SHOW_EVENT,
 
   show(options: SnackBarOptions) {
-    warnDeprecation(options, 'title', 'text');
-    warnDeprecation(options, 'color', 'textColor');
+    warnDeprecation(options, "title", "text");
+    warnDeprecation(options, "color", "textColor");
 
     const text = options.text || options.title;
     const { numberOfLines } = options;
@@ -160,19 +165,21 @@ const SnackBar: ISnackBar = {
     // eslint-disable-next-line no-param-reassign
     delete options.color;
     const textColor = textColorRaw && processColor(textColorRaw);
-    const backgroundColor = options.backgroundColor && processColor(options.backgroundColor);
+    const backgroundColor =
+      options.backgroundColor && processColor(options.backgroundColor);
     const textAlignCenter = options.textAlignCenter || false;
 
     const action = options.action || {};
 
-    warnDeprecation(action, 'title', 'text');
-    warnDeprecation(action, 'color', 'textColor');
+    warnDeprecation(action, "title", "text");
+    warnDeprecation(action, "color", "textColor");
 
     const actionText = action.text || action.title;
     delete action.title;
     const actionTextColorRaw = action.textColor || action.color;
     delete action.color;
-    const actionTextColor = actionTextColorRaw && processColor(actionTextColorRaw);
+    const actionTextColor =
+      actionTextColorRaw && processColor(actionTextColorRaw);
     const onPressCallback = action.onPress || (() => {});
 
     const nativeOptions = {
@@ -182,11 +189,13 @@ const SnackBar: ISnackBar = {
       numberOfLines,
       backgroundColor,
       textAlignCenter,
-      action: options.action ? {
-        ...action,
-        text: actionText,
-        textColor: actionTextColor,
-      } : undefined,
+      action: options.action
+        ? {
+            ...action,
+            text: actionText,
+            textColor: actionTextColor,
+          }
+        : undefined,
     };
 
     NativeModules.RNSnackbar.show(nativeOptions, onPressCallback);
@@ -199,7 +208,9 @@ const SnackBar: ISnackBar = {
 
 function warnDeprecation(options, deprecatedKey, newKey) {
   if (options && options[deprecatedKey]) {
-    console.warn(`The Snackbar '${deprecatedKey}' option has been deprecated. Please switch to '${newKey}' instead.`);
+    console.warn(
+      `The Snackbar '${deprecatedKey}' option has been deprecated. Please switch to '${newKey}' instead.`
+    );
   }
 }
 

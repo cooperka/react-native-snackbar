@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -142,6 +143,7 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
         boolean textAlignCenter = getOptionValue(options, "textAlignCenter", false);
         boolean rtl = getOptionValue(options, "rtl", false);
         int marginBottom = getOptionValue(options, "marginBottom", 0);
+        int marginHorizontal = getOptionValue(options, "marginHorizontal", 0);
         String fontFamily = getOptionValue(options, "fontFamily", null);
         Typeface font = null;
         if (fontFamily != null) {
@@ -176,6 +178,16 @@ public class SnackbarModule extends ReactContextBaseJavaModule {
 
         if (marginBottom != 0) {
             snackbarView.setTranslationY(-(convertDpToPixel(marginBottom, snackbarView.getContext())));
+        }
+
+        if (marginHorizontal != 0) {
+            final FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackbarView.getLayoutParams();
+            int sideMargin = (int) convertDpToPixel(marginHorizontal, snackbarView.getContext());
+            params.setMargins(params.leftMargin + sideMargin,
+                    params.topMargin,
+                    params.rightMargin + sideMargin,
+                    params.bottomMargin);
+            snackbarView.setLayoutParams(params);
         }
 
         TextView snackbarText = snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);

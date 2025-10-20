@@ -32,6 +32,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 @property(nonatomic, strong) NSString *actionText;
 @property(nonatomic, strong) UIColor *actionTextColor;
 @property(nonatomic, strong) NSNumber *marginBottom;
+@property(nonatomic, strong) NSNumber *marginHorizontal;
 @property(nonatomic, strong) NSString *fontFamily;
 @property(nonatomic) BOOL isRTL;
 @property(nonatomic, strong) NSArray<NSLayoutConstraint *> *verticalPaddingConstraints;
@@ -225,10 +226,10 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
                                                                       options:0
                                                                       metrics:nil
                                                                         views:@{@"self" : self}]];
-    [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[self]|"
-                                                                      options:0
-                                                                      metrics:nil
-                                                                        views:@{@"self" : self}]];
+    [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-%@-[self]-%@-|", self.marginHorizontal, self.marginHorizontal]
+                                                                   options:0
+                                                                   metrics:nil
+                                                                     views:@{@"self" : self}]];
 
     // Snackbar will slide up from bottom, unless a bottom margin is set in which case we use a fade animation
     self.transform = CGAffineTransformMakeTranslation(0, [self.marginBottom integerValue] == 0 ? self.bounds.size.height : 0);
@@ -304,6 +305,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     self.numberOfLines = [RCTConvert int:numberOfLines] ? [RCTConvert int:numberOfLines] : 2;
     
     self.marginBottom = _pendingOptions[@"marginBottom"] ? _pendingOptions[@"marginBottom"] : @(0);
+    self.marginHorizontal = _pendingOptions[@"marginHorizontal"] ? _pendingOptions[@"marginHorizontal"] : @(0);
     
     id backgroundColor = _pendingOptions[@"backgroundColor"];
     self.backgroundColor = backgroundColor ? [RCTConvert UIColor:backgroundColor]
