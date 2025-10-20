@@ -65,3 +65,6 @@ proguard/
 
 # Log Files
 *.log
+
+.bundle/
+.yarn/
