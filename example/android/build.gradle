@@ -1,39 +1,43 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
-    ext {
-        kotlinVersion = '1.3.50'
-        buildToolsVersion = "29.0.3"
-        minSdkVersion = 16
-        compileSdkVersion = 29
-        targetSdkVersion = 29
-        supportLibVersion = "29.0.0"
-    }
+    apply(from: {
+        def searchDir = rootDir.toPath()
+        do {
+            def p = searchDir.resolve("node_modules/react-native-test-app/android/dependencies.gradle")
+            if (p.toFile().exists()) {
+                return p.toRealPath().toString()
+            }
+        } while (searchDir = searchDir.getParent())
+        throw new GradleException("Could not find `react-native-test-app`");
+    }())
+
     repositories {
         mavenCentral()
         google()
     }
-    dependencies {
-        classpath('com.android.tools.build:gradle:4.2.2')
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+    dependencies {
+        getReactNativeDependencies().each { dependency ->
+            classpath(dependency)
+        }
     }
 }
 
 allprojects {
     repositories {
-        mavenLocal()
+        {
+            def searchDir = rootDir.toPath()
+            do {
+                def p = searchDir.resolve("node_modules/react-native/android")
+                if (p.toFile().exists()) {
+                    maven {
+                        url = p.toRealPath().toString()
+                    }
+                    break
+                }
+            } while (searchDir = searchDir.getParent())
+            // As of 0.80, React Native is no longer installed from npm
+        }()
         mavenCentral()
-        maven {
-            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url("$rootDir/../node_modules/react-native/android")
-        }
-        maven {
-            // Android JSC is installed from npm
-            url("$rootDir/../node_modules/jsc-android/dist")
-        }
-
         google()
     }
 }
