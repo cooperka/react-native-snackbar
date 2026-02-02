@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snackbar module calls native with default params 1`] = `
+[
+  [
+    "",
+    0,
+    2,
+    false,
+    0,
+    4294967295,
+    -1,
+    "",
+    false,
+    false,
+    "",
+    4294967295,
+    undefined,
+  ],
+]
+`;
+
+exports[`Snackbar module calls native with normal params 1`] = `
+[
+  [
+    "Hello world",
+    0,
+    2,
+    false,
+    0,
+    4278190335,
+    4294901760,
+    "",
+    false,
+    true,
+    "UNDO",
+    4278222848,
+    [MockFunction],
+  ],
+]
+`;
