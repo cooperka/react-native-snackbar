@@ -101,8 +101,53 @@ function processColorOrThrow(color?: ColorValue) {
   throw new Error(`Failed to parse color '${String(color)}'`);
 }
 
+const constants = NativeSnackbar.getConstants();
+
 export const Snackbar = {
-  ...NativeSnackbar.getConstants(),
+  /**
+   * Snackbar duration of about one second (varies per device).
+   */
+  LENGTH_SHORT: constants.LENGTH_SHORT,
+
+  /**
+   * Snackbar duration of about three seconds (varies per device).
+   */
+  LENGTH_LONG: constants.LENGTH_LONG,
+
+  /**
+   * Snackbar duration that lasts forever (until dismissed, replaced, or action button is tapped).
+   */
+  LENGTH_INDEFINITE: constants.LENGTH_INDEFINITE,
+
+  /**
+   * Indicates that the Snackbar was dismissed via a swipe.
+   */
+  DISMISS_EVENT_SWIPE: constants.DISMISS_EVENT_SWIPE,
+
+  /**
+   * Indicates that the Snackbar was dismissed via an action click.
+   */
+  DISMISS_EVENT_ACTION: constants.DISMISS_EVENT_ACTION,
+
+  /**
+   * Indicates that the Snackbar was dismissed via a timeout.
+   */
+  DISMISS_EVENT_TIMEOUT: constants.DISMISS_EVENT_TIMEOUT,
+
+  /**
+   * Indicates that the Snackbar was dismissed via a call to {@link #dismiss()}.
+   */
+  DISMISS_EVENT_MANUAL: constants.DISMISS_EVENT_MANUAL,
+
+  /**
+   * Indicates that the Snackbar was dismissed from a new Snackbar being shown.
+   */
+  DISMISS_EVENT_CONSECUTIVE: constants.DISMISS_EVENT_CONSECUTIVE,
+
+  /**
+   * Indicates that Snackbar appears.
+   */
+  SHOW_EVENT: constants.SHOW_EVENT,
 
   /**
    * Shows a native Snackbar component.

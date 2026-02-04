@@ -15,7 +15,7 @@ exports[`Snackbar module calls native with default params 1`] = `
     false,
     "",
     4294967295,
-    undefined,
+    [Function],
   ],
 ]
 `;
