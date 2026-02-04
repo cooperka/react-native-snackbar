@@ -3,13 +3,10 @@
 //  Copyrights by Facebook, Remi Santos, and Kevin Cooper.
 //
 
-#import <Foundation/Foundation.h>
-#import <React/RCTBridgeModule.h>
-#import <React/RCTEventEmitter.h>
+#import <SnackbarSpec/SnackbarSpec.h>
 
-@interface RNSnackbar : RCTEventEmitter <RCTBridgeModule>
+@interface RNSnackbar : NativeSnackbarSpecBase <NativeSnackbarSpec>
 
 - (void)sendSnackbarVisibilityEvent:(NSNumber *)event;
-- (NSDictionary *)constantsToExport;
 
 @end

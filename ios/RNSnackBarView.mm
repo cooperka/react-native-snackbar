@@ -17,6 +17,9 @@ typedef NS_ENUM(NSInteger, RNSnackBarViewState) {
 static NSDictionary *DEFAULT_DURATIONS;
 static const NSTimeInterval ANIMATION_DURATION = 0.250;
 
+@implementation SnackBarOptions
+@end
+
 @interface RNSnackBarView () {
     UILabel *textLabel;
     UIButton *actionButton;
@@ -25,13 +28,13 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 }
 
 @property(nonatomic) RNSnackBarViewState state;
-@property(nonatomic, strong) NSDictionary *pendingOptions;
+@property(nonatomic, strong) SnackBarOptions *pendingOptions;
 @property(nonatomic, strong) RNSnackbar *rnSnackbar;
 @property(nonatomic, strong) NSString *text;
 @property(nonatomic, strong) UIColor *textColor;
 @property(nonatomic, strong) NSString *actionText;
 @property(nonatomic, strong) UIColor *actionTextColor;
-@property(nonatomic, strong) NSNumber *marginBottom;
+@property(nonatomic) NSInteger marginBottom;
 @property(nonatomic, strong) NSString *fontFamily;
 @property(nonatomic) BOOL isRTL;
 @property(nonatomic, strong) NSArray<NSLayoutConstraint *> *verticalPaddingConstraints;
@@ -56,7 +59,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     return sharedSnackBar;
 }
 
-+ (void)showWithOptions:(NSDictionary *)options andCallback:(void (^)())callback rnSnackbar:(RNSnackbar *)rnSnackbar {
++ (void)showWithOptions:(SnackBarOptions *)options andCallback:(void (^)())callback rnSnackbar:(RNSnackbar *)rnSnackbar {
     RNSnackBarView *snackBar = [RNSnackBarView sharedSnackBar];
     snackBar.pendingOptions = options;
     snackBar.pendingCallback = callback;
@@ -157,7 +160,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     textLabel.textColor = textColor;
 }
 
-- (void)setNumberOfLines:(int *)numberOfLines {
+- (void)setNumberOfLines:(NSInteger)numberOfLines {
     textLabel.numberOfLines = numberOfLines;
 }
 
@@ -178,7 +181,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 }
 
 - (void)setFontFamily:(NSString *)fontFamily {
-  textLabel.font = fontFamily ? [UIFont fontWithName:fontFamily size:14] : [UIFont boldSystemFontOfSize:14];
+  textLabel.font = [fontFamily length] != 0 ? [UIFont fontWithName:fontFamily size:14] : [UIFont boldSystemFontOfSize:14];
 }
 
 - (void)setIsRTL:(BOOL)isRTL {
@@ -192,7 +195,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     self.callback();
 }
 
-- (void)presentWithDuration:(NSNumber *)duration {
+- (void)presentWithDuration:(NSInteger)duration {
     _pendingOptions = nil;
     _pendingCallback = nil;
     UIWindow *keyWindow = [[UIApplication sharedApplication] delegate].window;
@@ -206,7 +209,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
         UIWindow *window = [[UIApplication sharedApplication] delegate].window;
 
         // If no bottom margin, increase bottom padding to size of safe area inset
-        if ([self.marginBottom integerValue] == 0 && window.safeAreaInsets.bottom > bottomPadding)
+        if (self.marginBottom == 0 && window.safeAreaInsets.bottom > bottomPadding)
             bottomPadding = window.safeAreaInsets.bottom;
     }
     NSLog([NSString stringWithFormat:@"V:|-%f-[textLabel]-%f-|", topPadding,
@@ -221,7 +224,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     [self addConstraints:self.verticalPaddingConstraints];
 
     // Set margins
-    [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:[self(>=48)]-%@-|", self.marginBottom]
+    [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:[self(>=48)]-%ld-|", static_cast<long>(self.marginBottom)]
                                                                       options:0
                                                                       metrics:nil
                                                                         views:@{@"self" : self}]];
@@ -231,10 +234,10 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
                                                                         views:@{@"self" : self}]];
 
     // Snackbar will slide up from bottom, unless a bottom margin is set in which case we use a fade animation
-    self.transform = CGAffineTransformMakeTranslation(0, [self.marginBottom integerValue] == 0 ? self.bounds.size.height : 0);
+    self.transform = CGAffineTransformMakeTranslation(0, self.marginBottom == 0 ? self.bounds.size.height : 0);
     self->textLabel.alpha = 0;
     self->actionButton.alpha = 0;
-    if ([self.marginBottom integerValue] == 0) {
+    if (self.marginBottom == 0) {
         self.alpha = 0;
     }
     self.state = RNSnackBarViewStatePresenting;
@@ -248,11 +251,11 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
         completion:^(BOOL finished) {
           self.state = RNSnackBarViewStateDisplayed;
           NSTimeInterval interval;
-          if ([duration doubleValue] <= 0) {
-              NSString *durationString = [duration stringValue];
+          if (duration <= 0) {
+              NSString *durationString = [@(duration) stringValue];
               interval = [(NSNumber *)DEFAULT_DURATIONS[durationString] floatValue] / 1000;
           } else {
-              interval = [duration doubleValue] / 1000;
+              interval = (double)duration / 1000;
           }
           self->dismissTimer = [NSTimer scheduledTimerWithTimeInterval:interval
                                                           target:self
@@ -274,7 +277,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     self.state = RNSnackBarViewStateDismissing;
     [UIView animateWithDuration:ANIMATION_DURATION
         animations:^{
-          self.transform = CGAffineTransformMakeTranslation(0, [self.marginBottom integerValue] == 0 ? self.bounds.size.height : 0);
+          self.transform = CGAffineTransformMakeTranslation(0, self.marginBottom == 0 ? self.bounds.size.height : 0);
           self.alpha = 0;
         }
         completion:^(BOOL finished) {
@@ -300,42 +303,34 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
         return;
     }
 
-    NSNumber *numberOfLines = _pendingOptions[@"numberOfLines"];
-    self.numberOfLines = [RCTConvert int:numberOfLines] ? [RCTConvert int:numberOfLines] : 2;
-    
-    self.marginBottom = _pendingOptions[@"marginBottom"] ? _pendingOptions[@"marginBottom"] : @(0);
-    
-    id backgroundColor = _pendingOptions[@"backgroundColor"];
-    self.backgroundColor = backgroundColor ? [RCTConvert UIColor:backgroundColor]
+    self.numberOfLines = _pendingOptions.numberOfLines;
+
+    self.marginBottom = _pendingOptions.marginBottom;
+
+    self.backgroundColor = _pendingOptions.backgroundColor != -1 ? [RCTConvert UIColor:@(_pendingOptions.backgroundColor)]
                                            : [UIColor colorWithRed:0.196078F
                                                              green:0.196078F
                                                               blue:0.196078F
                                                              alpha:1.0F];
 
-    id textColor = _pendingOptions[@"textColor"];
-    self.textColor = textColor ? [RCTConvert UIColor:textColor] : [UIColor whiteColor];
+    self.textColor = [RCTConvert UIColor:@(_pendingOptions.textColor)];
 
-    self.text = _pendingOptions[@"text"];
-    self.textAlignCenter = [_pendingOptions[@"textAlignCenter"] boolValue];
-    self.fontFamily = [RCTConvert NSString:_pendingOptions[@"fontFamily"]];
-    self.isRTL = [RCTConvert BOOL:_pendingOptions[@"rtl"]];
+    self.text = _pendingOptions.text;
+    self.textAlignCenter = _pendingOptions.textAlignCenter;
+    self.fontFamily = _pendingOptions.fontFamily;
+    self.isRTL = _pendingOptions.rtl;
     self.callback = _pendingCallback;
 
-    NSDictionary *action = _pendingOptions[@"action"];
-    if (action) {
-        self.actionText = _pendingOptions[@"action"][@"text"];
-        self.actionHidden = _pendingOptions[@"action"][@"text"] ? NO : YES;
-        NSNumber *color = _pendingOptions[@"action"][@"textColor"];
-        self.actionTextColor = [RCTConvert UIColor:color];
+    if (_pendingOptions.action) {
+        self.actionText = _pendingOptions.actionText;
+        self.actionHidden = [_pendingOptions.actionText length] == 0 ? YES : NO;
+        self.actionTextColor = [RCTConvert UIColor:@(_pendingOptions.actionTextColor)];
     } else {
         self.actionText = @"";
         self.actionHidden = YES;
     }
 
-    NSNumber *duration =
-        _pendingOptions[@"duration"] ? (NSNumber *)_pendingOptions[@"duration"] : @(-1);
-
-    [self presentWithDuration:duration];
+    [self presentWithDuration:_pendingOptions.duration];
 }
 
 @end

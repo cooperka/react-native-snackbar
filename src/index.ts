@@ -121,7 +121,7 @@ export const Snackbar = {
       options.action != null,
       options.action?.text ?? '',
       processColorOrThrow(options.action?.textColor ?? 'white'),
-      options.action?.onPress
+      options.action?.onPress ?? (() => {})
     );
   },
 

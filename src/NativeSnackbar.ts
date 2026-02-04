@@ -5,50 +5,48 @@ type SnackbarConstants = {
   /**
    * Snackbar duration of about one second (varies per device).
    */
-  LENGTH_SHORT: number;
+  LENGTH_SHORT: CodegenTypes.Int32;
 
   /**
    * Snackbar duration of about three seconds (varies per device).
    */
-  LENGTH_LONG: number;
+  LENGTH_LONG: CodegenTypes.Int32;
 
   /**
    * Snackbar duration that lasts forever (until dismissed, replaced, or action button is tapped).
    */
-  LENGTH_INDEFINITE: number;
+  LENGTH_INDEFINITE: CodegenTypes.Int32;
 
   /**
    * Indicates that the Snackbar was dismissed via a swipe.
    */
-  DISMISS_EVENT_SWIPE: number;
+  DISMISS_EVENT_SWIPE: CodegenTypes.Int32;
 
   /**
    * Indicates that the Snackbar was dismissed via an action click.
    */
-  DISMISS_EVENT_ACTION: number;
+  DISMISS_EVENT_ACTION: CodegenTypes.Int32;
 
   /**
    * Indicates that the Snackbar was dismissed via a timeout.
    */
-  DISMISS_EVENT_TIMEOUT: number;
+  DISMISS_EVENT_TIMEOUT: CodegenTypes.Int32;
 
   /**
    * Indicates that the Snackbar was dismissed via a call to {@link #dismiss()}.
    */
-  DISMISS_EVENT_MANUAL: number;
+  DISMISS_EVENT_MANUAL: CodegenTypes.Int32;
 
   /**
    * Indicates that the Snackbar was dismissed from a new Snackbar being shown.
    */
-  DISMISS_EVENT_CONSECUTIVE: number;
+  DISMISS_EVENT_CONSECUTIVE: CodegenTypes.Int32;
 
   /**
    * Indicates that Snackbar appears.
    */
-  SHOW_EVENT: number;
+  SHOW_EVENT: CodegenTypes.Int32;
 };
-
-// type NullableProcessedColor = ProcessedColorValue | null | undefined;
 
 /**
  * A Snackbar visibility event.
@@ -59,24 +57,24 @@ export type SnackbarEvent = {
    * Snackbar.DISMISS_EVENT_TIMEOUT, Snackbar.DISMISS_EVENT_MANUAL,
    * Snackbar.DISMISS_EVENT_CONSECUTIVE, Snackbar.SHOW_EVENT
    */
-  event: number;
+  event: CodegenTypes.Int32;
 };
 
 export interface Spec extends TurboModule {
   show(
     text: string,
-    duration: number,
-    numberOfLines: number,
+    duration: CodegenTypes.Int32,
+    numberOfLines: CodegenTypes.Int32,
     textAlignCenter: boolean,
-    marginBottom: number,
-    textColor: number,
-    backgroundColor: number,
+    marginBottom: CodegenTypes.Int32,
+    textColor: CodegenTypes.Int32,
+    backgroundColor: CodegenTypes.Int32,
     fontFamily: string,
     rtl: boolean,
     action: boolean,
     actionText: string,
-    actionTextColor: number,
-    onPress: undefined | (() => void)
+    actionTextColor: CodegenTypes.Int32,
+    onPress: () => void
   ): void;
   dismiss(): void;
   getConstants(): SnackbarConstants;
