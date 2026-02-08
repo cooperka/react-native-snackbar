@@ -142,7 +142,7 @@ Where event is one of the following options :
 | `Snackbar.DISMISS_EVENT_CONSECUTIVE` | `number` | 4 | Indicates that the Snackbar was dismissed from a new Snackbar being shown. |
 | `Snackbar.SHOW_EVENT` | `number` | 5 | Indicates that Snackbar appears |
 
-## Mocking via jest
+## Mocking via Jest
 
 This package uses NativeModules, which `jest` does not have access to.
 
@@ -184,16 +184,6 @@ In your `android/app/build.gradle`:
 
 Make sure your Deployment Target is iOS 9.0 or above.
 
-## Software development
+## Local development
 
-If you want to help contribute to this library, here are local setup steps:
-
-1. Clone this git repo
-1. Install main dependencies: `yarn install`
-1. Set up the example app too: `cd example && yarn install`
-1. Within the example directory, `react-native run-android` to run it
-
-The example app will update automatically when changing JS code. To see your changes in the example app after updating native library code, reinstall it via:
-
-1. `yarn add file:.. && react-native run-android` in the example directory
-1. Type "rr" in the app to trigger a reload
+We welcome contributions. See [CONTRIBUTING.md](./CONTRIBUTING.md) for setup and advice.
