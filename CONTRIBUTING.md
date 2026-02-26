@@ -39,13 +39,13 @@ To start the packager:
 yarn example start
 ```
 
-To run the example app on Android:
+To run the example app on Android (make sure to use the JDK version specified in `.sdkmanrc`):
 
 ```sh
 yarn example android
 ```
 
-To run the example app on iOS:
+To run the example app on iOS (make sure to use the ruby version specified in `.ruby-version`):
 
 ```sh
 yarn example ios
