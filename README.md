@@ -41,15 +41,15 @@ Snackbar.show({
 
 ## Installation
 
+For older apps, use version 2 of this library. The latest version 3 requires React Native >= 0.72 with **New Architecture enabled**.
+
+Steps:
+
 1. Install:
     - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-snackbar --save`
     - Using [Yarn](https://yarnpkg.com/): `yarn add react-native-snackbar`
 
-2. [Link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html):
-    - RN >= 0.60 supports [autolinking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md): first `cd ios && pod install && cd ..`
-    - RN < 0.60: `react-native link react-native-snackbar`
-    - Or if that fails, link manually using [these steps](https://github.com/cooperka/react-native-snackbar/wiki/Manual-Installation)
-    - Note that because this is a native module, Expo does not support it -- to use with Expo you need to [eject to ExpoKit](https://docs.expo.io/versions/latest/expokit/eject/)
+2. Install CocoaPods dependencies for iOS: `cd ios && pod install && cd ..`
 
 3. Import it in your JS:
 
