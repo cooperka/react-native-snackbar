@@ -4,7 +4,9 @@ import { Snackbar } from 'react-native-snackbar';
 
 export default function App() {
   useEffect(() => {
-    const eventListener = Snackbar.onSnackbarVisibility(console.log);
+    const eventHandler = (payload) =>
+      console.log(`Snackbar change: ${payload.event}`);
+    const eventListener = Snackbar.onSnackbarVisibility(eventHandler);
     return () => eventListener.remove();
   });
 

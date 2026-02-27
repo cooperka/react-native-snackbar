@@ -54,7 +54,7 @@ Steps:
 3. Import it in your JS:
 
     ```js
-    import Snackbar from 'react-native-snackbar';
+    import { Snackbar } from 'react-native-snackbar';
     ```
 
 ## Usage
@@ -100,39 +100,17 @@ Dismisses any existing Snackbars.
 ## Advanced usage
 
 ### Snackbar events
-You can have information on snackbar visibility.
-
-```js
-  componentDidMount() {
-    const SnackbarEventEmitter = new NativeEventEmitter(
-      NativeModules.RNSnackbar,
-    );
-    this.eventListener = SnackbarEventEmitter.addListener('onSnackbarVisibility', (event) => {
-      console.log(event.event);
-    });
-  }
-
-  componentWillUnmount() {
-    this.eventListener.remove();
-  }
-```
-
-Or, with functional components:
+You can listen for Snackbar visibility, for example:
 
 ```js
   useEffect(() => {
-    const subscription = new NativeEventEmitter(
-      NativeModules.RNSnackbar,
-    ).addListener('onSnackbarVisibility', event => {
-      console.log(event.event);
-    });
-    return () => {
-      subscription.remove();
-    };
-  }, []);
+    const eventHandler = (payload) => console.log(`Snackbar change: ${payload.event}`);
+    const eventListener = Snackbar.onSnackbarVisibility(eventHandler);
+    return () => eventListener.remove();
+  });
 ```
 
-Where event is one of the following options :
+Where `event` is one of the following numbers:
 
 | Key | Data type | Value | Description |
 |-----|-----------|----------------|-------------|
@@ -140,8 +118,8 @@ Where event is one of the following options :
 | `Snackbar.DISMISS_EVENT_ACTION` | `number` | 1 | Indicates that the Snackbar was dismissed via an action click. |
 | `Snackbar.DISMISS_EVENT_TIMEOUT` | `number` | 2 | Indicates that the Snackbar was dismissed via a timeout. |
 | `Snackbar.DISMISS_EVENT_MANUAL` | `number` | 3 | Indicates that the Snackbar was dismissed via Snackbar.dismiss() call. |
-| `Snackbar.DISMISS_EVENT_CONSECUTIVE` | `number` | 4 | Indicates that the Snackbar was dismissed from a new Snackbar being shown. |
-| `Snackbar.SHOW_EVENT` | `number` | 5 | Indicates that Snackbar appears |
+| `Snackbar.DISMISS_EVENT_CONSECUTIVE` | `number` | 4 | Indicates that the Snackbar was dismissed due to a new Snackbar being shown. |
+| `Snackbar.SHOW_EVENT` | `number` | 5 | Indicates that Snackbar appeared. |
 
 ## Mocking via Jest
 
