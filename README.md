@@ -68,6 +68,7 @@ Shows a Snackbar, dismissing any existing Snackbar first. Accepts an object with
 | `text` | `string` | Required. | The message to show. |
 | `duration` | See below | `Snackbar.LENGTH_SHORT` | How long to display the Snackbar. |
 | `numberOfLines` | `number` | `2` | The max number of text lines to allow before ellipsizing. |
+| `textAlignCenter` | `boolean` | `false` | Whether to center the text. Currently broken on iOS. |
 | `marginBottom` | `number` | `0` | Margin from bottom. |
 | `textColor` | `string` or `style` | `'white'` | The color of the message text. |
 | `backgroundColor` | `string` or `style` | `undefined` (dark gray) | The background color for the whole Snackbar. |
