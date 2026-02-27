@@ -102,11 +102,9 @@ Our pre-commit hooks verify that your commit message matches this format when co
 
 We use [release-it](https://github.com/release-it/release-it) to make it easier to publish new versions. It handles common tasks like bumping version based on semver, creating tags and releases etc.
 
-To publish new versions, run the following:
+1. Set up authorization: as of 2026, npm requires a passkey to sign in AND an OTP to deploy, which is mutually exclusive and senseless, so it must be [routed around](https://github.com/orgs/community/discussions/181802#discussioncomment-15363055) by creating a temporary access token online that bypasses 2FA. First `npm logout` then save the token value to `~/.npmrc` as `//registry.npmjs.org/:_authToken=npm_foo`.
 
-```sh
-yarn release
-```
+2. To publish new versions, run `yarn release` and follow the prompts.
 
 ### Scripts
 
