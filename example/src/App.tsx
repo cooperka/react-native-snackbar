@@ -1,12 +1,15 @@
 import { useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Snackbar } from 'react-native-snackbar';
+import { Snackbar, type SnackbarEvent } from 'react-native-snackbar';
 
 export default function App() {
   useEffect(() => {
-    const eventHandler = (payload) =>
+    const eventHandler = (payload: { event: SnackbarEvent }) => {
       console.log(`Snackbar change: ${payload.event}`);
-    const eventListener = Snackbar.onSnackbarVisibility(eventHandler);
+    };
+    const eventListener = Snackbar.onSnackbarVisibility(
+      eventHandler as (payload: any) => void
+    );
     return () => eventListener.remove();
   });
 

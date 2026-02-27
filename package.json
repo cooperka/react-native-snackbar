@@ -129,10 +129,23 @@
     "useTabs": false
   },
   "jest": {
-    "preset": "react-native",
-    "modulePathIgnorePatterns": [
-      "<rootDir>/example/node_modules",
-      "<rootDir>/lib/"
+    "projects": [
+      {
+        "displayName": "library",
+        "preset": "react-native",
+        "rootDir": ".",
+        "testMatch": [
+          "<rootDir>/src/**/__tests__/**/*.test.ts?(x)"
+        ]
+      },
+      {
+        "displayName": "example",
+        "preset": "react-native",
+        "rootDir": "example",
+        "testMatch": [
+          "<rootDir>/src/**/__tests__/**/*.test.ts?(x)"
+        ]
+      }
     ]
   },
   "commitlint": {
