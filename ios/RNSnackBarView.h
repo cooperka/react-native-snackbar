@@ -6,9 +6,24 @@
 #import <UIKit/UIKit.h>
 #import "RNSnackbar.h"
 
+@interface SnackBarOptions : NSObject
+@property NSString *text;
+@property NSInteger duration;
+@property NSInteger numberOfLines;
+@property BOOL textAlignCenter;
+@property NSInteger marginBottom;
+@property NSInteger textColor;
+@property NSInteger backgroundColor;
+@property NSString *fontFamily;
+@property BOOL rtl;
+@property BOOL action;
+@property NSString *actionText;
+@property NSInteger actionTextColor;
+@end
+
 @interface RNSnackBarView : UIView
 
-+ (void)showWithOptions:(NSDictionary *)options andCallback:(void (^)())callback rnSnackbar:(RNSnackbar *)rnSnackbar;
++ (void)showWithOptions:(SnackBarOptions *)options andCallback:(void (^)())callback rnSnackbar:(RNSnackbar *)rnSnackbar;
 + (void)dismiss;
 
 @end

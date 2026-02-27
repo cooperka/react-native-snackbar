@@ -1,8 +1,0 @@
-node_modules
-
-android
-ios
-
-lib
-src/index.d.ts
-src/__tests__/types.ts

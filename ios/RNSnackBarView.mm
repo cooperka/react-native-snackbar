@@ -1,0 +1,336 @@
+//
+//  Created by Remi Santos on 13/04/16.
+//  Copyrights by Facebook, Remi Santos, and Kevin Cooper.
+//
+
+#import "RNSnackBarView.h"
+#import <React/RCTConvert.h>
+
+typedef NS_ENUM(NSInteger, RNSnackBarViewState) {
+    // Put RNSnackBarViewStateDismissed on the top to set it as a default value
+    RNSnackBarViewStateDismissed,
+    RNSnackBarViewStateDisplayed,
+    RNSnackBarViewStatePresenting,
+    RNSnackBarViewStateDismissing
+};
+
+static NSDictionary *DEFAULT_DURATIONS;
+static const NSTimeInterval ANIMATION_DURATION = 0.250;
+
+@implementation SnackBarOptions
+@end
+
+@interface RNSnackBarView () {
+    UILabel *textLabel;
+    UIButton *actionButton;
+    NSArray *horizontalLayoutConstraints;
+    NSTimer *dismissTimer;
+}
+
+@property(nonatomic) RNSnackBarViewState state;
+@property(nonatomic, strong) SnackBarOptions *pendingOptions;
+@property(nonatomic, strong) RNSnackbar *rnSnackbar;
+@property(nonatomic, strong) NSString *text;
+@property(nonatomic, strong) UIColor *textColor;
+@property(nonatomic, strong) NSString *actionText;
+@property(nonatomic, strong) UIColor *actionTextColor;
+@property(nonatomic) NSInteger marginBottom;
+@property(nonatomic, strong) NSString *fontFamily;
+@property(nonatomic) BOOL isRTL;
+@property(nonatomic, strong) NSArray<NSLayoutConstraint *> *verticalPaddingConstraints;
+@property(nonatomic) BOOL textAlignCenter;
+@property(nonatomic, strong) void (^pendingCallback)();
+@property(nonatomic, strong) void (^callback)();
+
+@end
+
+@implementation RNSnackBarView
+
++ (void)initialize {
+    DEFAULT_DURATIONS = @{@"-1" : @1500, @"0" : @2750, @"-2" : @INT_MAX};
+}
+
++ (id)sharedSnackBar {
+    static RNSnackBarView *sharedSnackBar = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+      sharedSnackBar = [[self alloc] init];
+    });
+    return sharedSnackBar;
+}
+
++ (void)showWithOptions:(SnackBarOptions *)options andCallback:(void (^)())callback rnSnackbar:(RNSnackbar *)rnSnackbar {
+    RNSnackBarView *snackBar = [RNSnackBarView sharedSnackBar];
+    snackBar.pendingOptions = options;
+    snackBar.pendingCallback = callback;
+    snackBar.rnSnackbar = rnSnackbar;
+    [snackBar show];
+    NSNumber *showEvent = [rnSnackbar constantsToExport][@"SHOW_EVENT"];
+    [rnSnackbar sendSnackbarVisibilityEvent:showEvent];
+}
+
++ (void)dismiss {
+    RNSnackBarView *snackBar = [RNSnackBarView sharedSnackBar];
+    [snackBar dismiss];
+    NSNumber *dismissEventManual = [snackBar->_rnSnackbar constantsToExport][@"DISMISS_EVENT_MANUAL"];
+    [snackBar->_rnSnackbar sendSnackbarVisibilityEvent:dismissEventManual];
+}
+
+- (instancetype)init {
+    self = [super initWithFrame:CGRectMake(0, [UIScreen mainScreen].bounds.size.height - 48,
+                                           [UIScreen mainScreen].bounds.size.width, 48)];
+    if (self) {
+        [self buildView];
+    }
+    return self;
+}
+
+- (void)buildView {
+    self.backgroundColor = [UIColor colorWithRed:0.196078F
+                                           green:0.196078F
+                                            blue:0.196078F
+                                           alpha:1.0F];
+    self.accessibilityIdentifier = @"snackbar";
+
+    textLabel = [UILabel new];
+    textLabel.text = _text;
+    textLabel.numberOfLines = 2;
+    textLabel.textColor = _textColor;
+    textLabel.font = [UIFont boldSystemFontOfSize:14];
+    [textLabel setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self addSubview:textLabel];
+
+    actionButton = [UIButton new];
+    actionButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
+    [actionButton setTitle:@"" forState:UIControlStateNormal];
+    [actionButton addTarget:self
+                     action:@selector(actionPressed:)
+           forControlEvents:UIControlEventTouchUpInside];
+    [actionButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self addSubview:actionButton];
+
+    [self addConstraint:[NSLayoutConstraint constraintWithItem:actionButton
+                                                     attribute:NSLayoutAttributeCenterY
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:textLabel
+                                                     attribute:NSLayoutAttributeCenterY
+                                                    multiplier:1
+                                                      constant:0]];
+    [textLabel setContentCompressionResistancePriority:250
+                                                forAxis:UILayoutConstraintAxisHorizontal];
+    [textLabel setContentHuggingPriority:250 forAxis:UILayoutConstraintAxisHorizontal];
+    [actionButton setContentCompressionResistancePriority:750
+                                                  forAxis:UILayoutConstraintAxisHorizontal];
+    [actionButton setContentHuggingPriority:750 forAxis:UILayoutConstraintAxisHorizontal];
+
+    self.actionHidden = YES;
+}
+
+- (void)setText:(NSString *)text {
+    textLabel.text = text;
+}
+
+- (void)setActionHidden:(BOOL)hidden {
+    if (actionButton.hidden != hidden || horizontalLayoutConstraints == nil) {
+        actionButton.hidden = hidden;
+        if (horizontalLayoutConstraints != nil) {
+            [self removeConstraints:horizontalLayoutConstraints];
+        }
+        if (hidden) {
+            horizontalLayoutConstraints =
+                [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-24-[textLabel]-24-|"
+                                                        options:0
+                                                        metrics:nil
+                                                          views:@{@"textLabel" : textLabel}];
+        } else {
+            horizontalLayoutConstraints = [NSLayoutConstraint
+                constraintsWithVisualFormat:@"H:|-24-[textLabel]-24-[actionButton]-24-|"
+                                    options:0
+                                    metrics:nil
+                                      views:@{
+                                          @"textLabel" : textLabel,
+                                          @"actionButton" : actionButton
+                                      }];
+        }
+        [self addConstraints:horizontalLayoutConstraints];
+    }
+}
+
+- (void)setTextColor:(UIColor *)textColor {
+    textLabel.textColor = textColor;
+}
+
+- (void)setNumberOfLines:(NSInteger)numberOfLines {
+    textLabel.numberOfLines = numberOfLines;
+}
+
+- (void)setTextAlignCenter:(BOOL)textAlignCenter {
+    if (textAlignCenter == YES) {
+        textLabel.textAlignment = NSTextAlignmentCenter;
+    } else {
+        textLabel.textAlignment = NSTextAlignmentLeft;
+    }
+}
+
+- (void)setActionText:(NSString *)actionText {
+    [actionButton setTitle:actionText forState:UIControlStateNormal];
+}
+
+- (void)setActionTextColor:(UIColor *)actionTextColor {
+    [actionButton setTitleColor:actionTextColor forState:UIControlStateNormal];
+}
+
+- (void)setFontFamily:(NSString *)fontFamily {
+  textLabel.font = [fontFamily length] != 0 ? [UIFont fontWithName:fontFamily size:14] : [UIFont boldSystemFontOfSize:14];
+}
+
+- (void)setIsRTL:(BOOL)isRTL {
+  textLabel.textAlignment = isRTL ? NSTextAlignmentRight : NSTextAlignmentLeft ;
+}
+
+- (void)actionPressed:(UIButton *)sender {
+    [self dismiss];
+    NSNumber *dismissEventAction = [self->_rnSnackbar constantsToExport][@"DISMISS_EVENT_ACTION"];
+    [self->_rnSnackbar sendSnackbarVisibilityEvent:dismissEventAction];
+    self.callback();
+}
+
+- (void)presentWithDuration:(NSInteger)duration {
+    _pendingOptions = nil;
+    _pendingCallback = nil;
+    UIWindow *keyWindow = [[UIApplication sharedApplication] delegate].window;
+    [keyWindow addSubview:self];
+    [self setTranslatesAutoresizingMaskIntoConstraints:false];
+    
+    // Set vertical padding
+    CGFloat topPadding = 14;
+    CGFloat bottomPadding = topPadding;
+    if (@available(iOS 11.0, *)) {
+        UIWindow *window = [[UIApplication sharedApplication] delegate].window;
+
+        // If no bottom margin, increase bottom padding to size of safe area inset
+        if (self.marginBottom == 0 && window.safeAreaInsets.bottom > bottomPadding)
+            bottomPadding = window.safeAreaInsets.bottom;
+    }
+    NSLog([NSString stringWithFormat:@"V:|-%f-[textLabel]-%f-|", topPadding,
+           bottomPadding]);
+    if (self.verticalPaddingConstraints) // Remove old constraints
+        [self removeConstraints:self.verticalPaddingConstraints];
+    self.verticalPaddingConstraints = [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%f-[textLabel]-%f-|", topPadding,
+                                                                     bottomPadding]
+                                                                            options:0
+                                                                            metrics:nil
+                                                                              views:@{@"textLabel" : textLabel}];
+    [self addConstraints:self.verticalPaddingConstraints];
+
+    // Set margins
+    [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:[self(>=48)]-%ld-|", static_cast<long>(self.marginBottom)]
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:@{@"self" : self}]];
+    [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[self]|"
+                                                                      options:0
+                                                                      metrics:nil
+                                                                        views:@{@"self" : self}]];
+
+    // Snackbar will slide up from bottom, unless a bottom margin is set in which case we use a fade animation
+    self.transform = CGAffineTransformMakeTranslation(0, self.marginBottom == 0 ? self.bounds.size.height : 0);
+    self->textLabel.alpha = 0;
+    self->actionButton.alpha = 0;
+    if (self.marginBottom == 0) {
+        self.alpha = 0;
+    }
+    self.state = RNSnackBarViewStatePresenting;
+    [UIView animateWithDuration:ANIMATION_DURATION
+        animations:^{
+          self.transform = CGAffineTransformIdentity;
+          self->textLabel.alpha = 1;
+          self->actionButton.alpha = 1;
+          self.alpha = 1;
+        }
+        completion:^(BOOL finished) {
+          self.state = RNSnackBarViewStateDisplayed;
+          NSTimeInterval interval;
+          if (duration <= 0) {
+              NSString *durationString = [@(duration) stringValue];
+              interval = [(NSNumber *)DEFAULT_DURATIONS[durationString] floatValue] / 1000;
+          } else {
+              interval = (double)duration / 1000;
+          }
+          self->dismissTimer = [NSTimer scheduledTimerWithTimeInterval:interval
+                                                          target:self
+                                                        selector:@selector(dismissWithTimeout)
+                                                        userInfo:nil
+                                                         repeats:FALSE];
+        }];
+}
+
+- (void)dismissWithTimeout {
+    NSNumber *dismissEventTimeout = [self->_rnSnackbar constantsToExport][@"DISMISS_EVENT_TIMEOUT"];
+    [self->_rnSnackbar sendSnackbarVisibilityEvent:dismissEventTimeout];
+    [self dismiss];
+}
+
+- (void)dismiss {
+    [self.layer removeAllAnimations];
+    [dismissTimer invalidate];
+    self.state = RNSnackBarViewStateDismissing;
+    [UIView animateWithDuration:ANIMATION_DURATION
+        animations:^{
+          self.transform = CGAffineTransformMakeTranslation(0, self.marginBottom == 0 ? self.bounds.size.height : 0);
+          self.alpha = 0;
+        }
+        completion:^(BOOL finished) {
+          self.state = RNSnackBarViewStateDismissed;
+          [self removeFromSuperview];
+          if (self->_pendingOptions) {
+              [self show];
+          }
+        }];
+}
+
+- (void)show {
+    if (self.state == RNSnackBarViewStateDisplayed || self.state == RNSnackBarViewStatePresenting) {
+        NSNumber *dismissEventConsecutive = [self->_rnSnackbar constantsToExport][@"DISMISS_EVENT_CONSECUTIVE"];
+        [self->_rnSnackbar sendSnackbarVisibilityEvent:dismissEventConsecutive];
+        [self dismiss];
+        return;
+    }
+    if (self.state == RNSnackBarViewStateDismissing) {
+        return;
+    }
+    if (!_pendingOptions) {
+        return;
+    }
+
+    self.numberOfLines = _pendingOptions.numberOfLines;
+
+    self.marginBottom = _pendingOptions.marginBottom;
+
+    self.backgroundColor = _pendingOptions.backgroundColor != -1 ? [RCTConvert UIColor:@(_pendingOptions.backgroundColor)]
+                                           : [UIColor colorWithRed:0.196078F
+                                                             green:0.196078F
+                                                              blue:0.196078F
+                                                             alpha:1.0F];
+
+    self.textColor = [RCTConvert UIColor:@(_pendingOptions.textColor)];
+
+    self.text = _pendingOptions.text;
+    self.textAlignCenter = _pendingOptions.textAlignCenter;
+    self.fontFamily = _pendingOptions.fontFamily;
+    self.isRTL = _pendingOptions.rtl;
+    self.callback = _pendingCallback;
+
+    if (_pendingOptions.action) {
+        self.actionText = _pendingOptions.actionText;
+        self.actionHidden = [_pendingOptions.actionText length] == 0 ? YES : NO;
+        self.actionTextColor = [RCTConvert UIColor:@(_pendingOptions.actionTextColor)];
+    } else {
+        self.actionText = @"";
+        self.actionHidden = YES;
+    }
+
+    [self presentWithDuration:_pendingOptions.duration];
+}
+
+@end

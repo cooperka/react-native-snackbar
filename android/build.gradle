@@ -1,54 +1,69 @@
 buildscript {
-    repositories {
-        mavenCentral()
-        google()
+  ext.Snackbar = [
+    kotlinVersion: "2.0.21",
+    minSdkVersion: 24,
+    compileSdkVersion: 36,
+    targetSdkVersion: 36,
+    materialVersion: "1.13.0"
+  ]
+
+  ext.getExtOrDefault = { prop ->
+    if (rootProject.ext.has(prop)) {
+      return rootProject.ext.get(prop)
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.2'
-    }
+
+    return Snackbar[prop]
+  }
+
+  repositories {
+    google()
+    mavenCentral()
+  }
+
+  dependencies {
+    classpath "com.android.tools.build:gradle:8.7.2"
+    // noinspection DifferentKotlinGradleVersion
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${getExtOrDefault('kotlinVersion')}"
+  }
 }
+
 
 apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
 
-// Fallback versions are intended to mirror
-// https://github.com/facebook/react-native/blob/v0.56.0/local-cli/templates/HelloWorld/android/build.gradle
-def _ext = rootProject.ext
-def _reactNativeVersion = _ext.has('reactNative') ? _ext.reactNative : '+'
-def _compileSdkVersion = _ext.has('compileSdkVersion') ? _ext.compileSdkVersion : 28
-def _materialVersion = _ext.has('materialVersion') ? _ext.materialVersion : '1.4.0'
-def _minSdkVersion = _ext.has('minSdkVersion') ? _ext.minSdkVersion : 16
-def _targetSdkVersion = _ext.has('targetSdkVersion') ? _ext.targetSdkVersion : 28
+apply plugin: "com.facebook.react"
 
 android {
-    compileSdkVersion _compileSdkVersion
+  namespace "com.azendoo.reactnativesnackbar"
 
-    defaultConfig {
-        minSdkVersion _minSdkVersion
-        targetSdkVersion _targetSdkVersion
-        versionCode 1
-        versionName "1.0"
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-}
+  compileSdkVersion getExtOrDefault("compileSdkVersion")
 
-repositories {
-        mavenLocal()
-        mavenCentral()
-        maven {
-            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url("$rootDir/../node_modules/react-native/android")
-        }
-        google()
+  defaultConfig {
+    minSdkVersion getExtOrDefault("minSdkVersion")
+    targetSdkVersion getExtOrDefault("targetSdkVersion")
+  }
+
+  buildFeatures {
+    buildConfig true
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+    }
+  }
+
+  lint {
+    disable "GradleCompatible"
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
 }
 
 dependencies {
-    implementation "com.facebook.react:react-native:${_reactNativeVersion}"
-    implementation "androidx.appcompat:appcompat:1.3.1"
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-    implementation "com.google.android.material:material:${_materialVersion}"
+  implementation "com.facebook.react:react-android"
+  implementation "com.google.android.material:material:${getExtOrDefault('materialVersion')}"
 }

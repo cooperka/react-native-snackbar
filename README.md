@@ -41,15 +41,15 @@ Snackbar.show({
 
 ## Installation
 
+For older apps, use version 2 of this library. The latest version 3 requires React Native >= 0.72 with **New Architecture enabled**.
+
+Steps:
+
 1. Install:
     - Using [npm](https://www.npmjs.com/#getting-started): `npm install react-native-snackbar --save`
     - Using [Yarn](https://yarnpkg.com/): `yarn add react-native-snackbar`
 
-2. [Link](https://facebook.github.io/react-native/docs/linking-libraries-ios.html):
-    - RN >= 0.60 supports [autolinking](https://github.com/react-native-community/cli/blob/master/docs/autolinking.md): first `cd ios && pod install && cd ..`
-    - RN < 0.60: `react-native link react-native-snackbar`
-    - Or if that fails, link manually using [these steps](https://github.com/cooperka/react-native-snackbar/wiki/Manual-Installation)
-    - Note that because this is a native module, Expo does not support it -- to use with Expo you need to [eject to ExpoKit](https://docs.expo.io/versions/latest/expokit/eject/)
+2. Install CocoaPods dependencies for iOS: `cd ios && pod install && cd ..`
 
 3. Import it in your JS:
 
@@ -68,6 +68,7 @@ Shows a Snackbar, dismissing any existing Snackbar first. Accepts an object with
 | `text` | `string` | Required. | The message to show. |
 | `duration` | See below | `Snackbar.LENGTH_SHORT` | How long to display the Snackbar. |
 | `numberOfLines` | `number` | `2` | The max number of text lines to allow before ellipsizing. |
+| `textAlignCenter` | `boolean` | `false` | Whether to center the text. Currently broken on iOS. |
 | `marginBottom` | `number` | `0` | Margin from bottom. |
 | `textColor` | `string` or `style` | `'white'` | The color of the message text. |
 | `backgroundColor` | `string` or `style` | `undefined` (dark gray) | The background color for the whole Snackbar. |
@@ -142,7 +143,7 @@ Where event is one of the following options :
 | `Snackbar.DISMISS_EVENT_CONSECUTIVE` | `number` | 4 | Indicates that the Snackbar was dismissed from a new Snackbar being shown. |
 | `Snackbar.SHOW_EVENT` | `number` | 5 | Indicates that Snackbar appears |
 
-## Mocking via jest
+## Mocking via Jest
 
 This package uses NativeModules, which `jest` does not have access to.
 
@@ -184,16 +185,6 @@ In your `android/app/build.gradle`:
 
 Make sure your Deployment Target is iOS 9.0 or above.
 
-## Software development
+## Local development
 
-If you want to help contribute to this library, here are local setup steps:
-
-1. Clone this git repo
-1. Install main dependencies: `yarn install`
-1. Set up the example app too: `cd example && yarn install`
-1. Within the example directory, `react-native run-android` to run it
-
-The example app will update automatically when changing JS code. To see your changes in the example app after updating native library code, reinstall it via:
-
-1. `yarn add file:.. && react-native run-android` in the example directory
-1. Type "rr" in the app to trigger a reload
+We welcome contributions. See [CONTRIBUTING.md](./CONTRIBUTING.md) for setup and advice.

@@ -1,7 +1,7 @@
 /**
  * @format
  */
-/* eslint-env jest */
+/* global jest */
 
 const RNSnackbar = {
   LENGTH_SHORT: 5,
