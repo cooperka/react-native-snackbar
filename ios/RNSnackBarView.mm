@@ -5,6 +5,7 @@
 
 #import "RNSnackBarView.h"
 #import <React/RCTConvert.h>
+#import <React/RCTUtils.h>
 
 typedef NS_ENUM(NSInteger, RNSnackBarViewState) {
     // Put RNSnackBarViewStateDismissed on the top to set it as a default value
@@ -198,7 +199,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
 - (void)presentWithDuration:(NSInteger)duration {
     _pendingOptions = nil;
     _pendingCallback = nil;
-    UIWindow *keyWindow = [[UIApplication sharedApplication] delegate].window;
+    UIWindow *keyWindow = RCTKeyWindow();
     [keyWindow addSubview:self];
     [self setTranslatesAutoresizingMaskIntoConstraints:false];
     
@@ -206,7 +207,7 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     CGFloat topPadding = 14;
     CGFloat bottomPadding = topPadding;
     if (@available(iOS 11.0, *)) {
-        UIWindow *window = [[UIApplication sharedApplication] delegate].window;
+        UIWindow *window = RCTKeyWindow();
 
         // If no bottom margin, increase bottom padding to size of safe area inset
         if (self.marginBottom == 0 && window.safeAreaInsets.bottom > bottomPadding)
