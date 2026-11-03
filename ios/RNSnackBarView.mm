@@ -136,21 +136,20 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
         if (horizontalLayoutConstraints != nil) {
             [self removeConstraints:horizontalLayoutConstraints];
         }
+        // Pin content to the safe area guide so it stays clear of the notch, rounded
+        // corners or a lateral status bar (e.g. foldables), whatever the orientation
+        UILayoutGuide *safeArea = self.safeAreaLayoutGuide;
         if (hidden) {
-            horizontalLayoutConstraints =
-                [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-24-[textLabel]-24-|"
-                                                        options:0
-                                                        metrics:nil
-                                                          views:@{@"textLabel" : textLabel}];
+            horizontalLayoutConstraints = @[
+                [textLabel.leadingAnchor constraintEqualToAnchor:safeArea.leadingAnchor constant:24],
+                [safeArea.trailingAnchor constraintEqualToAnchor:textLabel.trailingAnchor constant:24],
+            ];
         } else {
-            horizontalLayoutConstraints = [NSLayoutConstraint
-                constraintsWithVisualFormat:@"H:|-24-[textLabel]-24-[actionButton]-24-|"
-                                    options:0
-                                    metrics:nil
-                                      views:@{
-                                          @"textLabel" : textLabel,
-                                          @"actionButton" : actionButton
-                                      }];
+            horizontalLayoutConstraints = @[
+                [textLabel.leadingAnchor constraintEqualToAnchor:safeArea.leadingAnchor constant:24],
+                [actionButton.leadingAnchor constraintEqualToAnchor:textLabel.trailingAnchor constant:24],
+                [safeArea.trailingAnchor constraintEqualToAnchor:actionButton.trailingAnchor constant:24],
+            ];
         }
         [self addConstraints:horizontalLayoutConstraints];
     }
