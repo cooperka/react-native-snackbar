@@ -201,26 +201,26 @@ static const NSTimeInterval ANIMATION_DURATION = 0.250;
     [keyWindow addSubview:self];
     [self setTranslatesAutoresizingMaskIntoConstraints:false];
     
-    // Set vertical padding
-    CGFloat topPadding = 14;
-    CGFloat bottomPadding = topPadding;
-    if (@available(iOS 11.0, *)) {
-        UIWindow *window = [[UIApplication sharedApplication] delegate].window;
-
-        // If no bottom margin, increase bottom padding to size of safe area inset
-        if (self.marginBottom == 0 && window.safeAreaInsets.bottom > bottomPadding)
-            bottomPadding = window.safeAreaInsets.bottom;
-    }
-    NSLog([NSString stringWithFormat:@"V:|-%f-[textLabel]-%f-|", topPadding,
-           bottomPadding]);
+    // Set vertical padding: 14pt, increased when needed so the content stays above
+    // the bottom safe area (e.g. home indicator) if no bottom margin is set. Constraints
+    // are pinned to the window's safe area guide so they follow rotations and are not
+    // affected by the slide-in transform.
     if (self.verticalPaddingConstraints) // Remove old constraints
-        [self removeConstraints:self.verticalPaddingConstraints];
-    self.verticalPaddingConstraints = [NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%f-[textLabel]-%f-|", topPadding,
-                                                                     bottomPadding]
-                                                                            options:0
-                                                                            metrics:nil
-                                                                              views:@{@"textLabel" : textLabel}];
-    [self addConstraints:self.verticalPaddingConstraints];
+        [NSLayoutConstraint deactivateConstraints:self.verticalPaddingConstraints];
+    NSLayoutConstraint *preferredBottomPadding =
+        [self.bottomAnchor constraintEqualToAnchor:textLabel.bottomAnchor constant:14];
+    preferredBottomPadding.priority = UILayoutPriorityDefaultHigh;
+    NSMutableArray<NSLayoutConstraint *> *verticalConstraints = [@[
+        [textLabel.topAnchor constraintEqualToAnchor:self.topAnchor constant:14],
+        [self.bottomAnchor constraintGreaterThanOrEqualToAnchor:textLabel.bottomAnchor constant:14],
+        preferredBottomPadding,
+    ] mutableCopy];
+    if (self.marginBottom == 0 && keyWindow != nil) {
+        [verticalConstraints addObject:[keyWindow.safeAreaLayoutGuide.bottomAnchor
+                                           constraintGreaterThanOrEqualToAnchor:textLabel.bottomAnchor]];
+    }
+    self.verticalPaddingConstraints = verticalConstraints;
+    [NSLayoutConstraint activateConstraints:self.verticalPaddingConstraints];
 
     // Set margins
     [keyWindow addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:[self(>=48)]-%ld-|", static_cast<long>(self.marginBottom)]
